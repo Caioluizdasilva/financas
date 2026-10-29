@@ -3,170 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#0f766e">
+<meta name="theme-color" content="#000000">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon.svg">
 <link rel="apple-touch-icon" href="icon.svg">
 <title>Controle Financeiro</title>
-<style>
-:root{--bg:#f4f6f5;--card:#fff;--tx:#14201d;--mut:#6b7a76;--line:#e3e9e7;--pri:#0f766e;--ok:#16a34a;--bad:#dc2626}
-@media (prefers-color-scheme:dark){:root{--bg:#0e1514;--card:#17211f;--tx:#e8f0ee;--mut:#8fa29d;--line:#26332f;--pri:#2dd4bf;--ok:#4ade80;--bad:#f87171}}
-*{box-sizing:border-box}
-body{margin:0;font:16px/1.4 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--tx);padding:env(safe-area-inset-top) 0 calc(72px + env(safe-area-inset-bottom))}
-main{max-width:560px;margin:0 auto;padding:12px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:12px}
-.nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
-.nav h1{font-size:1.15rem;margin:0;text-transform:capitalize}
-button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
-.ib{width:44px;height:44px;border-radius:12px;background:var(--card);border:1px solid var(--line);font-size:1.3rem}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.k{font-size:.78rem;color:var(--mut)}.v{font-size:1.2rem;font-weight:700}
-.neg{color:var(--bad)}.pos{color:var(--ok)}
-.sum{cursor:pointer}
-.donut{display:flex;flex-direction:column;align-items:center}
-.donut svg{width:220px;height:220px}
-.legend{width:100%;margin-top:8px}
-.legend div{display:flex;align-items:center;gap:8px;padding:4px 0;font-size:.92rem}
-.dot{width:12px;height:12px;border-radius:50%;flex:none}
-.legend span:last-child{margin-left:auto;font-variant-numeric:tabular-nums}
-.row{display:flex;align-items:center;gap:10px;padding:10px 0;border-top:1px solid var(--line);cursor:pointer}
-.row:first-of-type{border-top:0}
-.row .n{flex:1;min-width:0}.row .n b{display:block;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.row .n small{color:var(--mut)}
-.row.paid .n b,.row.paid .a{text-decoration:line-through;color:var(--mut)}
-.chk{width:26px;height:26px;border-radius:8px;border:2px solid var(--line);flex:none;display:grid;place-items:center;font-size:1rem}
-.paid .chk{background:var(--ok);border-color:var(--ok);color:#fff}
-.a{font-weight:600;font-variant-numeric:tabular-nums}
-.bars{display:flex;align-items:flex-end;gap:4px;height:90px}
-.bars div{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;font-size:.65rem;color:var(--mut)}
-.bars i{display:block;width:100%;border-radius:4px 4px 0 0;background:var(--pri);min-height:2px}
-.bars .cur i{outline:2px solid var(--tx)}
-.tabs{position:fixed;bottom:0;left:0;right:0;display:flex;background:var(--card);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom)}
-.tabs button{flex:1;padding:12px 0;font-size:.8rem;color:var(--mut)}
-.tabs button.on{color:var(--pri);font-weight:700}
-.fab{position:fixed;right:16px;bottom:calc(74px + env(safe-area-inset-bottom));width:56px;height:56px;border-radius:50%;background:var(--pri);color:#fff;font-size:2rem;box-shadow:0 4px 14px #0004}
-@media (prefers-color-scheme:dark){.fab{color:#042f2b}}
-dialog{border:0;border-radius:18px;padding:18px;width:min(92vw,420px);background:var(--card);color:var(--tx)}
-dialog::backdrop{background:#0008}
-label{display:block;font-size:.8rem;color:var(--mut);margin:10px 0 4px}
-input,select{width:100%;font:inherit;padding:11px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--tx)}
-label.c{display:flex;gap:8px;align-items:center;color:var(--tx);font-size:.9rem}label.c input{width:auto}
-.btns{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
-.btn{flex:1;padding:12px;border-radius:12px;background:var(--pri);color:#fff;font-weight:600}
-@media (prefers-color-scheme:dark){.btn{color:#042f2b}}
-.btn.g{background:var(--bg);color:var(--tx);border:1px solid var(--line)}.btn.d{background:var(--bad);color:#fff}
-h2{font-size:1rem;margin:0 0 8px}.hide{display:none}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
+<header class="top">
+  <div class="brand"><b>💰 CONTROLE FINANCEIRO</b><span id="saved">✓ salvo</span></div>
+  <nav id="tabs"></nav>
+</header>
 <main id="app"></main>
-<button class="fab" id="fab" aria-label="Adicionar despesa">+</button>
-<nav class="tabs">
-  <button data-t="mes" class="on">📅 Mês</button>
-  <button data-t="div">💳 Dívidas</button>
-  <button data-t="cfg">⚙️ Dados</button>
-</nav>
-<dialog id="dlg"></dialog>
-<input type="file" id="file" accept=".json" class="hide">
+<input type="file" id="file" accept=".json" hidden>
 <script src="seed.js"></script>
-<script>
-const KEY='financas.v1', $=s=>document.querySelector(s);
-const BRL=n=>(n||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
-const PAL=['#0f766e','#2563eb','#d97706','#9333ea','#db2777','#0891b2','#65a30d','#e11d48'];
-const SOBRA='#16a34a';
-let S;try{S=JSON.parse(localStorage.getItem(KEY))}catch(e){}
-S=S||JSON.parse(JSON.stringify(SEED));
-let tab='mes', ym=(()=>{const d=new Date(),m=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');return m<S.months[0]?S.months[0]:m})();
-const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
-const add=(m,n)=>{let[y,mo]=m.split('-').map(Number);const d=new Date(y,mo-1+n,1);return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')};
-const mname=m=>{const[y,mo]=m.split('-');return new Date(y,mo-1,1).toLocaleDateString('pt-BR',{month:'long',year:'numeric'})};
-const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-function income(m){
-  if(S.income[m])return S.income[m];
-  for(let i=1;i<=24;i++){const p=S.income[add(m,-i)];if(p)return{salary:p.salary,extra:0}}
-  return{salary:0,extra:0}}
-const totals=m=>{
-  const list=S.expenses.filter(e=>e.months[m]!=null),inc=income(m);
-  const renda=(+inc.salary||0)+(+inc.extra||0),desp=list.reduce((a,e)=>a+e.months[m],0);
-  const pago=list.filter(e=>e.paid[m]).reduce((a,e)=>a+e.months[m],0);
-  return{list,inc,renda,desp,pago,sobra:renda-desp,saldo:renda-pago}};
-function donut(t){
-  const by={};t.list.forEach(e=>by[e.cat]=(by[e.cat]||0)+e.months[ym]);
-  const items=Object.entries(by).sort((a,b)=>b[1]-a[1]).map(([n,v],i)=>({n,v,c:PAL[i%PAL.length]}));
-  if(t.sobra>0)items.push({n:'Sobra',v:t.sobra,c:SOBRA});
-  const tot=items.reduce((a,i)=>a+i.v,0);
-  if(!tot)return'<p class="k">Sem despesas neste mês.</p>';
-  const R=80,C=2*Math.PI*R;let off=0;
-  const arcs=items.map(i=>{const l=i.v/tot*C,s=`<circle r="${R}" cx="110" cy="110" fill="none" stroke="${i.c}" stroke-width="32" stroke-dasharray="${l} ${C-l}" stroke-dashoffset="${-off}" transform="rotate(-90 110 110)"/>`;off+=l;return s}).join('');
-  return`<div class="donut"><svg viewBox="0 0 220 220">${arcs}<text x="110" y="104" text-anchor="middle" fill="var(--mut)" font-size="12">${t.sobra>=0?'sobra':'falta'}</text><text x="110" y="126" text-anchor="middle" fill="${t.sobra>=0?'var(--ok)':'var(--bad)'}" font-size="20" font-weight="700">${BRL(Math.abs(t.sobra))}</text></svg>
-  <div class="legend">${items.map(i=>`<div><span class="dot" style="background:${i.c}"></span><span>${esc(i.n)} <small class="k">${Math.round(i.v/tot*100)}%</small></span><span>${BRL(i.v)}</span></div>`).join('')}</div></div>`}
-function render(){
-  $('#fab').classList.toggle('hide',tab!=='mes');
-  document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('on',b.dataset.t===tab));
-  $('#app').innerHTML=tab==='mes'?viewMes():tab==='div'?viewDiv():viewCfg()}
-function viewMes(){
-  const t=totals(ym);
-  const months=Array.from({length:12},(_,i)=>add(S.months[0],i)),all=months.map(m=>totals(m).sobra),mx=Math.max(...all.map(Math.abs),1);
-  return`<div class="nav"><button class="ib" onclick="go(-1)">‹</button><h1>${mname(ym)}</h1><button class="ib" onclick="go(1)">›</button></div>
-  <div class="card"><div class="grid">
-   <div class="sum" onclick="editInc()"><div class="k">Renda ✎</div><div class="v">${BRL(t.renda)}</div></div>
-   <div><div class="k">Despesas</div><div class="v">${BRL(t.desp)}</div></div>
-   <div><div class="k">Saldo agora (renda − pago)</div><div class="v ${t.saldo<0?'neg':'pos'}">${BRL(t.saldo)}</div></div>
-   <div><div class="k">Falta pagar</div><div class="v">${BRL(t.desp-t.pago)}</div></div></div></div>
-  <div class="card"><h2>Pra onde vai o dinheiro</h2>${donut(t)}</div>
-  <div class="card"><h2>Despesas</h2>${t.list.length?t.list.sort((a,b)=>a.day-b.day).map(e=>`<div class="row ${e.paid[ym]?'paid':''}"><button class="chk" onclick="event.stopPropagation();pay('${e.id}')">${e.paid[ym]?'✓':''}</button><div class="n" onclick="editExp('${e.id}')"><b>${esc(e.name)}</b><small>dia ${e.day} · ${esc(e.cat)}</small></div><div class="a" onclick="editExp('${e.id}')">${BRL(e.months[ym])}</div></div>`).join(''):'<p class="k">Nada lançado. Toque no + para adicionar.</p>'}</div>
-  <div class="card"><h2>Sobra por mês</h2><div class="bars">${months.map((m,i)=>`<div class="${m===ym?'cur':''}" onclick="ym='${m}';render()"><i style="height:${Math.abs(all[i])/mx*70}%;background:${all[i]<0?'var(--bad)':'var(--pri)'}"></i>${mname(m).slice(0,3)}</div>`).join('')}</div></div>`}
-function viewDiv(){
-  const tot=S.debts.reduce((a,d)=>a+d.value,0);
-  return`<div class="nav"><h1>Dívidas</h1><button class="ib" onclick="editDebt()">+</button></div>
-  <div class="card"><div class="k">Total devendo</div><div class="v neg">${BRL(tot)}</div></div>
-  <div class="card">${S.debts.map(d=>`<div class="row" onclick="editDebt('${d.id}')"><div class="n"><b>${esc(d.name)}</b></div><div class="a">${BRL(d.value)}</div></div>`).join('')||'<p class="k">Nenhuma dívida.</p>'}</div>`}
-function viewCfg(){return`<div class="nav"><h1>Dados</h1></div>
-  <div class="card"><p class="k">Tudo fica salvo neste aparelho (navegador). Faça backup de vez em quando e use para passar os dados para outro celular.</p>
-  <div class="btns"><button class="btn" onclick="exp()">Exportar backup</button><button class="btn g" onclick="$('#file').click()">Importar</button></div></div>
-  <div class="card"><p class="k">Voltar aos dados originais da planilha apaga tudo o que você mudou.</p><div class="btns"><button class="btn d" onclick="if(confirm('Apagar tudo e voltar aos dados da planilha?')){S=JSON.parse(JSON.stringify(SEED));save();tab='mes';render()}">Restaurar planilha</button></div></div>`}
-function go(n){ym=add(ym,n);render()}
-function pay(id){const e=S.expenses.find(x=>x.id===id);e.paid[ym]=!e.paid[ym];save();render()}
-function open(html){const d=$('#dlg');d.innerHTML=html;d.showModal();return d}
-const close=()=>{$('#dlg').close();render()};
-function editInc(){const i=income(ym);
-  open(`<h2>Renda de ${mname(ym)}</h2><label>Salário</label><input id="s" type="number" step="0.01" value="${i.salary}"><label>Extras</label><input id="x" type="number" step="0.01" value="${i.extra||0}">
-  <label class="c"><input type="checkbox" id="f" checked> Salário igual nos meses seguintes</label>
-  <div class="btns"><button class="btn g" onclick="close()">Cancelar</button><button class="btn" onclick="saveInc()">Salvar</button></div>`)}
-function saveInc(){const s=+$('#s').value||0,x=+$('#x').value||0;S.income[ym]={salary:s,extra:x};
-  if($('#f').checked)for(let i=1;i<=24;i++){const m=add(ym,i);if(m<=add(S.months[0],11))S.income[m]={salary:s,extra:S.income[m]?.extra||0}}
-  save();close()}
-function editExp(id){
-  const e=id?S.expenses.find(x=>x.id===id):{name:'',cat:'Outros',day:5,months:{[ym]:''},paid:{}};
-  const cats=[...new Set(S.expenses.map(x=>x.cat).concat(['Moradia','Alimentação','Transporte','Lazer','Outros']))];
-  open(`<h2>${id?'Editar':'Nova'} despesa</h2><label>Nome</label><input id="n" value="${esc(e.name)}">
-  <label>Categoria</label><input id="c" list="cl" value="${esc(e.cat)}"><datalist id="cl">${cats.map(c=>`<option value="${esc(c)}">`).join('')}</datalist>
-  <div class="grid"><div><label>Valor (R$)</label><input id="v" type="number" step="0.01" inputmode="decimal" value="${e.months[ym]}"></div><div><label>Dia do vencimento</label><input id="d" type="number" min="1" max="31" value="${e.day}"></div></div>
-  ${id?`<label class="c"><input type="checkbox" id="f"> Aplicar o valor aos meses seguintes</label>`:`<label>Repetir por quantos meses?</label><input id="r" type="number" min="1" max="60" value="1">`}
-  <div class="btns"><button class="btn g" onclick="close()">Cancelar</button><button class="btn" onclick="saveExp('${id||''}')">Salvar</button></div>
-  ${id?`<div class="btns"><button class="btn g" onclick="delExp('${id}',0)">Excluir só deste mês</button><button class="btn d" onclick="delExp('${id}',1)">Excluir de todos</button></div>`:''}`)}
-function saveExp(id){
-  const name=$('#n').value.trim(),v=+$('#v').value;if(!name||!(v>0))return alert('Preencha nome e valor.');
-  const cat=$('#c').value.trim()||'Outros',day=Math.min(31,Math.max(1,+$('#d').value||1));
-  if(id){const e=S.expenses.find(x=>x.id===id);Object.assign(e,{name,cat,day});e.months[ym]=v;
-    if($('#f').checked)Object.keys(e.months).filter(m=>m>ym).forEach(m=>e.months[m]=v)}
-  else{const n=Math.max(1,+$('#r').value||1),months={};for(let i=0;i<n;i++)months[add(ym,i)]=v;
-    S.expenses.push({id:'e'+Date.now(),name,cat,day,months,paid:{}})}
-  save();close()}
-function delExp(id,all){const e=S.expenses.find(x=>x.id===id);
-  if(all)S.expenses=S.expenses.filter(x=>x!==e);else delete e.months[ym];save();close()}
-function editDebt(id){const d=id?S.debts.find(x=>x.id===id):{name:'',value:''};
-  open(`<h2>${id?'Editar':'Nova'} dívida</h2><label>Nome</label><input id="n" value="${esc(d.name)}"><label>Quanto falta (R$)</label><input id="v" type="number" step="0.01" inputmode="decimal" value="${d.value}">
-  <div class="btns"><button class="btn g" onclick="close()">Cancelar</button><button class="btn" onclick="saveDebt('${id||''}')">Salvar</button></div>${id?`<div class="btns"><button class="btn d" onclick="delDebt('${id}')">Excluir</button></div>`:''}`)}
-function saveDebt(id){const name=$('#n').value.trim(),value=+$('#v').value;if(!name)return;
-  if(id)Object.assign(S.debts.find(x=>x.id===id),{name,value});else S.debts.push({id:'d'+Date.now(),name,value});save();close()}
-function delDebt(id){S.debts=S.debts.filter(x=>x.id!==id);save();close()}
-function exp(){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(S)],{type:'application/json'}));a.download='financas-backup.json';a.click()}
-$('#file').onchange=async e=>{try{const j=JSON.parse(await e.target.files[0].text());if(!j.expenses)throw 0;S=j;save();render()}catch{alert('Arquivo inválido.')}};
-$('#fab').onclick=()=>editExp();
-document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{tab=b.dataset.t;render()});
-render();
-if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
-</script>
+<script src="app.js"></script>
 </body>
 </html>
