@@ -76,3 +76,25 @@ input,select,textarea{font-family:'Poppins',sans-serif!important}
   .mobile-header .brand-symbol{width:31px;height:31px;font-size:19px;border-radius:9px}
   .mobile-header .brand strong{font-size:18px}
 }
+
+/* Contraste consistente em todos os campos de seleção */
+select,.cell-select,.editor-fields select{background-color:#181818!important;color:#fff!important;border-color:#454545;color-scheme:dark}
+select option{background:#181818!important;color:#fff!important}
+.nav-trash{float:right;border:1px solid #444;background:#202020;color:#aaa;border-radius:7px;padding:3px 7px;font-size:14px;cursor:pointer}
+.nav-trash:hover{color:#ffe608;border-color:#ffe608}
+.calendar-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
+.calendar-toolbar h2{font-size:18px;text-transform:capitalize;text-align:center}
+.calendar-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px}
+.calendar-weekday{text-align:center;color:#aaa;font-size:11px;padding:8px 0}
+.calendar-day{display:flex;flex-direction:column;align-items:stretch;gap:4px;min-width:0;min-height:92px;padding:7px 5px;border:1px solid #383838;border-radius:9px;background:#191919;color:#fff;text-align:left;overflow:hidden}
+.calendar-day.blank{background:transparent;border-color:transparent}
+.calendar-day:not(.blank){cursor:pointer}
+.calendar-day.is-today{border-color:#ffe608;box-shadow:inset 0 0 0 1px #ffe608}
+.calendar-date{font-weight:700;font-size:12px}
+.calendar-day small{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:9px;background:#302b13;color:#ffe608;border-radius:4px;padding:3px}
+.calendar-day small.is-paid{background:#193126;color:#8ce0b3}
+.calendar-event{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 0;border-bottom:1px solid #383838}
+.calendar-event div{display:flex;flex-direction:column;gap:4px}
+.calendar-event small{font-size:11px;color:#aaa}
+.calendar-event strong{white-space:nowrap;color:#fff}
+@media(max-width:620px){.calendar-grid{gap:3px}.calendar-day{min-height:68px;padding:5px 3px;border-radius:6px}.calendar-day small{font-size:8px}.calendar-toolbar h2{font-size:14px}.calendar-toolbar .button{padding:8px;font-size:10px}}
