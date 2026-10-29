@@ -38,3 +38,41 @@ input,select,textarea{font-family:'Poppins',sans-serif!important}
 @media(max-width:760px){.hero{background:linear-gradient(145deg,#303030,#242424)!important}.hero h2{color:#fff!important}}
 
 .hero-stat-action{display:block;width:100%;text-align:left;font:inherit;cursor:pointer;transition:transform .2s,border-color .2s}.hero-stat-action:hover{transform:translateY(-2px);border-color:#ffe608!important}.hero-stat-action small{display:block}
+
+/* Navegação mensal rolável e menu móvel compacto */
+.sidebar{height:100vh;height:100dvh;overflow:hidden}
+#tabs{display:flex;flex-direction:column;flex:1;min-height:0}
+#tabs>.nav-group:first-child{flex:none}
+#tabs .month-nav{display:block;flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#555 transparent;padding-bottom:8px}
+.nav-month-head{display:flex;align-items:center;justify-content:space-between}
+.nav-add-month{border:1px solid #4a4a4a;background:#292929;color:#ffe608;border-radius:8px;width:27px;height:27px;font-size:18px}
+.nav-add-month:hover{border-color:#ffe608}
+.mobile-brand-row{display:flex;align-items:center;justify-content:space-between;width:100%}
+.menu-toggle{display:none;border:1px solid #484848;background:#292929;border-radius:10px;width:40px;height:38px;align-items:center;justify-content:center;flex-direction:column;gap:5px}
+.menu-toggle span{display:block;width:18px;height:2px;background:#ffe608;border-radius:2px}
+.nav-overlay[hidden]{display:none!important}
+.nav-overlay{display:none}
+@media(max-width:620px){
+  .mobile-header{flex-direction:row;flex-wrap:wrap;gap:2px}
+  .mobile-brand-row{width:100%}
+  .menu-toggle{display:flex}
+  .sidebar{position:fixed;top:0;bottom:0;left:0;width:min(86vw,320px)!important;height:100dvh;z-index:30;padding:20px 13px;background:#171717!important;border-right:1px solid #454545;transform:translateX(-105%);transition:transform .25s ease;display:flex;flex-direction:column;overflow:hidden}
+  .sidebar.mobile-open{transform:translateX(0)}
+  .sidebar>.brand{display:flex!important;padding:2px 9px 22px}
+  .sidebar-footer{display:flex!important;color:#fff;border-color:#383838;padding-top:15px}
+  .sidebar-footer strong{color:#fff}
+  .sidebar-footer small{color:#aaa}
+  .sidebar .nav-status{display:block!important;color:#aaa;border-color:#383838}
+  .sidebar #tabs{display:flex!important;flex-direction:column;min-height:0;overflow:hidden}
+  .sidebar #tabs>.nav-group:first-child{display:flex;flex-direction:column;align-items:stretch;gap:3px;padding:0 0 14px;margin:0;flex:none}
+  .sidebar .nav-label{display:block!important;color:#999;padding:0 12px 8px}
+  .sidebar .nav-item{width:100%;flex:none;justify-content:flex-start;padding:11px 12px;font-size:12px;gap:10px;margin:1px 0}
+  .sidebar .nav-icon{font-size:16px}
+  .sidebar #tabs .month-nav{display:block!important;flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;border-top:1px solid #383838;padding-top:14px}
+  .sidebar .month-item{font-size:12px;padding:10px 12px}
+  .nav-overlay:not([hidden]){display:block;position:fixed;inset:0;background:#0009;border:0;border-radius:0;z-index:29;backdrop-filter:blur(2px)}
+  .main-column{margin-left:0}
+  .mobile-header .brand{padding:0;gap:8px}
+  .mobile-header .brand-symbol{width:31px;height:31px;font-size:19px;border-radius:9px}
+  .mobile-header .brand strong{font-size:18px}
+}
