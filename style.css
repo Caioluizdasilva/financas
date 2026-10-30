@@ -704,3 +704,23 @@ body.theme-dark .calendar-payment-toggle{background:#242424;border-color:#505050
 body.theme-dark .calendar-payment-toggle:hover{background:#353326;border-color:#ffe608}
 body.theme-dark .calendar-payment-toggle.is-paid{background:#203427;border-color:#426b4c;color:#a8e6b4}
 @media(max-width:620px){.calendar-payment-toggle{padding:8px 9px;font-size:9px}}
+
+
+/* Modo de privacidade dos planos e metas: preserva a apresentação sem revelar dados pessoais. */
+body.privacy-hidden .goal-card .goal-cover,
+body.privacy-hidden .goal-card h2,
+body.privacy-hidden .goal-card .goal-card-content > p:not(.eyebrow),
+body.privacy-hidden .goal-card .goal-card-content .micro,
+body.privacy-hidden .goal-card .progress-meta,
+body.privacy-hidden .goal-detail-dialog .dialog-head h2,
+body.privacy-hidden .goal-detail-dialog .goal-detail-cover,
+body.privacy-hidden .goal-detail-dialog > p,
+body.privacy-hidden .goal-detail-dialog .goal-child-row,
+body.privacy-hidden .goal-detail-dialog .goal-item-row {
+  filter: blur(7px);
+  user-select: none;
+  transition: filter .18s ease;
+}
+body.privacy-hidden .goal-card .goal-cover { filter: blur(10px); }
+body.privacy-hidden .goal-card .goal-card-content .eyebrow { filter: blur(3px); }
+.account-setting-description { margin: 0 0 12px; color: var(--muted); font-size: 12px; line-height: 1.6; }
