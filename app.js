@@ -111,16 +111,45 @@ function openSpendingAdvisor(){let greetingHour=new Date().getHours(),dayGreetin
 function setupDashboardArrangement(){
  const host=$('#app');if(!host)return;
  const cards=[...host.querySelectorAll(':scope > .page-head,:scope > .hero,:scope > .dashboard-goals,:scope > .metrics,:scope > .grid2,:scope > .bank-movement-summary,:scope > .moto-card')];
- cards.forEach((el,i)=>{el.dataset.dashboardCard='1';el.dataset.dashboardId=el.dataset.dashboardId||(el.classList.contains('page-head')?'heading':el.classList.contains('hero')?'hero':el.classList.contains('dashboard-goals')?'goals':el.classList.contains('metrics')?'metrics':el.classList.contains('moto-card')?'moto':el.classList.contains('bank-movement-summary')?'bank-summary':'group-'+i);el.draggable=false;el.classList.remove('dashboard-arrange-active','dashboard-selected')});
+ cards.forEach((el,i)=>{
+  el.dataset.dashboardCard='1';
+  el.dataset.dashboardId=el.dataset.dashboardId||(el.classList.contains('page-head')?'heading':el.classList.contains('hero')?'hero':el.classList.contains('dashboard-goals')?'goals':el.classList.contains('metrics')?'metrics':el.classList.contains('moto-card')?'moto':el.classList.contains('bank-movement-summary')?'bank-summary':'group-'+i);
+  el.draggable=false;el.classList.remove('dashboard-arrange-active','dashboard-selected','dashboard-drop-before','dashboard-drop-after');
+  let handle=el.querySelector(':scope > .dashboard-arrange-handle');
+  if(!handle){handle=document.createElement('button');handle.type='button';handle.className='dashboard-arrange-handle';handle.dataset.dashboardHandle='1';handle.setAttribute('aria-label','Selecionar este cartão para reorganizar');handle.title='Mover este cartão';handle.textContent='⠿';el.prepend(handle)}
+ });
  const persist=()=>{S.preferences=S.preferences||{};S.preferences.dashboardOrder=[...host.querySelectorAll('[data-dashboard-card="1"]')].map(x=>x.dataset.dashboardId);save()};
- const select=card=>{selectedDashboard=card;dashboardArrange=!!card;cards.forEach(el=>{el.draggable=el===card;el.classList.toggle('dashboard-arrange-active',el===card);el.classList.toggle('dashboard-selected',el===card)});let hint=host.querySelector('#dashboard-arrange-hint');if(card){if(!hint){hint=document.createElement('div');hint.id='dashboard-arrange-hint';hint.className='dashboard-arrange-hint';host.prepend(hint)}hint.textContent='Cartão selecionado: arraste-o para outra posição. Clique novamente no cartão para cancelar a seleção.'}else if(hint)hint.remove()};
+ const clearMarks=()=>cards.forEach(el=>el.classList.remove('dashboard-drop-before','dashboard-drop-after'));
+ const select=card=>{
+  selectedDashboard=card;dashboardArrange=!!card;clearMarks();
+  cards.forEach(el=>{el.classList.toggle('dashboard-arrange-active',!!card);el.classList.toggle('dashboard-selected',el===card)});
+  let hint=host.querySelector('#dashboard-arrange-hint');
+  if(card){
+   if(!hint){hint=document.createElement('div');hint.id='dashboard-arrange-hint';hint.className='dashboard-arrange-hint';host.prepend(hint)}
+   hint.innerHTML='<strong>Reorganizando a visão geral</strong><span>Cartão selecionado. Escolha outro cartão para posicioná-lo antes ou depois dele. A faixa amarela indica onde ele ficará.</span><button type="button" data-dashboard-cancel>Cancelar</button>';
+  }else if(hint)hint.remove();
+ };
  const order=S.preferences?.dashboardOrder||[];
  if(order.length){const parent=cards[0]?.parentNode;order.forEach(id=>{const el=cards.find(x=>x.dataset.dashboardId===id);if(el&&el.parentNode===parent)parent.appendChild(el)})}
- host.onclick=e=>{const card=e.target.closest('[data-dashboard-card="1"]');if(!card||!host.contains(card))return;if(e.target.closest('button,a,input,select,textarea,label,[data-action]'))return;if(!selectedDashboard){select(card);return}if(selectedDashboard===card){select(null);return}const moving=selectedDashboard,rect=card.getBoundingClientRect(),after=e.clientY>rect.top+rect.height/2;card.parentNode.insertBefore(moving,after?card.nextSibling:card);persist();select(moving)};
- host.ondragstart=e=>{const card=e.target.closest('[data-dashboard-card="1"]');if(!dashboardArrange||!card||card!==selectedDashboard){e.preventDefault();return}dragDashboard=card;card.classList.add('dashboard-dragging');if(e.dataTransfer)e.dataTransfer.effectAllowed='move'};
- host.ondragover=e=>{if(dashboardArrange&&dragDashboard&&e.target.closest('[data-dashboard-card="1"]'))e.preventDefault()};
- host.ondrop=e=>{const target=e.target.closest('[data-dashboard-card="1"]');if(!dashboardArrange||!dragDashboard||!target||target===dragDashboard)return;e.preventDefault();const r=target.getBoundingClientRect(),after=e.clientY>r.top+r.height/2;target.parentNode.insertBefore(dragDashboard,after?target.nextSibling:target);persist();select(dragDashboard)};
- host.ondragend=()=>{if(dragDashboard)dragDashboard.classList.remove('dashboard-dragging');dragDashboard=null};
+ host.addEventListener('pointermove',e=>{
+  if(!selectedDashboard)return;
+  const target=e.target.closest('[data-dashboard-card="1"]');
+  clearMarks();
+  if(!target||target===selectedDashboard)return;
+  const r=target.getBoundingClientRect(),after=e.clientY>r.top+r.height/2;
+  target.classList.add(after?'dashboard-drop-after':'dashboard-drop-before');
+ });
+ host.addEventListener('click',e=>{
+  if(e.target.closest('[data-dashboard-cancel]')){select(null);return}
+  const handle=e.target.closest('[data-dashboard-handle]');
+  if(handle){const card=handle.closest('[data-dashboard-card="1"]');select(selectedDashboard===card?null:card);return}
+  if(!selectedDashboard)return;
+  const target=e.target.closest('[data-dashboard-card="1"]');
+  if(!target||target===selectedDashboard||e.target.closest('button,a,input,select,textarea,label,[data-action]'))return;
+  const r=target.getBoundingClientRect(),after=e.clientY>r.top+r.height/2,moving=selectedDashboard;
+  target.parentNode.insertBefore(moving,after?target.nextSibling:target);
+  persist();select(moving);
+ });
 }
 function go(k){cur=k;render();scrollTo({top:0,behavior:'smooth'})}
 function upd(k,key,i,f,v){let r=M(k)[key][i],t=cols[key].find(c=>c[0]===f)[2];r[f]=t==='n'||t==='d'?(+v||0):v;save();render()}
