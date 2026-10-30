@@ -565,3 +565,7 @@ body:not(.theme-dark) .hero-stat{border-left-color:#ffffff55}
 .theme-dark .hero{background:linear-gradient(120deg,#1d342d,#254b3d)!important;color:#f5faf7!important}.theme-dark .hero .eyebrow{color:#d7e9dd!important}.theme-dark .hero p:not(.eyebrow),.theme-dark .hero-stat span,.theme-dark .hero-stat small{color:#dbe9e0!important}.theme-dark .hero-stat{border-left-color:#ffffff35}
 .theme-dark .debt-focus{background:#202a35!important}.theme-dark .pill{background:#263d34;color:#cce6d6}.theme-dark .account-center-nav{background:#151c25}.theme-dark .account-center-nav button{color:#d1dae5}.theme-dark .account-setting{color:#e6edf5}.theme-dark .data-management{background:#202a35;border-color:#3b4858}.theme-dark .advisor-chat-bubble.assistant{background:#202a35}
 #finance-form-dialog input[type=file]{width:100%;padding:12px;border:1px dashed var(--line);border-radius:10px;background:var(--surface);color:var(--ink)}.bank-logo img{max-width:100%;max-height:100%;object-fit:contain}
+
+/* Reordenação contextual da Visão Geral, exclusiva para mouse/desktop. */
+.dashboard-arrange-active{outline:2px dashed var(--user-accent)!important;outline-offset:4px;cursor:grab!important;box-shadow:0 0 0 3px color-mix(in srgb,var(--user-accent) 14%,transparent)!important}.dashboard-dragging{opacity:.4;cursor:grabbing!important}
+@media(hover:none),(pointer:coarse),(max-width:700px){.dashboard-arrange-active{outline:none!important;box-shadow:none!important;cursor:default!important}}
