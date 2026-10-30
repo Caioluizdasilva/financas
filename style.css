@@ -694,3 +694,13 @@ body.theme-dark .account-center-body .data-management .button-stack .button.prim
 body.theme-dark .debt-negativity-status{background:#fff;border-color:#e5e5e5;color:#353535}
 body.theme-dark .debt-negativity-status.is-negative{background:#3a2022;border-color:#8f4147;color:#ff999f}
 @media(max-width:620px){.debt-negativity-status{min-height:32px;padding:7px 11px}}
+
+
+/* Ação de pagamento diretamente nos compromissos do calendário. */
+.calendar-payment-toggle{display:inline-flex;align-items:center;justify-content:center;align-self:center;flex:none;padding:8px 11px;border:1px solid #deded8;border-radius:9px;background:#fff;color:#292929;font:600 10px 'Poppins',sans-serif;cursor:pointer;transition:background .15s ease,border-color .15s ease}
+.calendar-payment-toggle:hover{border-color:#c9b500;background:#fffde8}
+.calendar-payment-toggle.is-paid{border-color:#b8d9c0;background:#edf8ef;color:#24733a}
+body.theme-dark .calendar-payment-toggle{background:#242424;border-color:#505050;color:#f5f5f5}
+body.theme-dark .calendar-payment-toggle:hover{background:#353326;border-color:#ffe608}
+body.theme-dark .calendar-payment-toggle.is-paid{background:#203427;border-color:#426b4c;color:#a8e6b4}
+@media(max-width:620px){.calendar-payment-toggle{padding:8px 9px;font-size:9px}}
