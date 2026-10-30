@@ -854,3 +854,17 @@ body.theme-dark .goal-detail-dialog{background:#292929!important;color:#f5f5f5!i
 .chart-hover-detail{position:relative}.chart-hover-detail::after{content:attr(data-tooltip);white-space:pre-line;position:absolute;z-index:15;left:50%;bottom:calc(100% + 9px);transform:translate(-50%,5px);min-width:145px;padding:9px 11px;border:1px solid var(--line);border-radius:9px;background:var(--surface);color:var(--ink);font-size:10px;line-height:1.55;text-align:left;box-shadow:0 8px 22px #0004;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .15s ease,transform .15s ease}
 .chart-hover-detail:hover::after,.chart-hover-detail:focus-within::after{opacity:1;visibility:visible;transform:translate(-50%,0)}.chart-hover-detail i{cursor:help}
 @media(hover:none){.metric-tooltip{display:none}.chart-hover-detail::after{display:none}}
+
+
+/* Gráfico de evolução da saúde financeira */
+.financial-health-chart{width:100%;overflow:hidden;padding:8px 0 0}
+.financial-health-chart svg{display:block;width:100%;height:auto;overflow:visible}
+.health-zero-line{stroke:var(--line);stroke-width:1;stroke-dasharray:4 4}
+.health-line{fill:none;stroke:var(--user-accent);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.health-point{fill:var(--user-accent);stroke:var(--surface);stroke-width:2;cursor:crosshair;transition:r .15s ease}
+.health-point:hover,.health-point:focus{r:8;outline:none}.health-point.negative{fill:#d97757}
+.health-axis-label,.health-month-label{fill:var(--muted);font-size:9px}
+.health-chart-key{margin-top:6px}
+.bank-pie-segment{cursor:pointer;outline:none;transition:stroke-width .18s,opacity .18s,filter .18s}
+.bank-pie-segment:hover,.bank-pie-segment:focus{stroke-width:26;opacity:.88;filter:drop-shadow(0 1px 3px #0005)}
+@media(max-width:620px){.financial-health-chart{overflow-x:auto}.financial-health-chart svg{min-width:520px}}
