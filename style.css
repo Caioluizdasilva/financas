@@ -235,4 +235,9 @@ select option{background:#181818!important;color:#fff!important}
 .account-email-card b{font-size:12px;overflow-wrap:anywhere;color:var(--ink)}
 .account-signout{margin-top:12px!important;border-color:#b94b4b!important;color:#d76b6b!important}
 .account-signout:hover{background:#b94b4b12!important}
-@media(max-width:620px){#tabs{overflow:visible}.month-nav{display:none}}
+@media(max-width:620px){
+  .sidebar #tabs{display:block!important;flex:1 1 auto;min-height:0;overflow-y:auto!important;overflow-x:hidden!important;overscroll-behavior:contain}
+  .sidebar #tabs>.nav-group:first-child{flex:none}
+  .sidebar #tabs .month-nav{display:block!important;flex:none;min-height:auto;overflow:visible!important;border-top:1px solid #383838;padding-top:14px;margin-top:0}
+  .sidebar #tabs .nav-status{margin-top:14px}
+}
