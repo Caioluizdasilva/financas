@@ -467,3 +467,6 @@ select option{background:#181818!important;color:#fff!important}
   #finance-form-dialog.goal-form-dialog *,
   #finance-form-dialog.goal-form-dialog *:before{transition:none!important}
 }
+
+/* Tooltips detalhados dos indicadores do planejamento mensal */
+.metric.has-metric-tooltip{position:relative;cursor:help;outline:none}.metric-tooltip{display:none;position:absolute;z-index:30;top:calc(100% + 8px);left:0;width:min(330px,calc(100vw - 40px));padding:14px 15px;background:var(--surface);color:var(--text);border:1px solid var(--line);border-radius:12px;box-shadow:0 14px 38px #0002;white-space:normal}.metric.has-metric-tooltip:hover .metric-tooltip,.metric.has-metric-tooltip:focus-within .metric-tooltip{display:block}.metric-tooltip-title{font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:9px}.metric-tooltip-row{display:flex;justify-content:space-between;gap:14px;padding:6px 0;border-bottom:1px solid var(--line);font-size:11px}.metric-tooltip-row span{color:var(--muted)}.metric-tooltip-row b{white-space:nowrap;font-variant-numeric:tabular-nums}.metric-tooltip p{font-size:10px;line-height:1.5;color:var(--muted);margin:10px 0 0}@media(hover:none){.metric.has-metric-tooltip:active .metric-tooltip{display:block}}
