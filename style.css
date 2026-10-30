@@ -732,3 +732,40 @@ body.privacy-hidden .dashboard-goal-main i {
   transition: filter .18s ease;
 }
 body.privacy-hidden .dashboard-goal img { filter: blur(10px); }
+
+
+/* Desktop: mantém a navegação fixa e limita a rolagem à área de conteúdo. */
+@media (min-width: 621px) {
+  body:has(.sidebar) {
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+  }
+  body:has(.sidebar) .sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    height: 100vh;
+    height: 100dvh;
+  }
+  body:has(.sidebar) .main-column {
+    height: 100vh;
+    height: 100dvh;
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    overscroll-behavior-y: contain;
+    scrollbar-gutter: stable;
+  }
+}
+@media (max-width: 620px) {
+  body:has(.sidebar) {
+    height: auto;
+    overflow: auto;
+  }
+  body:has(.sidebar) .main-column {
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+  }
+}
