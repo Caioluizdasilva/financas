@@ -617,3 +617,7 @@ body:not(.theme-dark) .dashboard-selected{outline:3px solid var(--user-accent,#f
 .dashboard-arrange-active{cursor:grab!important}
 .dashboard-dragging{opacity:.45!important}
 @media(hover:none),(pointer:coarse),(max-width:700px){.dashboard-selected{outline-width:3px!important;outline-offset:3px!important;box-shadow:0 0 0 4px color-mix(in srgb,var(--user-accent,#ffe608) 16%,transparent)!important}}
+
+:root{--portfolio-yellow:#ffe608;--portfolio-yellow-hover:#ebff00}
+body.theme-dark .button.primary:hover{background:var(--portfolio-yellow-hover)!important;border-color:var(--portfolio-yellow-hover)!important}
+body:not(.theme-dark) .button.primary:hover{background:var(--portfolio-yellow-hover)!important;border-color:var(--portfolio-yellow-hover)!important}
