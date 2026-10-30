@@ -686,3 +686,11 @@ body.theme-dark .account-center-body .data-management-grid .button.danger{backgr
 body.theme-dark .account-center-body .data-management .button-stack .button:hover,body.theme-dark .account-center-body .data-management-grid .button:hover{border-color:#ffe608!important;background:#353326!important}
 body.theme-dark .account-center-body .data-management .button-stack .button.primary:hover{background:#fff06a!important}
 @media(max-width:650px){.account-center-body .data-management{padding:17px;margin-bottom:14px;border-radius:14px}.account-center-body .data-management .button-stack,.account-center-body .data-management-grid{grid-template-columns:1fr;gap:8px}.account-center-body .data-management-grid .button.danger{grid-column:auto}.account-center-body .data-management .button-stack .button,.account-center-body .data-management-grid .button{min-height:46px;font-size:11px}}
+
+
+/* Situação de negativação: indicador estático, sem controle lateral. */
+.debt-negativity-status{display:inline-flex;align-items:center;justify-content:center;min-height:30px;padding:6px 12px;border:1px solid #e5e5e5;border-radius:10px;background:#fff;color:#353535;font-size:11px;font-weight:700;line-height:1.2;white-space:nowrap;box-shadow:0 1px 2px #00000008}
+.debt-negativity-status.is-negative{background:#fff0f0;border-color:#f2bcbc;color:#c62828}
+body.theme-dark .debt-negativity-status{background:#fff;border-color:#e5e5e5;color:#353535}
+body.theme-dark .debt-negativity-status.is-negative{background:#3a2022;border-color:#8f4147;color:#ff999f}
+@media(max-width:620px){.debt-negativity-status{min-height:32px;padding:7px 11px}}
