@@ -119,7 +119,7 @@ function openSpendingAdvisor(){
  document.body.appendChild(d);let messages=d.querySelector('.advisor-chat-messages'),reply=d.querySelector('.advisor-chat-reply');
  const bubble=(who,html)=>{let el=document.createElement('div');el.className='advisor-chat-bubble '+(who==='user'?'user':'assistant');el.innerHTML=html;messages.appendChild(el);messages.scrollTop=messages.scrollHeight};
  const norm=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
- const parseMoney=s=>{let m=String(s).match(/(?:r\$\s*)?(\d{1,3}(?:\.\d{3})*(?:,\d{1,2})?|\d+(?:,\d{1,2})?)(?:\s*(?:reais|real|r\$))?/i);if(!m)return 0;return Math.max(0,+m[1].replace(/\./g,'').replace(',','.')||0)};
+ const parseMoney=s=>{let raw=String(s),m=raw.match(/r\$\s*(\d{1,3}(?:\.\d{3})*(?:,\d{1,2})?|\d+(?:,\d{1,2})?)/i)||raw.match(/(\d{1,3}(?:\.\d{3})*(?:,\d{1,2})?|\d+(?:,\d{1,2})?)\s*(?:reais|real)\b/i);if(!m){let clean=raw.replace(/\b\d{1,2}\s*(?:x|vezes|parcelas?)\b/ig,' ');m=clean.match(/\d{1,3}(?:\.\d{3})*(?:,\d{1,2})?|\d+(?:,\d{1,2})?/i)}if(!m)return 0;let value=Array.isArray(m)?m[m.length-1]:m[0];if(m.length>1)value=m[1];return Math.max(0,+String(value).replace(/\./g,'').replace(',','.')||0)};
  const parse=message=>{
   let t=norm(message),amount=parseMoney(message);if(amount>0&&!answers.valor)answers.valor=amount;
   let installments=t.match(/(\d{1,2})\s*(?:x|vezes|parcelas?)/);if(installments)answers.parcelas=Math.max(1,+installments[1]||1);else if(/\b(duas|dois)\s+vezes\b/.test(t))answers.parcelas=2;else if(/\b(tres|tr[eê]s)\s+vezes\b/.test(t))answers.parcelas=3;
