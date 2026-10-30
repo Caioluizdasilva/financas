@@ -621,3 +621,40 @@ body:not(.theme-dark) .dashboard-selected{outline:3px solid var(--user-accent,#f
 :root{--portfolio-yellow:#ffe608;--portfolio-yellow-hover:#ebff00}
 body.theme-dark .button.primary:hover{background:var(--portfolio-yellow-hover)!important;border-color:var(--portfolio-yellow-hover)!important}
 body:not(.theme-dark) .button.primary:hover{background:var(--portfolio-yellow-hover)!important;border-color:var(--portfolio-yellow-hover)!important}
+
+/* Correção definitiva da identidade visual: prevalece sobre regras antigas do tema. */
+:root{--portfolio-bg:#1f1f1f;--portfolio-card:#2e2e2e;--portfolio-yellow:#ffe608;--portfolio-lime:#ebff00}
+body.theme-dark{background:#1f1f1f!important;color:#f7f7f7!important}
+body.theme-dark .main-column{background:#1f1f1f!important}
+body.theme-dark .sidebar{background:#171717!important;border-color:#383838!important}
+body.theme-dark .panel,body.theme-dark .metric,body.theme-dark .debt-card,body.theme-dark .finance-dialog,body.theme-dark .account-center-dialog{background:#2e2e2e!important;color:#f7f7f7!important;border-color:#444!important}
+body.theme-dark .panel-head h2,body.theme-dark .panel h2,body.theme-dark .panel h3,body.theme-dark .metric strong,body.theme-dark .debt-card h2{color:#fff!important}
+body.theme-dark .panel-head p,body.theme-dark .metric span,body.theme-dark .metric small,body.theme-dark .page-head .lede,body.theme-dark .micro,body.theme-dark .empty{color:#bdbdbd!important}
+body.theme-dark .button.secondary{background:#383838!important;color:#fff!important;border-color:#505050!important}
+body.theme-dark input,body.theme-dark select,body.theme-dark textarea,body.theme-dark .inline-number,body.theme-dark .cell-input,body.theme-dark .cell-select{background:#1f1f1f!important;color:#fff!important;border-color:#484848!important}
+body.theme-dark th,body.theme-dark .total-row td{background:#252525!important;color:#ddd!important}
+body.theme-dark td{color:#f2f2f2!important;border-color:#414141!important}
+body.theme-dark .hero,body.theme-light .hero{background:#2e2e2e!important;color:#fff!important;border:1px solid #484848!important;box-shadow:none!important}
+body.theme-dark .hero:after,body.theme-light .hero:after{background:#ffe608!important}
+body.theme-dark .hero .eyebrow,body.theme-light .hero .eyebrow,body.theme-dark .hero-stat strong,body.theme-light .hero-stat strong{color:#ffe608!important}
+body.theme-dark .hero h2,body.theme-dark .hero p:not(.eyebrow),body.theme-dark .hero-stat span,body.theme-dark .hero-stat small,body.theme-light .hero h2,body.theme-light .hero p:not(.eyebrow),body.theme-light .hero-stat span,body.theme-light .hero-stat small{color:#f7f7f7!important}
+body.theme-dark .hero-stat,body.theme-light .hero-stat{background:#1f1f1f!important;border:1px solid #454545!important}
+body.theme-dark .nav-item.active,body.theme-dark .button.primary,body.theme-light .nav-item.active,body.theme-light .button.primary{background:#ffe608!important;color:#111!important;border-color:#ffe608!important}
+body.theme-dark .advisor-result{background:#252525!important;border-color:#ffe608!important}
+body.theme-dark .account-center-nav{background:#1f1f1f!important;border-color:#444!important}
+body.theme-dark .account-center-nav button{color:#ddd!important}
+body.theme-dark .account-center-nav button.active{background:#ffe608!important;color:#111!important}
+body.theme-light{background:#f5f5f3!important;color:#1f1f1f!important}
+body.theme-light .main-column{background:#f5f5f3!important}
+body.theme-light .sidebar{background:#fff!important;border-color:#deded8!important}
+body.theme-light .brand strong,body.theme-light .page-head h1,body.theme-light .panel h2,body.theme-light .panel h3,body.theme-light .metric strong{color:#1f1f1f!important}
+body.theme-light .panel,body.theme-light .metric,body.theme-light .debt-card,body.theme-light .finance-dialog,body.theme-light .account-center-dialog{background:#fff!important;color:#1f1f1f!important;border-color:#deded8!important;box-shadow:0 8px 25px #0000000d!important}
+body.theme-light .panel-head p,body.theme-light .metric span,body.theme-light .metric small,body.theme-light .page-head .lede,body.theme-light .micro,body.theme-light .empty{color:#666!important}
+body.theme-light .button.secondary{background:#fff!important;color:#1f1f1f!important;border-color:#ccc!important}
+body.theme-light input,body.theme-light select,body.theme-light textarea,body.theme-light .inline-number,body.theme-light .cell-input,body.theme-light .cell-select{background:#fff!important;color:#1f1f1f!important;border-color:#ccc!important}
+body.theme-light th{background:#f0f0ed!important;color:#333!important}
+body.theme-light td{color:#333!important;border-color:#e5e5e0!important}
+body.theme-light .nav-item{color:#333!important}
+.dashboard-arrange-active,body.theme-dark .dashboard-selected,body.theme-light .dashboard-selected{outline:3px solid #ffe608!important;outline-offset:4px;box-shadow:0 0 0 4px #ffe60830!important;cursor:grab!important;position:relative;z-index:2}
+.dashboard-arrange-hint{margin:0 0 14px;padding:10px 14px;border:1px solid #ffe608;border-radius:10px;background:#ffe60818;color:inherit;font-size:12px}
+.dashboard-dragging{opacity:.45;cursor:grabbing!important}
