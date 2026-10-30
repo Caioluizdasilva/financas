@@ -913,3 +913,22 @@ body.theme-dark .goal-detail-dialog{background:#292929!important;color:#f5f5f5!i
 .bank-pie-segment{cursor:pointer;outline:none;transition:stroke-width .18s,opacity .18s,filter .18s}
 .bank-pie-segment:hover,.bank-pie-segment:focus{stroke-width:26;opacity:.88;filter:drop-shadow(0 1px 3px #0005)}
 @media(max-width:620px){.financial-health-chart{overflow-x:auto}.financial-health-chart svg{min-width:520px}}
+
+/* Projeção anual: indicadores, composição e leitura comparativa */
+.annual-overview-panel .metrics{margin-top:16px}
+.annual-insights-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:14px}
+.annual-insight{min-width:0;padding:14px;border:1px solid var(--line);border-radius:13px;background:color-mix(in srgb,var(--surface) 88%,var(--user-accent) 12%);display:flex;flex-direction:column;gap:5px}
+.annual-insight span{font-size:10px;color:var(--muted);font-weight:650}
+.annual-insight strong{font-size:clamp(17px,2vw,23px);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.annual-insight small{font-size:9px;line-height:1.4;color:var(--muted)}
+.annual-category-panel{margin-top:18px}
+.annual-category-list{display:grid;gap:13px;margin-top:16px}
+.annual-category-row{min-width:0}
+.annual-category-label{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:6px;font-size:11px}
+.annual-category-label span{color:var(--muted);overflow-wrap:anywhere}
+.annual-category-label b{white-space:nowrap;font-variant-numeric:tabular-nums}
+.annual-category-track{height:9px;border-radius:99px;background:var(--line);overflow:hidden}
+.annual-category-track i{display:block;height:100%;border-radius:inherit;background:var(--user-accent);transition:width .2s ease}
+.annual-table-panel{margin-top:18px}
+@media(max-width:820px){.annual-insights-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:620px){.annual-insights-grid{gap:8px}.annual-insight{padding:11px;border-radius:11px}.annual-insight strong{font-size:18px}.annual-category-label{font-size:10px}.annual-category-list{gap:11px}}
