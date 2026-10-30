@@ -522,3 +522,17 @@ select option{background:#181818!important;color:#fff!important}
 @media(max-width:620px){.debt-types-manager{min-width:0}.debt-type-edit-row{grid-template-columns:1fr 1fr}.debt-type-edit-row input{grid-column:1/-1}}
 
 .bank-logo{background:color-mix(in srgb,var(--bank-color,#fff) 14%,var(--surface));color:var(--ink);overflow:hidden}.bank-logo img{display:block;width:72%;height:72%;object-fit:contain}.bank-logo b{font-size:22px}.debt-amounts strong.text-accent{color:var(--user-accent)}
+
+/* Personalização global: toda a interface usa a cor de destaque escolhida. */
+:root{--user-accent-text:color-mix(in srgb,var(--user-accent) 58%,#171717)}
+.brand-symbol,.nav-item.active,.nav-more-toggle:hover,.nav-more-toggle.expanded,.nav-more-plus,.profile-finance-button,.privacy-toggle,.eyebrow,.debt-index,.debt-drag-hint,.goal-section-symbol,.planning-month-icon{border-color:var(--user-accent)!important}
+.nav-more-toggle{border-color:color-mix(in srgb,var(--user-accent) 55%,var(--line))!important;background:color-mix(in srgb,var(--user-accent) 10%,transparent)!important;color:var(--user-accent)!important}
+.nav-more-items{border-left-color:var(--user-accent)!important}
+.hero{background:linear-gradient(115deg,var(--user-accent),color-mix(in srgb,var(--user-accent) 72%,var(--surface)))!important}
+.hero .eyebrow,.hero>div:first-child>p:last-child{color:var(--user-accent-text)!important}
+.calendar-day small{background:color-mix(in srgb,var(--user-accent) 14%,var(--surface))!important;color:var(--user-accent)!important}
+.calendar-day.has-events,.calendar-filters button.selected{border-color:var(--user-accent)!important}
+#tabs::-webkit-scrollbar-thumb,.table-wrap::-webkit-scrollbar-thumb{background:var(--user-accent)!important;border-color:var(--surface)!important}
+#finance-form-dialog .dialog-fields label:has(input.form-toggle){grid-column:1/-1;display:flex;flex-direction:row;align-items:center;gap:12px;padding:14px;border:1px solid var(--line);border-radius:12px;background:color-mix(in srgb,var(--user-accent) 7%,var(--surface));cursor:pointer}
+#finance-form-dialog input.form-toggle{width:19px;height:19px;min-height:19px;accent-color:var(--user-accent);flex:none}
+#finance-form-dialog .dialog-fields label:has(input.form-toggle)::after{content:'Ative para informar valor e quantidade de parcelas e o primeiro vencimento.';font-size:11px;font-weight:450;color:var(--muted)}
