@@ -719,3 +719,16 @@ body.privacy-hidden .goal-card .goal-card-content .eyebrow { filter: blur(3px); 
 
 #app [data-dashboard-card="1"]{position:relative}
 @media(hover:none),(pointer:coarse){}
+
+
+/* Privacidade também na lista de objetivos da Visão Geral. */
+body.privacy-hidden .dashboard-goal img,
+body.privacy-hidden .dashboard-goal-placeholder,
+body.privacy-hidden .dashboard-goal-main b,
+body.privacy-hidden .dashboard-goal-main small,
+body.privacy-hidden .dashboard-goal-main i {
+  filter: blur(7px);
+  user-select: none;
+  transition: filter .18s ease;
+}
+body.privacy-hidden .dashboard-goal img { filter: blur(10px); }
