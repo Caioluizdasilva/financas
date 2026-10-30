@@ -163,3 +163,20 @@ select option{background:#181818!important;color:#fff!important}
 .calendar-event.saida{border-left:3px solid #ff626b;padding-left:10px}.calendar-event.saida strong{color:#ff8b91}
 .calendar-event.assinatura{border-left:3px solid #5ba8ff;padding-left:10px}.calendar-event.assinatura strong{color:#82bdff}
 @media(max-width:620px){.calendar-filters{gap:6px}.calendar-filters button{flex:1;justify-content:center;padding:8px 9px;font-size:10px}.calendar-legend{gap:9px;font-size:9px}.calendar-day .calendar-tag{font-size:8px}}
+
+/* Autenticação e sincronização em nuvem */
+#auth-screen{position:fixed;inset:0;z-index:1000;background:#171a17;color:#f8f6ef;display:grid;place-items:center;padding:24px;overflow:auto}
+.auth-backdrop{width:min(100%,470px);margin:auto}.auth-card{background:#242923;border:1px solid #3b4238;border-radius:24px;padding:clamp(24px,5vw,42px);box-shadow:0 28px 90px #0008}
+.auth-brand{display:flex;align-items:center;gap:12px;margin-bottom:38px}.auth-brand strong{display:block;font:700 22px 'Playfair Display',Georgia,serif}.auth-brand small{display:block;color:#a9ad9f;font-size:9px;letter-spacing:1.5px;margin-top:3px}
+.auth-card h1{font:600 clamp(28px,6vw,38px)/1.15 'Playfair Display',Georgia,serif;margin:0 0 10px}.auth-subtitle{color:#b6bbae;font-size:12px;line-height:1.7;margin:0 0 25px}
+.auth-card form{display:grid;gap:15px}.auth-card label{display:grid;gap:7px;color:#d5d8cd;font-size:11px;font-weight:600}.auth-card input{width:100%;border:1px solid #4a5147;background:#1b201b;color:#fff;border-radius:10px;padding:13px 14px;font-size:13px}.auth-card input:focus{outline:2px solid #ffe608;outline-offset:1px}
+.auth-submit{width:100%;padding:13px 16px;border-radius:11px;margin-top:4px}.auth-card .button.primary{background:#ffe608;border-color:#ffe608;color:#202218}.auth-card .button:not(.primary){background:#30372f;color:#f8f6ef;border-color:#50574d}
+#auth-error{min-height:17px;margin:0;color:#ffb2a8;font-size:11px;line-height:1.5}.auth-links{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin-top:19px;color:#aeb3a7;font-size:10px}.auth-links button{border:0;background:none;color:#ffe608;font-size:10px;font-weight:700;padding:3px}.auth-links #auth-forgot{margin-left:auto}
+.auth-foot{border-top:1px solid #3b4238;margin-top:30px;padding-top:17px;color:#939a8c;font-size:9px;text-align:center}.auth-error-static{color:#ffb2a8;font-size:11px}
+#cloud-account-controls{position:fixed;right:18px;top:14px;z-index:30;display:flex;align-items:center;gap:10px;padding:6px 8px 6px 12px;border:1px solid #e6e1d6;border-radius:999px;background:#fffdf8eF;box-shadow:0 6px 22px #00000012}
+.cloud-user{max-width:190px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#777a70;font-size:10px}
+#cloud-signout{border:0;border-radius:999px;background:#ffe608;color:#242a25;padding:7px 13px;font-size:10px;font-weight:700}
+#tabs{min-height:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#e6c900 transparent;padding-right:5px}
+#tabs::-webkit-scrollbar{width:7px}#tabs::-webkit-scrollbar-track{background:transparent;margin:5px 0}
+#tabs::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#ffe608,#d9b900);border-radius:20px;border:2px solid #ebe7dc}
+@media(max-width:620px){#cloud-account-controls{top:7px;right:9px}.cloud-user{max-width:115px}.auth-links #auth-forgot{margin-left:0}#tabs{overflow:visible}}
