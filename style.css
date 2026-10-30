@@ -724,3 +724,19 @@ body.privacy-hidden .goal-detail-dialog .goal-item-row {
 body.privacy-hidden .goal-card .goal-cover { filter: blur(10px); }
 body.privacy-hidden .goal-card .goal-card-content .eyebrow { filter: blur(3px); }
 .account-setting-description { margin: 0 0 12px; color: var(--muted); font-size: 12px; line-height: 1.6; }
+
+
+/* Reorganização da Visão Geral: alça de mover e indicador de posição. */
+#app [data-dashboard-card="1"]{position:relative}
+#app .dashboard-arrange-handle{position:absolute;top:10px;right:10px;z-index:8;width:32px;height:32px;display:grid;place-items:center;border:1px solid #ffe608;border-radius:9px;background:#1f1f1f;color:#ffe608;font-size:21px;line-height:1;cursor:grab;opacity:.78;transition:opacity .16s,transform .16s,background .16s}
+#app .dashboard-arrange-handle:hover{opacity:1;transform:scale(1.06);background:#ffe608;color:#1f1f1f}
+#app .dashboard-selected{outline:2px solid #ffe608!important;outline-offset:3px;box-shadow:0 0 0 4px #ffe60825!important}
+#app .dashboard-drop-before:before,#app .dashboard-drop-after:after{content:"";position:absolute;left:0;right:0;height:5px;border-radius:8px;background:#ffe608;box-shadow:0 0 0 2px #ffe60835,0 0 15px #ffe60880;z-index:12;pointer-events:none}
+#app .dashboard-drop-before:before{top:-8px}
+#app .dashboard-drop-after:after{bottom:-8px}
+#dashboard-arrange-hint{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 14px;border:1px solid #ffe608;border-left:5px solid #ffe608;border-radius:12px;background:#ffe60812;margin:0 0 16px}
+#dashboard-arrange-hint strong{font-size:12px;color:var(--ink)}
+#dashboard-arrange-hint span{flex:1;min-width:180px;font-size:11px;color:var(--muted);line-height:1.5}
+#dashboard-arrange-hint button{border:1px solid var(--line);border-radius:8px;padding:7px 11px;background:var(--surface);color:var(--ink);font-size:11px;cursor:pointer}
+#app .dashboard-arrange-active .dashboard-arrange-handle{opacity:1;background:#ffe608;color:#1f1f1f}
+@media(hover:none),(pointer:coarse){#app .dashboard-arrange-handle{opacity:1}#dashboard-arrange-hint{align-items:flex-start}}
