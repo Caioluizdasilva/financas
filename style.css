@@ -224,3 +224,15 @@ select option{background:#181818!important;color:#fff!important}
 #cloud-signout:hover{filter:brightness(1.06)}
 @media(max-width:620px){#auth-screen{align-items:start;padding:18px 14px}.auth-backdrop{width:100%;max-width:460px;margin:auto}.auth-card{padding:27px 23px;border-radius:22px}.auth-brand{margin-bottom:37px}.auth-links{gap:9px 12px}.auth-links #auth-forgot{margin-left:0}#cloud-account-controls{top:7px;right:9px}.cloud-user{max-width:115px}}
 @media(prefers-reduced-motion:reduce){.auth-submit,.auth-card input,#cloud-signout{transition:none}}
+
+
+/* Navegação unificada e conta dentro da Central da conta */
+#tabs{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#e6c900 transparent}
+#tabs::-webkit-scrollbar{width:7px}#tabs::-webkit-scrollbar-track{background:transparent;margin:5px 0}#tabs::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#ffe608,#d9b900);border-radius:20px;border:2px solid #ebe7dc}
+.month-nav{flex:0 0 auto;overflow:visible;min-height:auto}
+.account-email-card{display:grid;gap:6px;margin:18px 0;padding:14px 15px;border:1px solid var(--line);border-radius:12px;background:var(--surface-2,var(--surface))}
+.account-email-card span{font-size:9px;font-weight:800;letter-spacing:1.3px;color:var(--muted)}
+.account-email-card b{font-size:12px;overflow-wrap:anywhere;color:var(--ink)}
+.account-signout{margin-top:12px!important;border-color:#b94b4b!important;color:#d76b6b!important}
+.account-signout:hover{background:#b94b4b12!important}
+@media(max-width:620px){#tabs{overflow:visible}.month-nav{display:none}}
