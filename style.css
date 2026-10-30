@@ -473,7 +473,12 @@ select option{background:#181818!important;color:#fff!important}
 /* Tabelas ampliáveis no planejamento mensal */
 .table-expand-trigger{white-space:nowrap;font-size:10px!important;padding:7px 9px!important}
 .table-panel-expanded{position:relative;z-index:45}
+.table-wrap{scrollbar-width:thin;scrollbar-color:#d6b900 #292929;overscroll-behavior-x:contain}.table-wrap::-webkit-scrollbar{width:11px;height:11px}.table-wrap::-webkit-scrollbar-track{background:#292929;border-radius:10px}.table-wrap::-webkit-scrollbar-thumb{background:#d6b900;border:2px solid #292929;border-radius:10px}.table-wrap::-webkit-scrollbar-thumb:hover{background:#ffe608}
 .table-wrap-expanded{position:fixed!important;z-index:1000;inset:5vh 3vw!important;height:90vh!important;max-height:90vh!important;overflow:scroll!important;overscroll-behavior:contain;scrollbar-gutter:stable both-edges;scrollbar-width:auto;scrollbar-color:#e6c900 #292929;background:var(--surface)!important;border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:0 24px 90px #0005}
+.table-expanded-toolbar{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 0 12px;background:var(--surface)}
+.table-expanded-toolbar .button{margin:0;white-space:nowrap}
+.table-wrap-expanded{scrollbar-width:auto;scrollbar-color:#e6c900 #292929}
+.table-wrap-expanded table{min-width:max-content;width:100%}
 .table-wrap-expanded::-webkit-scrollbar{width:13px;height:13px}
 .table-wrap-expanded::-webkit-scrollbar-track{background:#292929;border-radius:10px}
 .table-wrap-expanded::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#ffe608,#c9a900);border:3px solid #292929;border-radius:10px}
