@@ -470,3 +470,22 @@ select option{background:#181818!important;color:#fff!important}
 
 /* Tooltips detalhados dos indicadores do planejamento mensal */
 .metric.has-metric-tooltip{position:relative;cursor:help;outline:none}.metric-tooltip{display:none;position:absolute;z-index:30;top:calc(100% + 8px);left:0;width:min(330px,calc(100vw - 40px));padding:14px 15px;background:var(--surface);color:var(--text);border:1px solid var(--line);border-radius:12px;box-shadow:0 14px 38px #0002;white-space:normal}.metric.has-metric-tooltip:hover .metric-tooltip,.metric.has-metric-tooltip:focus-within .metric-tooltip{display:block}.metric-tooltip-title{font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:9px}.metric-tooltip-row{display:flex;justify-content:space-between;gap:14px;padding:6px 0;border-bottom:1px solid var(--line);font-size:11px}.metric-tooltip-row span{color:var(--muted)}.metric-tooltip-row b{white-space:nowrap;font-variant-numeric:tabular-nums}.metric-tooltip p{font-size:10px;line-height:1.5;color:var(--muted);margin:10px 0 0}@media(hover:none){.metric.has-metric-tooltip:active .metric-tooltip{display:block}}
+/* Tabelas ampliáveis no planejamento mensal */
+.table-expand-trigger{white-space:nowrap;font-size:10px!important;padding:7px 9px!important}
+.table-panel-expanded{position:relative;z-index:45}
+.table-wrap-expanded{position:fixed!important;z-index:1000;inset:5vh 3vw!important;max-height:90vh!important;overflow:auto!important;background:var(--surface)!important;border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:0 24px 90px #0005}
+.table-wrap-expanded table{min-width:100%;width:max-content}
+.table-wrap-expanded td,.table-wrap-expanded th{padding:12px 14px!important}
+.table-expand-close{position:sticky;top:0;left:100%;z-index:3;margin:0 0 12px auto;display:block}
+.bank-pie-layout{display:grid;grid-template-columns:minmax(150px,220px) 1fr;align-items:center;gap:22px}
+.bank-pie svg{width:100%;max-width:220px;display:block;margin:auto;overflow:visible}
+.bank-pie-segment{cursor:pointer;transition:stroke-width .18s,opacity .18s;transform-origin:60px 60px}
+.bank-pie-segment:hover{stroke-width:25;opacity:.85}
+.bank-pie-legend{display:grid;gap:8px}
+.bank-pie-legend-item{display:grid;grid-template-columns:10px minmax(0,1fr) auto;align-items:center;gap:8px;padding:7px;border-radius:8px;cursor:default}
+.bank-pie-legend-item:hover,.bank-pie-legend-item:focus{background:var(--surface-2,#f3f1e9);outline:none}
+.bank-pie-legend-item>i{width:10px;height:10px;border-radius:50%}
+.bank-pie-legend-item>span{font-size:11px;font-weight:600}
+.bank-pie-legend-item>b{font-size:11px;font-variant-numeric:tabular-nums}
+.bank-pie-legend-item>small{grid-column:2/4;color:var(--muted);font-size:9px}
+@media(max-width:620px){.bank-pie-layout{grid-template-columns:1fr}.bank-pie svg{max-width:180px}.table-wrap-expanded{inset:2vh 2vw!important;padding:12px}}
