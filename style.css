@@ -473,7 +473,11 @@ select option{background:#181818!important;color:#fff!important}
 /* Tabelas ampliáveis no planejamento mensal */
 .table-expand-trigger{white-space:nowrap;font-size:10px!important;padding:7px 9px!important}
 .table-panel-expanded{position:relative;z-index:45}
-.table-wrap-expanded{position:fixed!important;z-index:1000;inset:5vh 3vw!important;max-height:90vh!important;overflow:auto!important;background:var(--surface)!important;border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:0 24px 90px #0005}
+.table-wrap-expanded{position:fixed!important;z-index:1000;inset:5vh 3vw!important;height:90vh!important;max-height:90vh!important;overflow:scroll!important;overscroll-behavior:contain;scrollbar-gutter:stable both-edges;scrollbar-width:auto;scrollbar-color:#e6c900 #292929;background:var(--surface)!important;border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:0 24px 90px #0005}
+.table-wrap-expanded::-webkit-scrollbar{width:13px;height:13px}
+.table-wrap-expanded::-webkit-scrollbar-track{background:#292929;border-radius:10px}
+.table-wrap-expanded::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#ffe608,#c9a900);border:3px solid #292929;border-radius:10px}
+.table-wrap-expanded::-webkit-scrollbar-thumb:hover{background:#fff000}
 .table-wrap-expanded table{min-width:100%;width:max-content}
 .table-wrap-expanded td,.table-wrap-expanded th{padding:12px 14px!important}
 .table-expand-close{position:sticky;top:0;left:100%;z-index:3;margin:0 0 12px auto;display:block}
