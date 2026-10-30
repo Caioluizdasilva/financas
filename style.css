@@ -975,3 +975,92 @@ body.theme-dark .goal-detail-dialog{background:#292929!important;color:#f5f5f5!i
 .account-center-close{position:absolute;z-index:5;top:12px;right:14px;width:36px;height:36px;display:grid;place-items:center;border:1px solid var(--line);border-radius:50%;background:var(--panel, var(--surface));color:var(--ink);font-size:25px;line-height:1;cursor:pointer;box-shadow:0 2px 10px #00000012}
 .account-center-close:hover{background:color-mix(in srgb,var(--user-accent) 18%,var(--panel, var(--surface)))}
 @media(max-width:620px){.account-center-dialog{width:min(96vw,560px);max-width:96vw;padding:48px 14px 18px}.account-center-close{top:9px;right:10px}.account-center-layout{min-height:0}}
+
+
+/* Landing page e nova experiência de autenticação Finanças */
+#auth-screen{position:fixed;inset:0;z-index:1000;display:block;overflow-x:hidden;overflow-y:auto;padding:0;color:#f4f1e7;background:#171b14;isolation:isolate}
+#auth-screen:before,#auth-screen:after{content:"";position:fixed;z-index:-1;pointer-events:none;border-radius:50%;filter:blur(2px)}
+#auth-screen:before{width:650px;height:650px;top:-390px;right:-170px;background:radial-gradient(circle,#e6d51c24,transparent 68%)}
+#auth-screen:after{width:560px;height:560px;bottom:-390px;left:-190px;background:radial-gradient(circle,#8a9a6a18,transparent 70%)}
+.auth-site{width:min(100%,1440px);margin:0 auto;padding:0 clamp(22px,6vw,92px)}
+.auth-nav{height:88px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ffffff17}
+.auth-brand{display:flex;align-items:center;gap:12px;color:#f4f1e7;text-decoration:none}
+.auth-brand .brand-symbol,.auth-card-mark{display:grid;place-items:center;width:43px;height:43px;border-radius:13px;background:#e9d91a;color:#202116;font:800 25px/1 Georgia,serif}
+.auth-brand strong{display:block;font:700 21px/1 'Poppins',sans-serif;letter-spacing:-1px}
+.auth-brand small{display:block;margin-top:6px;color:#969b8d;font-size:8px;font-weight:700;letter-spacing:1.55px}
+.auth-nav-actions{display:flex;align-items:center;gap:24px}
+.auth-nav-actions button,.auth-text-cta{border:0;background:none;color:#f4f1e7;font-size:11px;font-weight:700;cursor:pointer}
+.auth-nav-actions .auth-nav-cta{padding:12px 17px;border:1px solid #e9d91a;border-radius:8px;color:#e9d91a}
+.auth-nav-cta span,.auth-primary-cta span{margin-left:13px;font-size:15px}
+.auth-landing{display:block}
+.auth-hero{min-height:590px;display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:5vw;padding:70px 0 82px}
+.auth-hero-copy{max-width:590px}
+.auth-kicker{display:flex;align-items:center;gap:9px;margin:0 0 20px;color:#e9d91a;font-size:9px;font-weight:800;letter-spacing:2px}
+.auth-kicker i{width:7px;height:7px;border-radius:50%;background:#e9d91a;box-shadow:0 0 12px #e9d91a88}
+.auth-hero h1{max-width:620px;margin:0;color:#f6f3e9;font:600 clamp(48px,6.6vw,88px)/.99 'Playfair Display',Georgia,serif;letter-spacing:-3.8px}
+.auth-hero h1 em,.auth-section-heading h2 em,.auth-bottom-cta h2 em{color:#e9d91a;font-weight:500}
+.auth-hero-text{max-width:465px;margin:25px 0 28px;color:#b6b9ac;font-size:13px;line-height:1.9}
+.auth-hero-actions{display:flex;align-items:center;gap:25px;flex-wrap:wrap}
+.auth-primary-cta{display:inline-flex;align-items:center;justify-content:center;min-height:49px;padding:0 20px;border:0;border-radius:8px;background:#e9d91a;color:#202116;font-size:11px;font-weight:800;cursor:pointer;transition:transform .2s,filter .2s}
+.auth-primary-cta:hover{transform:translateY(-2px);filter:brightness(1.06)}
+.auth-text-cta{padding:12px 0;color:#f1efe5}
+.auth-text-cta span{margin-left:8px;color:#e9d91a}
+.auth-proof{display:flex;align-items:center;gap:12px;margin-top:54px;color:#a9ad9f;font-size:10px;line-height:1.7}
+.auth-proof b{color:#f4f1e7;font-weight:700}
+.auth-proof-mark{display:grid;place-items:center;width:35px;height:35px;border:1px solid #ffffff27;border-radius:50%;color:#e9d91a;font-size:17px}
+.auth-hero-art{position:relative;min-height:440px;display:grid;place-items:center}
+.auth-art-orbit{position:absolute;border:1px solid #e9d91a25;border-radius:50%;transform:rotate(-24deg)}
+.orbit-one{width:410px;height:270px}.orbit-two{width:490px;height:340px;transform:rotate(27deg)}
+.auth-art-card{position:relative;z-index:2;width:min(100%,370px);padding:25px 25px 20px;border:1px solid #ffffff22;border-radius:17px;background:linear-gradient(145deg,#30372b,#20251e);box-shadow:0 28px 75px #0008;transform:rotate(-4deg)}
+.auth-art-card-top,.auth-art-card-foot{display:flex;align-items:center;justify-content:space-between}
+.auth-art-card-top span{color:#9ca391;font-size:8px;font-weight:800;letter-spacing:1.5px}.auth-art-card-top i{color:#8c9383;font-style:normal;letter-spacing:3px}
+.auth-art-card p{margin:27px 0 5px;color:#b1b6a8;font-size:10px}
+.auth-art-card>strong{font:600 37px/1 'Playfair Display',Georgia,serif;color:#f5f2e8;letter-spacing:-1px}
+.auth-art-card>strong span{color:#a7ac9d;font-size:19px}
+.auth-art-chart{height:125px;display:flex;align-items:end;gap:10px;margin-top:25px;padding:0 4px 12px;border-bottom:1px solid #ffffff20}
+.auth-art-chart i{flex:1;border-radius:4px 4px 0 0;background:linear-gradient(180deg,#e9d91a,#8c8a34);opacity:.9}
+.auth-art-card-foot{justify-content:flex-start;gap:20px;margin-top:13px;color:#aeb3a5;font-size:8px}
+.auth-art-card-foot span{display:flex;align-items:center;gap:6px}.auth-art-card-foot i{width:6px;height:6px;border-radius:50%;background:#e9d91a}.auth-art-card-foot span+span i{background:#71866c}
+.auth-art-note{position:absolute;z-index:3;top:12%;right:1%;padding:10px 13px;border:1px solid #ffffff22;border-radius:6px;background:#262c22;color:#d9ddcf;font-size:8px;font-weight:800;letter-spacing:1.2px;transform:rotate(5deg)}
+.auth-art-note span{margin-left:8px;color:#e9d91a}
+.auth-art-float{position:absolute;z-index:4;bottom:9%;left:-2%;display:flex;align-items:center;gap:11px;padding:13px 16px;border:1px solid #ffffff22;border-radius:9px;background:#e9d91a;color:#202116;box-shadow:0 12px 30px #0005;transform:rotate(3deg)}
+.auth-art-float>span{font-size:22px}.auth-art-float div{display:grid;gap:3px}.auth-art-float small{font-size:7px;font-weight:800;letter-spacing:1px}.auth-art-float b{font:600 13px 'Playfair Display',Georgia,serif}
+.auth-art-stamp{position:absolute;right:3%;bottom:2%;color:#ffffff0b;font:900 190px/.8 Georgia,serif;transform:rotate(12deg)}
+.auth-features{padding:65px 0 80px;border-top:1px solid #ffffff17}
+.auth-section-heading{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:32px}
+.auth-section-heading .auth-kicker{margin-bottom:12px}
+.auth-section-heading h2,.auth-bottom-cta h2{margin:0;color:#f6f3e9;font:600 clamp(30px,4vw,48px)/1.08 'Playfair Display',Georgia,serif;letter-spacing:-1.5px}
+.auth-feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
+.auth-feature-grid article{min-height:205px;padding:23px;border:1px solid #ffffff1b;border-radius:11px;background:#ffffff06}
+.auth-feature-icon{display:grid;place-items:center;width:36px;height:36px;margin-bottom:22px;border-radius:9px;background:#e9d91a18;color:#e9d91a;font-size:19px}
+.auth-feature-grid article>small{color:#989e8f;font-size:8px;font-weight:800;letter-spacing:1.3px}
+.auth-feature-grid h3{margin:10px 0 8px;color:#f5f2e8;font:600 20px 'Playfair Display',Georgia,serif}
+.auth-feature-grid p{max-width:300px;margin:0;color:#aeb3a5;font-size:10px;line-height:1.8}
+.auth-bottom-cta{display:flex;align-items:center;justify-content:space-between;gap:25px;padding:36px 0 44px;border-top:1px solid #ffffff17}
+.auth-bottom-cta .auth-kicker{margin-bottom:12px}
+.auth-site-footer{display:flex;justify-content:space-between;gap:15px;padding:20px 0 26px;border-top:1px solid #ffffff17;color:#838a7d;font-size:9px}
+.auth-site-footer>span:first-child{color:#f4f1e7;font-size:13px;font-weight:800}.auth-site-footer small{margin-left:8px;color:#858c7f;font-size:7px;letter-spacing:1px}
+.auth-access{min-height:calc(100vh - 89px);display:grid;place-items:center;padding:45px 15px 25px}
+.auth-back-home{position:absolute;top:112px;left:clamp(22px,6vw,92px);border:0;background:none;color:#b5baaa;font-size:10px;font-weight:700;cursor:pointer}
+.auth-card{width:min(100%,440px);padding:clamp(27px,5vw,43px);border:1px solid #ffffff1c;border-radius:17px;background:linear-gradient(145deg,#293025,#1e241c);box-shadow:0 24px 70px #0007}
+.auth-card-mark{width:39px;height:39px;margin-bottom:27px;border-radius:11px;font-size:22px}
+.auth-card .auth-kicker{margin-bottom:11px;font-size:8px}
+.auth-card h1{margin:0 0 9px;color:#f7f5ec;font:600 clamp(30px,5vw,39px)/1.08 'Playfair Display',Georgia,serif;letter-spacing:-1px}
+.auth-subtitle{margin:0 0 25px;color:#adb3a4;font-size:11px;line-height:1.75}
+.auth-card form{display:grid;gap:15px}
+.auth-card label{display:grid;gap:7px;color:#d8dbd0;font-size:10px;font-weight:700}
+.auth-card input{box-sizing:border-box;width:100%;height:47px;padding:0 14px;border:1px solid #ffffff24;border-radius:8px;outline:none;background:#151a13;color:#f7f5ec;font:400 12px 'Poppins',sans-serif;transition:border-color .2s,box-shadow .2s}
+.auth-card input::placeholder{color:#737b6e}.auth-card input:focus{border-color:#e9d91a;box-shadow:0 0 0 3px #e9d91a18}
+.auth-form-meta{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:1px}
+.auth-form-meta span{color:#858d7e;font-size:7px;font-weight:800;letter-spacing:1px}
+.auth-form-meta button,.auth-links button{border:0;background:none;color:#e9d91a;font-size:9px;font-weight:800;cursor:pointer}
+.auth-form-meta button:hover,.auth-links button:hover{text-decoration:underline;text-underline-offset:3px}
+#auth-error{min-height:15px;margin:0;color:#ffaaa0;font-size:10px;line-height:1.5}
+.auth-submit{min-height:48px;width:100%;border:0;border-radius:8px;background:#e9d91a;color:#202116;font-size:10px;font-weight:800;cursor:pointer;transition:filter .2s,transform .2s}
+.auth-submit:hover{filter:brightness(1.06);transform:translateY(-1px)}.auth-submit:disabled{opacity:.6;cursor:wait;transform:none}
+.auth-links{display:flex;align-items:center;justify-content:center;gap:7px;margin-top:20px;padding-top:17px;border-top:1px solid #ffffff18;color:#a6ad9b;font-size:9px}
+.auth-access-foot{margin:23px 0 0;color:#7e8677;font-size:7px;font-weight:700;letter-spacing:1.2px;text-align:center}
+#auth-landing[hidden],#auth-access[hidden],#auth-name-wrap[hidden],#auth-confirm-wrap[hidden],#auth-password-wrap[hidden],#auth-forgot[hidden],#auth-switch[hidden]{display:none!important}
+@media(max-width:850px){.auth-hero{min-height:520px;gap:20px}.auth-hero h1{font-size:clamp(44px,7vw,66px)}.auth-art-card{width:min(100%,330px)}.orbit-one{width:340px}.orbit-two{width:390px}.auth-art-note{right:-1%}}
+@media(max-width:620px){.auth-site{padding:0 19px}.auth-nav{height:72px}.auth-brand .brand-symbol{width:38px;height:38px}.auth-brand strong{font-size:18px}.auth-nav-actions{gap:14px}.auth-nav-actions button{font-size:10px}.auth-nav-actions .auth-nav-cta{padding:10px 12px}.auth-hero{grid-template-columns:1fr;gap:10px;padding:65px 0 50px}.auth-hero h1{max-width:480px;font-size:clamp(48px,13vw,70px);letter-spacing:-2.8px}.auth-hero-text{font-size:12px;margin:21px 0 24px}.auth-proof{margin-top:30px}.auth-hero-art{min-height:340px;margin-top:10px}.auth-art-card{width:min(83%,340px);padding:20px}.auth-art-chart{height:95px}.orbit-one{width:300px;height:210px}.orbit-two{width:350px;height:260px}.auth-art-note{top:6%;right:0}.auth-art-float{bottom:5%;left:0}.auth-art-stamp{font-size:130px}.auth-features{padding:47px 0}.auth-section-heading{display:block}.auth-section-heading h2,.auth-bottom-cta h2{font-size:36px}.auth-feature-grid{grid-template-columns:1fr;gap:9px}.auth-feature-grid article{min-height:0;padding:19px}.auth-feature-icon{margin-bottom:15px}.auth-bottom-cta{align-items:flex-start;flex-direction:column;padding:30px 0}.auth-site-footer{flex-direction:column;gap:8px;padding-bottom:22px}.auth-access{min-height:calc(100vh - 73px);align-content:center;padding:65px 0 22px}.auth-back-home{top:89px;left:20px}.auth-card{padding:28px 23px}.auth-access-foot{font-size:6px}.auth-form-meta span{font-size:6px}}
+@media(prefers-reduced-motion:reduce){.auth-primary-cta,.auth-submit,.auth-card input{transition:none}}
