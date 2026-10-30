@@ -16,6 +16,17 @@ The project is designed for everyday use on desktop and mobile devices. Its inte
 - Annual financial projections and spending breakdowns.
 - Local data export and import for backups.
 
+### Financial intelligence and planning
+- Rule-based financial insights and alerts based on recorded income, expenses, debt balances, and category budgets.
+- Monthly spending limits by category, with threshold alerts.
+- What-if simulator for savings goals and debt-payment prioritization, including a user-entered estimate of possible delay charges.
+- Net-worth overview combining manually registered assets, the latest month's reserves/investments, and outstanding debts.
+- CSV and OFX bank-statement import with a review step and basic duplicate detection before adding transactions.
+- Existing recurring subscriptions, monthly calendar, and payment reminders remain available.
+- Annual and monthly reports with CSV, PDF, and full JSON backup options.
+
+> **Simulation and import notes:** Debt scenarios are estimates only and never change real debt records. Delay interest/fees must be checked against the creditor's contract. Statement imports are not a bank connection; review the preview carefully before confirming. CSV formats vary between institutions, so some files may need adjustment.
+
 ### Investments
 - A dedicated investment dashboard for people who are learning how to invest.
 - Reference indicators from the Central Bank of Brazil (BCB): Selic target rate, CDI, and IPCA.
