@@ -959,3 +959,7 @@ body.theme-dark .goal-detail-dialog{background:#292929!important;color:#f5f5f5!i
 .report-actions{display:flex;flex-wrap:wrap;gap:10px}.import-drop{display:grid;gap:10px;padding:20px;border:1px dashed var(--line);border-radius:13px;background:var(--surface);font-size:12px;font-weight:650}.import-drop input{max-width:100%;font:inherit}
 @media(max-width:720px){.simulator-fields,.simulator-result-grid{grid-template-columns:1fr 1fr}.simulator-result-grid article:last-child{grid-column:1/-1}.budget-row,.asset-row{grid-template-columns:minmax(0,1fr) auto;gap:8px}.budget-row .annual-category-track{grid-column:1/-1;grid-row:2}.budget-row .button,.asset-row .button{grid-column:2;grid-row:1}}
 @media(max-width:420px){.simulator-fields,.simulator-result-grid{grid-template-columns:1fr}.simulator-result-grid article:last-child{grid-column:auto}.report-actions .button{flex:1 1 100%}}
+
+/* Proteção de campos numéricos nas novas simulações */
+.privacy-hidden .simulator-fields input{color:transparent!important;text-shadow:none!important;caret-color:transparent!important}
+.privacy-hidden .simulator-fields input:focus{outline-color:var(--user-accent)}
