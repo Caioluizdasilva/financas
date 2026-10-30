@@ -145,3 +145,21 @@ select option{background:#181818!important;color:#fff!important}
 #finance-form-dialog:not(.goal-form-dialog) .dialog-actions .button{border-radius:999px;min-height:42px;padding:0 20px}
 #finance-form-dialog:not(.goal-form-dialog) .dialog-fields input[type=date]{color-scheme:dark}
 @media(max-width:620px){#finance-form-dialog:not(.goal-form-dialog) .dialog-head h2{font-size:20px}#finance-form-dialog:not(.goal-form-dialog) .dialog-actions{gap:8px}#finance-form-dialog:not(.goal-form-dialog) .dialog-actions .button{flex:1;padding:0 12px}}
+
+.calendar-filters{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 13px}
+.calendar-filters button{display:inline-flex;align-items:center;gap:8px;border:1px solid #454545;background:#242424;color:#ddd;border-radius:999px;padding:9px 13px;font-size:11px;font-weight:600}
+.calendar-filters button.selected{border-color:#ffe608;background:#ffe60818;color:#fff}
+.calendar-filter-dot,.calendar-legend i{display:inline-block;width:9px;height:9px;border-radius:50%;flex:none}
+.calendar-filter-dot.todas{background:#aaa}.calendar-filter-dot.entrada,.calendar-legend i.entrada{background:#35c779}.calendar-filter-dot.saida,.calendar-legend i.saida{background:#ff626b}.calendar-filter-dot.assinatura,.calendar-legend i.assinatura{background:#5ba8ff}
+.calendar-legend{display:flex;flex-wrap:wrap;gap:14px;margin:0 0 14px;color:#c4c4c4;font-size:10px}
+.calendar-legend span{display:inline-flex;align-items:center;gap:6px}
+.calendar-day .calendar-tag{border-radius:5px;padding:3px 4px;font-size:9px;font-weight:600}
+.calendar-day .calendar-tag.entrada{background:#153c2a;color:#68e7a0;border:1px solid #246b45}
+.calendar-day .calendar-tag.saida{background:#421f23;color:#ff8b91;border:1px solid #74343a}
+.calendar-day .calendar-tag.assinatura{background:#172d48;color:#82bdff;border:1px solid #2b507d}
+.calendar-day .calendar-tag.is-paid{opacity:.62;text-decoration:line-through}
+.calendar-day .calendar-tag.more{background:#333;color:#eee;border-color:#484848}
+.calendar-event.entrada{border-left:3px solid #35c779;padding-left:10px}.calendar-event.entrada strong{color:#68e7a0}
+.calendar-event.saida{border-left:3px solid #ff626b;padding-left:10px}.calendar-event.saida strong{color:#ff8b91}
+.calendar-event.assinatura{border-left:3px solid #5ba8ff;padding-left:10px}.calendar-event.assinatura strong{color:#82bdff}
+@media(max-width:620px){.calendar-filters{gap:6px}.calendar-filters button{flex:1;justify-content:center;padding:8px 9px;font-size:10px}.calendar-legend{gap:9px;font-size:9px}.calendar-day .calendar-tag{font-size:8px}}
