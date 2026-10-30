@@ -658,3 +658,31 @@ body.theme-light .nav-item{color:#333!important}
 .dashboard-arrange-active,body.theme-dark .dashboard-selected,body.theme-light .dashboard-selected{outline:3px solid #ffe608!important;outline-offset:4px;box-shadow:0 0 0 4px #ffe60830!important;cursor:grab!important;position:relative;z-index:2}
 .dashboard-arrange-hint{margin:0 0 14px;padding:10px 14px;border:1px solid #ffe608;border-radius:10px;background:#ffe60818;color:inherit;font-size:12px}
 .dashboard-dragging{opacity:.45;cursor:grabbing!important}
+
+/* Gerenciamento de dados — layout refinado para claro e escuro */
+.account-center-body .data-management{position:relative;margin:0 0 18px;padding:22px;border:1px solid #e5e3dc;border-radius:18px;background:#fff;box-shadow:0 8px 24px #1b1b1b0a;overflow:hidden}
+.account-center-body .data-management:before{content:"";position:absolute;inset:0 auto 0 0;width:4px;background:#ffe608}
+.account-center-body .data-management h3{margin:0 0 8px;color:#202020;font:700 16px 'Poppins',sans-serif;letter-spacing:-.25px}
+.account-center-body .data-management>p{margin:0 0 14px;max-width:680px;color:#707070;font:400 12px/1.75 'Poppins',sans-serif}
+.account-center-body .data-management .micro{margin:13px 0 0;padding:11px 13px;border-radius:10px;background:#f5f5f2;color:#686868;font-size:10px;line-height:1.65}
+.account-center-body .data-management .button-stack{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:17px}
+.account-center-body .data-management .button-stack .button{display:flex;align-items:center;justify-content:center;min-height:44px;padding:11px 14px;border:1px solid #deded8;border-radius:11px;background:#f7f7f4;color:#252525;font:600 11px 'Poppins',sans-serif;text-align:center;white-space:normal;transition:transform .18s ease,background .18s ease,border-color .18s ease,box-shadow .18s ease}
+.account-center-body .data-management .button-stack .button:hover{transform:translateY(-1px);border-color:#d2bd00;background:#fffde7;box-shadow:0 5px 14px #0000000b}
+.account-center-body .data-management .button-stack .button.primary{background:#ffe608;border-color:#ffe608;color:#171717}
+.account-center-body .data-management .button-stack .button.text{background:transparent;border-color:#e3dca2;color:#6d5c00}
+.account-center-body .data-management-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:17px}
+.account-center-body .data-management-grid .button{min-height:42px;padding:10px 12px;border:1px solid #deded8;border-radius:10px;background:#f7f7f4;color:#363636;font:600 10px 'Poppins',sans-serif;white-space:normal;transition:background .18s ease,border-color .18s ease,transform .18s ease}
+.account-center-body .data-management-grid .button:hover{transform:translateY(-1px);background:#fffde7;border-color:#d8c500}
+.account-center-body .data-management-grid .button.danger{grid-column:1/-1;background:#fff3f1;border-color:#f0c9c4;color:#a32e25}
+.account-center-body .data-management-grid .button.danger:hover{background:#ffe7e3;border-color:#dc8f86}
+body.theme-dark .account-center-body .data-management{background:#2e2e2e!important;border-color:#484848!important;box-shadow:0 8px 24px #00000020}
+body.theme-dark .account-center-body .data-management h3{color:#fff!important}
+body.theme-dark .account-center-body .data-management>p{color:#c2c2c2!important}
+body.theme-dark .account-center-body .data-management .micro{background:#242424!important;color:#bdbdbd!important}
+body.theme-dark .account-center-body .data-management .button-stack .button,body.theme-dark .account-center-body .data-management-grid .button{background:#242424!important;border-color:#505050!important;color:#f3f3f3!important}
+body.theme-dark .account-center-body .data-management .button-stack .button.primary{background:#ffe608!important;border-color:#ffe608!important;color:#171717!important}
+body.theme-dark .account-center-body .data-management .button-stack .button.text{border-color:#71651b!important;color:#ffe86a!important}
+body.theme-dark .account-center-body .data-management-grid .button.danger{background:#3a2422!important;border-color:#75423d!important;color:#ffb7ae!important}
+body.theme-dark .account-center-body .data-management .button-stack .button:hover,body.theme-dark .account-center-body .data-management-grid .button:hover{border-color:#ffe608!important;background:#353326!important}
+body.theme-dark .account-center-body .data-management .button-stack .button.primary:hover{background:#fff06a!important}
+@media(max-width:650px){.account-center-body .data-management{padding:17px;margin-bottom:14px;border-radius:14px}.account-center-body .data-management .button-stack,.account-center-body .data-management-grid{grid-template-columns:1fr;gap:8px}.account-center-body .data-management-grid .button.danger{grid-column:auto}.account-center-body .data-management .button-stack .button,.account-center-body .data-management-grid .button{min-height:46px;font-size:11px}}
