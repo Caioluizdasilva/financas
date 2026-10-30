@@ -282,3 +282,188 @@ select option{background:#181818!important;color:#fff!important}
 .bank-usage-leader{margin:18px 0 0;padding-top:13px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}
 .bank-usage-leader b{color:var(--ink)}
 @media(max-width:620px){.planning-month-tooltip{display:none!important}.planning-month-grid{grid-template-columns:1fr 1fr}.planning-month-card{min-height:160px;padding:13px}}
+
+
+/* Refinamento visual — formulário de Planos e Metas */
+#finance-form-dialog.goal-form-dialog{
+  width:min(720px,calc(100vw - 32px));
+  max-width:720px;
+  max-height:min( min(88dvh,820px),calc(100vh - 32px));
+  overflow:hidden;
+  border-radius:26px;
+  border:1px solid color-mix(in srgb,var(--user-accent,#ffe608) 24%,var(--line,#dedbd2));
+  box-shadow:0 32px 110px #0008,0 0 0 1px #ffffff08 inset;
+  scrollbar-width:thin;
+}
+#finance-form-dialog.goal-form-dialog form{max-height:inherit;min-height:0}
+#finance-form-dialog.goal-form-dialog .dialog-head{
+  position:relative;
+  flex:none;
+  display:flex;
+  align-items:center;
+  gap:18px;
+  padding:27px 32px 23px;
+  background:
+    radial-gradient(ellipse at 5% 0%,color-mix(in srgb,var(--user-accent,#ffe608) 18%,transparent),transparent 68%),
+    var(--surface,#fff);
+}
+#finance-form-dialog.goal-form-dialog .dialog-head:before{
+  content:"PLANEJAMENTO PESSOAL";
+  display:block;
+  position:absolute;
+  top:12px;
+  left:32px;
+  color:var(--muted,#888);
+  font-size:9px;
+  font-weight:850;
+  letter-spacing:.16em;
+}
+#finance-form-dialog.goal-form-dialog .dialog-head h2{
+  padding-top:13px;
+  font-size:25px;
+  font-weight:800;
+  letter-spacing:-.045em;
+}
+#finance-form-dialog.goal-form-dialog #form-close{
+  flex:none;
+  width:40px;height:40px;
+  display:grid;place-items:center;
+  border:1px solid var(--line,#ddd);
+  background:var(--surface,#fff);
+  color:var(--ink,#222);
+  transition:transform .18s,border-color .18s,background .18s;
+}
+#finance-form-dialog.goal-form-dialog #form-close:hover{
+  transform:rotate(90deg);
+  border-color:var(--user-accent,#ffe608);
+  background:color-mix(in srgb,var(--user-accent,#ffe608) 12%,var(--surface,#fff));
+}
+#finance-form-dialog.goal-form-dialog .dialog-fields{
+  flex:1 1 auto;
+  min-height:0;
+  padding:23px 32px 25px;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  align-content:start;
+  gap:19px 20px;
+  overscroll-behavior:contain;
+  scrollbar-width:thin;
+  scrollbar-color:var(--user-accent,#ffe608) transparent;
+}
+#finance-form-dialog.goal-form-dialog .form-section-title{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin:7px 0 1px;
+  padding:0 0 10px;
+  border:0;
+  color:var(--user-accent-text,#8a7100);
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.15em;
+}
+#finance-form-dialog.goal-form-dialog .form-section-title:after{
+  content:"";
+  height:1px;
+  flex:1;
+  background:linear-gradient(90deg,var(--line,#ddd),transparent);
+}
+#finance-form-dialog.goal-form-dialog .dialog-fields label{
+  gap:9px;
+  font-size:12px;
+  font-weight:750;
+  letter-spacing:.005em;
+}
+#finance-form-dialog.goal-form-dialog .dialog-fields label[data-field-wrap="nome"],
+#finance-form-dialog.goal-form-dialog .dialog-fields label[data-field-wrap="descricao"],
+#finance-form-dialog.goal-form-dialog .dialog-fields label[data-field-wrap="imagem"]{grid-column:1/-1}
+#finance-form-dialog.goal-form-dialog .dialog-fields input,
+#finance-form-dialog.goal-form-dialog .dialog-fields select,
+#finance-form-dialog.goal-form-dialog .dialog-fields textarea{
+  min-height:48px;
+  padding:13px 15px;
+  border-radius:13px;
+  background:var(--paper,#fafafa);
+  box-shadow:0 1px 2px #00000008 inset;
+  font-size:13px;
+}
+#finance-form-dialog.goal-form-dialog .dialog-fields input::placeholder,
+#finance-form-dialog.goal-form-dialog .dialog-fields textarea::placeholder{color:var(--muted,#999)}
+#finance-form-dialog.goal-form-dialog .dialog-fields input:hover,
+#finance-form-dialog.goal-form-dialog .dialog-fields select:hover,
+#finance-form-dialog.goal-form-dialog .dialog-fields textarea:hover{border-color:color-mix(in srgb,var(--user-accent,#ffe608) 48%,var(--line,#ddd))}
+#finance-form-dialog.goal-form-dialog .dialog-fields textarea{min-height:116px;line-height:1.6}
+#finance-form-dialog.goal-form-dialog .dialog-actions{
+  flex:none;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:17px 32px 23px;
+  background:var(--surface,#fff);
+  box-shadow:0 -8px 22px #00000008;
+}
+#finance-form-dialog.goal-form-dialog .dialog-actions:before{
+  content:"Você poderá editar essas informações depois.";
+  margin-right:auto;
+  color:var(--muted,#888);
+  font-size:10px;
+  line-height:1.4;
+}
+#finance-form-dialog.goal-form-dialog .dialog-actions .button{
+  min-width:112px;
+  min-height:46px;
+  font-size:12px;
+  transition:transform .16s,filter .16s;
+}
+#finance-form-dialog.goal-form-dialog .dialog-actions .button:hover{transform:translateY(-1px);filter:brightness(1.04)}
+.theme-dark #finance-form-dialog.goal-form-dialog{
+  background:#171717;
+  border-color:#45402a;
+  box-shadow:0 32px 110px #000b,0 0 0 1px #ffffff08 inset;
+}
+.theme-dark #finance-form-dialog.goal-form-dialog .dialog-head{
+  background:radial-gradient(ellipse at 5% 0%,#ffe60818,transparent 68%),#1c1c1c;
+}
+.theme-dark #finance-form-dialog.goal-form-dialog .dialog-head:before{color:#aaa}
+.theme-dark #finance-form-dialog.goal-form-dialog .dialog-fields input,
+.theme-dark #finance-form-dialog.goal-form-dialog .dialog-fields select,
+.theme-dark #finance-form-dialog.goal-form-dialog .dialog-fields textarea{
+  background:#101010;
+  border-color:#414141;
+  color:#f7f7f7;
+}
+.theme-dark #finance-form-dialog.goal-form-dialog .form-section-title{color:#e6d34c}
+.theme-dark #finance-form-dialog.goal-form-dialog .dialog-actions{background:#171717;box-shadow:0 -8px 22px #0005}
+@media(max-width:620px){
+  #finance-form-dialog.goal-form-dialog{
+    width:calc(100vw - 18px);
+    max-height:calc(100dvh - 18px);
+    border-radius:21px;
+  }
+  #finance-form-dialog.goal-form-dialog form{max-height:calc(100dvh - 18px)}
+  #finance-form-dialog.goal-form-dialog .dialog-head{padding:25px 19px 17px}
+  #finance-form-dialog.goal-form-dialog .dialog-head:before{left:19px;top:10px}
+  #finance-form-dialog.goal-form-dialog .dialog-head h2{font-size:21px;padding-top:12px}
+  #finance-form-dialog.goal-form-dialog .dialog-fields{
+    grid-template-columns:1fr;
+    gap:15px;
+    padding:18px 19px 22px;
+  }
+  #finance-form-dialog.goal-form-dialog .dialog-fields label{grid-column:1/-1}
+  #finance-form-dialog.goal-form-dialog .dialog-fields input,
+  #finance-form-dialog.goal-form-dialog .dialog-fields select{min-height:47px}
+  #finance-form-dialog.goal-form-dialog .dialog-actions{
+    flex-wrap:wrap;
+    padding:13px 19px 17px;
+    gap:9px;
+  }
+  #finance-form-dialog.goal-form-dialog .dialog-actions:before{
+    flex:1 0 100%;
+    margin:0 0 2px;
+  }
+  #finance-form-dialog.goal-form-dialog .dialog-actions .button{flex:1;min-width:0}
+}
+@media(prefers-reduced-motion:reduce){
+  #finance-form-dialog.goal-form-dialog *,
+  #finance-form-dialog.goal-form-dialog *:before{transition:none!important}
+}
