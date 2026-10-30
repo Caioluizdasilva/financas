@@ -565,10 +565,7 @@ body:not(.theme-dark) .hero-stat{border-left-color:#ffffff55}
 .theme-dark .hero{background:linear-gradient(120deg,#1d342d,#254b3d)!important;color:#f5faf7!important}.theme-dark .hero .eyebrow{color:#d7e9dd!important}.theme-dark .hero p:not(.eyebrow),.theme-dark .hero-stat span,.theme-dark .hero-stat small{color:#dbe9e0!important}.theme-dark .hero-stat{border-left-color:#ffffff35}
 .theme-dark .debt-focus{background:#202a35!important}.theme-dark .pill{background:#263d34;color:#cce6d6}.theme-dark .account-center-nav{background:#151c25}.theme-dark .account-center-nav button{color:#d1dae5}.theme-dark .account-setting{color:#e6edf5}.theme-dark .data-management{background:#202a35;border-color:#3b4858}.theme-dark .advisor-chat-bubble.assistant{background:#202a35}
 #finance-form-dialog input[type=file]{width:100%;padding:12px;border:1px dashed var(--line);border-radius:10px;background:var(--surface);color:var(--ink)}.bank-logo img{max-width:100%;max-height:100%;object-fit:contain}
-
-/* Reordenação contextual da Visão Geral, exclusiva para mouse/desktop. */
-.dashboard-arrange-active{outline:2px dashed var(--user-accent)!important;outline-offset:4px;cursor:grab!important;box-shadow:0 0 0 3px color-mix(in srgb,var(--user-accent) 14%,transparent)!important}.dashboard-dragging{opacity:.4;cursor:grabbing!important}
-@media(hover:none),(pointer:coarse),(max-width:700px){.dashboard-arrange-active{outline:none!important;box-shadow:none!important;cursor:default!important}}
+@media(hover:none),(pointer:coarse),(max-width:700px){}
 
 /* Cartão de boas-vindas: contraste explícito, independente da cor de destaque. */
 body:not(.theme-dark) #app .hero{background:linear-gradient(120deg,#244b3c 0%,#356a55 100%)!important;color:#fff!important;border:1px solid #47745f!important}
@@ -612,11 +609,7 @@ body.theme-dark .progress{background:#484848}
 body.theme-dark .advisor-chat-bubble.assistant{background:#383838;color:#fff}
 body.theme-dark .advisor-chat-intro{background:#383838;color:#d5d5d5}
 body.theme-dark .bank-logo{background:#383838;color:#fff}
-body.theme-dark .dashboard-selected{outline:3px solid var(--user-accent,#ffe608)!important;outline-offset:4px;box-shadow:0 0 0 5px color-mix(in srgb,var(--user-accent,#ffe608) 18%,transparent)!important}
-body:not(.theme-dark) .dashboard-selected{outline:3px solid var(--user-accent,#ffe608)!important;outline-offset:4px;box-shadow:0 0 0 5px color-mix(in srgb,var(--user-accent,#ffe608) 18%,transparent)!important}
-.dashboard-arrange-active{cursor:grab!important}
-.dashboard-dragging{opacity:.45!important}
-@media(hover:none),(pointer:coarse),(max-width:700px){.dashboard-selected{outline-width:3px!important;outline-offset:3px!important;box-shadow:0 0 0 4px color-mix(in srgb,var(--user-accent,#ffe608) 16%,transparent)!important}}
+@media(hover:none),(pointer:coarse),(max-width:700px){}
 
 :root{--portfolio-yellow:#ffe608;--portfolio-yellow-hover:#ebff00}
 body.theme-dark .button.primary:hover{background:var(--portfolio-yellow-hover)!important;border-color:var(--portfolio-yellow-hover)!important}
@@ -655,9 +648,6 @@ body.theme-light input,body.theme-light select,body.theme-light textarea,body.th
 body.theme-light th{background:#f0f0ed!important;color:#333!important}
 body.theme-light td{color:#333!important;border-color:#e5e5e0!important}
 body.theme-light .nav-item{color:#333!important}
-.dashboard-arrange-active,body.theme-dark .dashboard-selected,body.theme-light .dashboard-selected{outline:3px solid #ffe608!important;outline-offset:4px;box-shadow:0 0 0 4px #ffe60830!important;cursor:grab!important;position:relative;z-index:2}
-.dashboard-arrange-hint{margin:0 0 14px;padding:10px 14px;border:1px solid #ffe608;border-radius:10px;background:#ffe60818;color:inherit;font-size:12px}
-.dashboard-dragging{opacity:.45;cursor:grabbing!important}
 
 /* Gerenciamento de dados — layout refinado para claro e escuro */
 .account-center-body .data-management{position:relative;margin:0 0 18px;padding:22px;border:1px solid #e5e3dc;border-radius:18px;background:#fff;box-shadow:0 8px 24px #1b1b1b0a;overflow:hidden}
@@ -726,17 +716,6 @@ body.privacy-hidden .goal-card .goal-card-content .eyebrow { filter: blur(3px); 
 .account-setting-description { margin: 0 0 12px; color: var(--muted); font-size: 12px; line-height: 1.6; }
 
 
-/* Reorganização da Visão Geral: alça de mover e indicador de posição. */
+
 #app [data-dashboard-card="1"]{position:relative}
-#app .dashboard-arrange-handle{position:absolute;top:10px;right:10px;z-index:8;width:32px;height:32px;display:grid;place-items:center;border:1px solid #ffe608;border-radius:9px;background:#1f1f1f;color:#ffe608;font-size:21px;line-height:1;cursor:grab;opacity:.78;transition:opacity .16s,transform .16s,background .16s}
-#app .dashboard-arrange-handle:hover{opacity:1;transform:scale(1.06);background:#ffe608;color:#1f1f1f}
-#app .dashboard-selected{outline:2px solid #ffe608!important;outline-offset:3px;box-shadow:0 0 0 4px #ffe60825!important}
-#app .dashboard-drop-before:before,#app .dashboard-drop-after:after{content:"";position:absolute;left:0;right:0;height:5px;border-radius:8px;background:#ffe608;box-shadow:0 0 0 2px #ffe60835,0 0 15px #ffe60880;z-index:12;pointer-events:none}
-#app .dashboard-drop-before:before{top:-8px}
-#app .dashboard-drop-after:after{bottom:-8px}
-#dashboard-arrange-hint{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 14px;border:1px solid #ffe608;border-left:5px solid #ffe608;border-radius:12px;background:#ffe60812;margin:0 0 16px}
-#dashboard-arrange-hint strong{font-size:12px;color:var(--ink)}
-#dashboard-arrange-hint span{flex:1;min-width:180px;font-size:11px;color:var(--muted);line-height:1.5}
-#dashboard-arrange-hint button{border:1px solid var(--line);border-radius:8px;padding:7px 11px;background:var(--surface);color:var(--ink);font-size:11px;cursor:pointer}
-#app .dashboard-arrange-active .dashboard-arrange-handle{opacity:1;background:#ffe608;color:#1f1f1f}
-@media(hover:none),(pointer:coarse){#app .dashboard-arrange-handle{opacity:1}#dashboard-arrange-hint{align-items:flex-start}}
+@media(hover:none),(pointer:coarse){}
