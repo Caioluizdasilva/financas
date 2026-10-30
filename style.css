@@ -799,3 +799,26 @@ body.privacy-hidden .dashboard-goal img { filter: blur(10px); }
 /* Situações secundárias das dívidas: somente leitura; edição fica no formulário da dívida. */
 .debt-info-status{display:inline-flex;align-items:center;justify-content:center;min-height:30px;padding:6px 12px;border:1px solid rgba(255,255,255,.72);border-radius:10px;background:transparent;color:#fff;font-size:11px;font-weight:600;line-height:1.2;white-space:nowrap}
 .debt-negativity-status.is-clear{background:transparent;border-color:rgba(255,255,255,.72);color:#fff;box-shadow:none}
+
+
+/* Formulário de dívidas: etapas claras e campos condicionais de parcelamento. */
+#finance-form-dialog.debt-form-dialog{width:min(760px,95vw);max-width:760px;max-height:91vh;padding:0;overflow:hidden;border-radius:22px}
+#finance-form-dialog.debt-form-dialog form{display:flex;flex-direction:column;max-height:91vh;padding:0}
+#finance-form-dialog.debt-form-dialog .dialog-head{padding:23px 26px 17px;margin:0;border-bottom:1px solid var(--line)}
+#finance-form-dialog.debt-form-dialog .dialog-fields{padding:10px 26px 20px;max-height:70vh;overflow:auto;gap:14px 16px}
+#finance-form-dialog.debt-form-dialog .form-section-title{grid-column:1/-1;margin-top:8px;padding:10px 0 8px;border-bottom:1px solid var(--line);font-size:10px;font-weight:800;letter-spacing:.13em;color:var(--user-accent)}
+#finance-form-dialog.debt-form-dialog .dialog-fields label{font-size:12px;font-weight:650;gap:7px}
+#finance-form-dialog.debt-form-dialog .dialog-fields label[data-field-wrap="nome"],
+#finance-form-dialog.debt-form-dialog .dialog-fields label[data-field-wrap="observacao"]{grid-column:1/-1}
+#finance-form-dialog.debt-form-dialog .dialog-fields label:has(input.form-toggle){grid-column:1/-1;display:flex;flex-direction:row;align-items:center;gap:12px;padding:14px 15px;border:1px solid var(--line);border-radius:12px;background:color-mix(in srgb,var(--user-accent) 7%,var(--surface));cursor:pointer}
+#finance-form-dialog.debt-form-dialog .dialog-fields label:has(input.form-toggle)::after{content:"Ative para informar valor, quantidade de parcelas e o primeiro vencimento.";font-size:11px;font-weight:450;color:var(--muted)}
+#finance-form-dialog.debt-form-dialog .dialog-fields input.form-toggle{width:18px;height:18px;min-height:18px;accent-color:var(--user-accent);flex:0 0 auto}
+#finance-form-dialog.debt-form-dialog .dialog-actions{padding:16px 26px 21px;margin:0;border-top:1px solid var(--line)}
+.theme-dark #finance-form-dialog.debt-form-dialog .dialog-head,
+.theme-dark #finance-form-dialog.debt-form-dialog .dialog-actions{background:#2e2e2e}
+@media(max-width:620px){
+ #finance-form-dialog.debt-form-dialog{width:95vw;border-radius:18px}
+ #finance-form-dialog.debt-form-dialog .dialog-head{padding:19px 18px 14px}
+ #finance-form-dialog.debt-form-dialog .dialog-fields{grid-template-columns:1fr;padding:8px 18px 16px;max-height:65vh}
+ #finance-form-dialog.debt-form-dialog .dialog-actions{padding:14px 18px 18px}
+}
