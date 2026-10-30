@@ -969,3 +969,9 @@ body.theme-dark .goal-detail-dialog{background:#292929!important;color:#f5f5f5!i
 
 /* Ajustes mobile da navegação expandida e simuladores */
 @media(max-width:620px){.nav-group:first-child{display:flex;flex-direction:column;align-items:stretch;gap:4px;padding:9px 12px 12px}.nav-group:first-child .nav-item{flex:0 0 auto;width:100%;justify-content:flex-start;padding:11px 12px}.nav-group:first-child .nav-more-toggle{width:100%;justify-content:flex-start}.nav-more-items{width:100%}.nav-more-items .nav-item{width:100%;justify-content:flex-start}.simulator-fields{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* Botão de fechar sempre visível na Central da conta */
+.account-center-dialog{position:relative;padding-top:48px}
+.account-center-close{position:absolute;z-index:5;top:12px;right:14px;width:36px;height:36px;display:grid;place-items:center;border:1px solid var(--line);border-radius:50%;background:var(--panel, var(--surface));color:var(--ink);font-size:25px;line-height:1;cursor:pointer;box-shadow:0 2px 10px #00000012}
+.account-center-close:hover{background:color-mix(in srgb,var(--user-accent) 18%,var(--panel, var(--surface)))}
+@media(max-width:620px){.account-center-dialog{width:min(96vw,560px);max-width:96vw;padding:48px 14px 18px}.account-center-close{top:9px;right:10px}.account-center-layout{min-height:0}}
