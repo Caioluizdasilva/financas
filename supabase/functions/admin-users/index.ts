@@ -44,8 +44,9 @@ Deno.serve(async (req) => {
     const display_name = String(input.display_name || "").trim();
     const role = input.role === "master" ? "master" : "common";
     const password = String(input.password || "");
-    const module_access = input.module_access && typeof input.module_access === "object"
-      ? input.module_access : {};
+    const allowedModules = new Set(["painel","calendario","entradas","metas","assinaturas","planejamento","moto","dividas","inteligencia","simulador","quitacao","lembretes","cartoes","bancos","projecao","investimentos","patrimonio","relatorios"]);
+    const requestedAccess = input.module_access && typeof input.module_access === "object" ? input.module_access : {};
+    const module_access = Object.fromEntries([...allowedModules].map((key) => [key, requestedAccess[key] !== false]));
 
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return json({ error: "Informe um e-mail válido." }, 400);
@@ -66,16 +67,39 @@ Deno.serve(async (req) => {
       if (userId === authData.user.id && role !== "master") {
         return json({ error: "Você não pode remover seu próprio acesso master." }, 400);
       }
-      const attributes: Record<string, unknown> = { email, email_confirm: true, user_metadata: { display_name } };
+      const { data: existingProfile } = await admin.from("profiles").select("*").eq("user_id", userId).maybeSingle();
+      const previousProfile = existingProfile || null;
+      const { error: profileError } = await admin.from("profiles").upsert({
+        user_id: userId, email, display_name, role, module_access,
+      }, { onConflict: "user_id" });
+      if (profileError) return json({ error: profileError.message }, 500);
+      const { data: targetAuth, error: targetAuthError } = await admin.auth.admin.getUserById(userId);
+      if (targetAuthError || !targetAuth.user) {
+        if (previousProfile) await admin.from("profiles").upsert(previousProfile, { onConflict: "user_id" });
+        else await admin.from("profiles").delete().eq("user_id", userId);
+        return json({ error: targetAuthError?.message || "Conta de autenticação não encontrada." }, 404);
+      }
+      const attributes: Record<string, unknown> = {
+        email, email_confirm: true,
+        user_metadata: { ...(targetAuth.user.user_metadata || {}), display_name },
+      };
       if (password) attributes.password = password;
       const { error } = await admin.auth.admin.updateUserById(userId, attributes);
-      if (error) return json({ error: error.message }, 400);
+      if (error) {
+        if (previousProfile) await admin.from("profiles").upsert(previousProfile, { onConflict: "user_id" });
+        else await admin.from("profiles").delete().eq("user_id", userId);
+        return json({ error: error.message }, 400);
+      }
+      return json({ success: true, user_id: userId, email, role });
     }
 
     const { error: profileError } = await admin.from("profiles").upsert({
       user_id: userId, email, display_name, role, module_access,
     }, { onConflict: "user_id" });
-    if (profileError) return json({ error: profileError.message }, 500);
+    if (profileError) {
+      await admin.auth.admin.deleteUser(userId);
+      return json({ error: profileError.message }, 500);
+    }
 
     return json({ success: true, user_id: userId, email, role });
   } catch (error) {
