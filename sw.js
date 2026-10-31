@@ -1,4 +1,4 @@
-const CACHE='financas-v44-account-center-scroll';
+const CACHE='financas-v45-account-center-financial-icons';
 const FILES=['./','index.html','style.css','app.js','auth.js','seed.js','manifest.webmanifest'];
 self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(FILES)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
