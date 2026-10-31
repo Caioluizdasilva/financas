@@ -1366,3 +1366,68 @@ body .month-item.active .month-dot{background:var(--user-accent)!important}
 .nav-item{gap:11px}
 .nav-item.active .nav-icon svg{stroke-width:2}
 @media(max-width:700px){.nav-icon{width:20px;height:20px;flex-basis:20px}.nav-icon svg{width:17px;height:17px}}
+
+
+/* Correção estrutural da landing e identidade alinhada ao portfólio */
+html{scroll-behavior:smooth;scroll-padding-top:92px}
+body{overflow-x:hidden}
+#auth-screen{
+  display:block!important;
+  position:relative!important;
+  inset:auto!important;
+  width:100%;
+  min-height:100vh;
+  min-height:100svh;
+  padding:0!important;
+  overflow-x:clip!important;
+  overflow-y:visible!important;
+  background:#1f1f1f!important;
+  color:#fff!important;
+  place-items:unset!important;
+}
+#auth-screen .auth-site{width:100%;min-height:100vh;min-height:100svh;overflow:clip;background:#1f1f1f}
+#auth-screen .auth-landing{display:block;width:100%;max-width:none;padding:0;margin:0}
+#auth-screen .auth-landing[hidden],#auth-screen .auth-access[hidden]{display:none!important}
+#auth-screen.auth-is-access .auth-nav{display:none!important}
+#auth-screen.auth-is-access .auth-landing{display:none!important}
+#auth-screen .auth-access{min-height:100vh;min-height:100svh;width:100%;padding:100px 20px 60px;overflow:visible}
+#auth-screen .auth-back-home{z-index:10}
+#auth-screen .auth-reveal{opacity:1;transform:none}
+#auth-screen .auth-reveal.is-visible{opacity:1;transform:translateY(0)}
+#auth-screen .auth-nav{background:rgba(31,31,31,.9);border-bottom:1px solid #ffffff18}
+#auth-screen .auth-nav.is-scrolled{background:rgba(24,24,24,.97)}
+#auth-screen .auth-hero{min-height:min(790px,calc(100svh - 76px));padding-top:85px;padding-bottom:100px}
+#auth-screen .auth-hero h1{font-family:'Poppins',sans-serif;font-weight:700;letter-spacing:-.055em}
+#auth-screen .auth-hero h1 span{color:#ffe608}
+#auth-screen .auth-hero h1 em{color:#fff}
+#auth-screen .auth-kicker{color:#ffe608}
+#auth-screen .auth-primary-cta,#auth-screen .auth-nav-cta{background:#ffe608;color:#000;border-radius:50px}
+#auth-screen .auth-primary-cta:hover,#auth-screen .auth-nav-cta:hover{background:#ebff00}
+#auth-screen .auth-feature-grid article{background:#2e2e2e;border:1px solid #ffffff12;border-radius:10px;box-shadow:0 12px 30px #0003}
+#auth-screen .auth-feature-grid article:hover{border-color:#ffe608;transform:translateY(-8px)}
+#auth-screen .auth-feature-grid .feature-highlight{background:#2e2e2e;border-color:#ffe608}
+#auth-screen .auth-feature-grid article>b{background:#ffe608;color:#111;border-radius:9px}
+#auth-screen .auth-showcase-panel,#auth-screen .auth-showcase-tabs button,#auth-screen .auth-how-steps article{background:#2e2e2e;border-radius:10px}
+#auth-screen .auth-showcase-screen{background:#1f1f1f;border:1px solid #ffe60855;border-radius:10px}
+#auth-screen .auth-showcase-bars i,#auth-screen .auth-mini-chart i{background:linear-gradient(to top,#ffe60866,#ffe608)}
+#auth-screen .auth-showcase-tabs button:hover,#auth-screen .auth-showcase-tabs button.active{background:#ffe608;color:#000;border-color:#ffe608}
+#auth-screen .auth-how{background:#2e2e2e}
+#auth-screen .auth-how-steps article{background:#1f1f1f;border:1px solid #ffffff14}
+#auth-screen .auth-security-mark{border-color:#ffe608;color:#ffe608}
+#auth-screen .auth-bottom-cta{background:#ffe608}
+#auth-screen .auth-bottom-cta h2 em{color:#111}
+#auth-screen .auth-card{background:#2e2e2e;border:1px solid #ffffff20;border-radius:16px}
+#auth-screen .auth-card-mark{background:#ffe608;color:#000;border-radius:10px}
+#auth-screen .auth-submit{background:#ffe608;color:#000;border-radius:50px}
+#auth-screen .auth-card input{background:#1f1f1f;border-color:#555}
+#auth-screen .auth-form-meta button,#auth-screen .auth-links button{color:#ffe608}
+#auth-screen .auth-site-footer{background:#171717}
+@media(max-width:720px){
+  #auth-screen .auth-hero{min-height:0;padding:65px 22px 78px}
+  #auth-screen .auth-hero-art{min-height:350px}
+  #auth-screen .auth-nav{position:sticky}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  #auth-screen .auth-reveal{opacity:1;transform:none}
+}
