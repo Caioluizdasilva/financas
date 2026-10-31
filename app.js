@@ -210,8 +210,9 @@ function financialInsightsView(){
 function simulatorView(){
  let current=S.keys.includes(today)?today:S.keys[S.keys.length-1],m=current?M(current):null,c=current?calc(current):null,debtList=S.debts.filter(d=>(+d.valor||0)>0);
  let chosen=debtList.find(d=>d.id===decisionSim.debtId)||debtList[0]||null;
- let priority=debtList.find(d=>d.id===decisionSim.priorityDebtId&&d.id!==chosen?.id)||debtList.find(d=>d.id!==chosen?.id)||null;
+ let priority=decisionSim.priorityDebtId?debtList.find(d=>d.id===decisionSim.priorityDebtId&&d.id!==chosen?.id)||null:null;
  let monthRows=chosen&&current&&S.months[current]?[...(S.months[current].fixos||[]),...(S.months[current].parcelas||[])].filter(r=>r.debtId===chosen.id):[];
+ if(!monthRows.length&&chosen){for(const k of [...S.keys].sort()){const mm=S.months[k];const found=[...(mm?.fixos||[]),...(mm?.parcelas||[])].filter(r=>r.debtId===chosen.id);if(found.length){monthRows=found;break}}}
  let scheduled=monthRows.reduce((n,r)=>n+(+r.valor||0),0);
  let defer=scheduled||(+chosen?.valorParcela||0)||(+chosen?.valor||0);
  let rate=Math.max(0,+decisionSim.interest||0),nextImpact=defer*(1+rate/100);
