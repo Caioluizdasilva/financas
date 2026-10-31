@@ -2004,3 +2004,27 @@ body:has(#auth-screen){
  .account-financial-grid,.account-info-grid{grid-template-columns:1fr!important}
  .account-financial-main{grid-column:auto!important}
 }
+
+/* v48 — confirmação de exclusão em três etapas */
+.secure-delete-dialog{width:min(520px,calc(100vw - 32px))!important;max-width:520px!important;padding:30px!important;border:1px solid #48402a!important;border-radius:22px!important;background:linear-gradient(145deg,#252525,#191919)!important;color:#f6f6f6!important;box-shadow:0 28px 100px #000b!important}
+.secure-delete-dialog::backdrop{background:#000b!important;backdrop-filter:blur(7px)!important}
+.delete-dialog-mark{width:46px;height:46px;display:grid;place-items:center;margin-bottom:20px;border:1px solid #725c1b;border-radius:14px;background:#3a3010;color:#ffe608;font-size:25px;font-weight:900}
+.delete-dialog-mark.is-lock{background:#292929;border-color:#454545;color:#ffe608}
+.secure-delete-dialog .account-center-kicker{display:block;margin-bottom:10px;color:#ffe608;font-size:9px;font-weight:850;letter-spacing:1.45px}
+.secure-delete-dialog h2{margin:0 0 12px;color:#fff;font-size:25px;font-weight:850;letter-spacing:-.7px;line-height:1.15}
+.secure-delete-dialog>p{margin:0 0 18px;color:#bcbcbc;font-size:13px;line-height:1.65}
+.secure-delete-dialog>p b{color:#fff}
+.delete-warning-box{display:flex;flex-direction:column;gap:6px;margin:18px 0 22px;padding:14px 16px;border:1px solid #51471e;border-left:3px solid #ffe608;border-radius:12px;background:#292611}
+.delete-warning-box b{font-size:12px;color:#ffe608}.delete-warning-box span{font-size:11px;line-height:1.55;color:#c3bd9e}
+.delete-warning-box.is-danger{border-color:#633a35;border-left-color:#e36c61;background:#2b1d1c}
+.delete-warning-box.is-danger b{color:#ffaaa2}.delete-warning-box.is-danger span{color:#d0aaa6}
+.delete-dialog-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:24px}
+.delete-dialog-actions button{min-height:45px!important;padding:0 18px!important;border-radius:11px!important;font-size:12px!important;font-weight:800!important}
+.delete-dialog-actions .button.danger{background:#a83e37!important;border-color:#a83e37!important;color:white!important}
+.delete-password-label{display:block;margin:20px 0 8px;color:#d9d9d9;font-size:11px;font-weight:750}
+.delete-password-wrap{display:flex;align-items:center;gap:8px;padding:0 12px;border:1px solid #555;border-radius:12px;background:#111}
+.delete-password-wrap:focus-within{border-color:#ffe608;box-shadow:0 0 0 3px #ffe60820}
+.delete-password-wrap input{flex:1;min-width:0;height:48px;border:0!important;outline:0!important;background:transparent!important;color:#fff!important;font:inherit;font-size:14px}
+.delete-password-wrap button{width:32px;height:32px;border:0;border-radius:8px;background:#292929;color:#ffe608;font-size:16px}
+.delete-password-error{margin:9px 0 0!important;color:#ff938b!important;font-size:11px!important}
+@media(max-width:600px){.secure-delete-dialog{width:calc(100vw - 24px)!important;padding:23px!important;border-radius:18px!important}.secure-delete-dialog h2{font-size:22px}.delete-dialog-actions{flex-direction:column-reverse}.delete-dialog-actions button{width:100%!important}}
