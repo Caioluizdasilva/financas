@@ -1542,3 +1542,25 @@ body:has(#auth-screen){display:block!important;overscroll-behavior-y:auto}
 #auth-screen .auth-landing{display:block!important;height:auto!important;min-height:100%!important;overflow:visible!important}
 #auth-screen .auth-nav{position:sticky;top:0;z-index:20}
 #auth-screen .auth-access{min-height:100%;height:auto!important}
+
+
+/* v36 — correção do ícone ativo e rolagem nativa da landing */
+#tabs .nav-item .nav-icon{background:transparent!important;background-color:transparent!important;border:0!important;box-shadow:none!important;overflow:visible!important}
+#tabs .nav-item .nav-icon svg{display:block!important;visibility:visible!important;opacity:1!important;width:20px!important;height:20px!important;min-width:20px!important;background:transparent!important;fill:none!important;stroke:currentColor!important}
+#tabs .nav-item .nav-icon svg rect,#tabs .nav-item .nav-icon svg path,#tabs .nav-item .nav-icon svg circle,#tabs .nav-item .nav-icon svg line,#tabs .nav-item .nav-icon svg polyline{fill:none!important;stroke:currentColor!important;stroke-width:1.8!important}
+#tabs .nav-item.active .nav-icon,#tabs .nav-item.active .nav-icon svg,#tabs .nav-item.active .nav-icon svg *{color:#171717!important;stroke:#171717!important;fill:none!important}
+#tabs .nav-item.active .nav-icon{background:transparent!important}
+
+/* Marca da landing no iPhone: monograma limpo, sem sombra deslocada */
+#auth-screen .auth-brand .brand-symbol{width:43px!important;height:43px!important;min-width:43px!important;display:grid!important;place-items:center!important;border-radius:13px!important;background:#ffe608!important;color:#171717!important;border:1px solid #ffe608!important;box-shadow:0 5px 16px #ffe60820!important;font-family:'Poppins',sans-serif!important;font-size:27px!important;font-weight:800!important;line-height:1!important;letter-spacing:-2px!important}
+#auth-screen .auth-brand{gap:11px!important}
+#auth-screen .auth-brand strong{font-family:'Poppins',sans-serif!important;font-weight:800!important;letter-spacing:-1.1px!important}
+@media(max-width:720px){#auth-screen .auth-brand .brand-symbol{width:38px!important;height:38px!important;min-width:38px!important;font-size:24px!important;border-radius:12px!important}#auth-screen .auth-brand small{letter-spacing:1.15px!important;line-height:1.45!important}}
+
+/* Landing no fluxo do documento: rolagem nativa por roda, trackpad e arraste */
+html,body{height:auto!important;min-height:100%!important;overflow-x:hidden!important;overflow-y:auto!important}
+body:has(#auth-screen){display:block!important;height:auto!important;min-height:100%!important;overflow-x:hidden!important;overflow-y:auto!important}
+#auth-screen{position:relative!important;inset:auto!important;display:block!important;width:100%!important;height:auto!important;min-height:100vh!important;min-height:100svh!important;padding:0!important;overflow:visible!important;overflow-x:clip!important;overflow-y:visible!important;touch-action:pan-y!important;overscroll-behavior-y:auto!important}
+#auth-screen .auth-site{position:relative!important;display:block!important;width:100%!important;height:auto!important;min-height:100vh!important;overflow:visible!important;overflow-x:clip!important;contain:none!important}
+#auth-screen .auth-landing{display:block!important;height:auto!important;min-height:0!important;overflow:visible!important}
+#auth-screen .auth-nav{position:sticky!important;top:0!important;z-index:30!important}
