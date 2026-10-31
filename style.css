@@ -1834,3 +1834,11 @@ body:has(#auth-screen){
 .signout-actions .button.primary{background:#ffe608!important;color:#171717!important;border-color:#ffe608!important}
 .signout-actions .button:disabled{opacity:.55;cursor:wait}
 @media(max-width:560px){.finance-toast-region{right:14px;bottom:14px;width:calc(100vw - 28px)}.finance-signout-dialog{padding:23px!important}.signout-actions{flex-direction:column-reverse}.signout-actions button{width:100%}}
+
+
+.auth-logout-note{position:fixed;z-index:100010;right:24px;top:24px;display:flex;align-items:center;gap:12px;max-width:min(390px,calc(100vw - 32px));padding:14px 17px;border:1px solid #414141;border-radius:14px;background:#202020;color:#f5f5f5;box-shadow:0 16px 48px #0009;animation:authLogoutIn .28s ease both}
+.auth-logout-note>span{width:29px;height:29px;flex:0 0 29px;display:grid;place-items:center;border-radius:9px;background:#ffe608;color:#171717;font-weight:900}
+.auth-logout-note div{display:flex;flex-direction:column;gap:3px}
+.auth-logout-note b{font-size:12px;color:#fff}
+.auth-logout-note small{font-size:10px;line-height:1.4;color:#aaa}
+@keyframes authLogoutIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
