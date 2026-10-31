@@ -21,10 +21,10 @@ function mount(){if($('#auth-screen'))return;const root=document.createElement('
     </div>
     <div class="auth-hero-art" aria-label="Prévia ilustrativa do painel financeiro">
       <div class="auth-art-orbit orbit-one"></div><div class="auth-art-orbit orbit-two"></div>
-      <div class="auth-art-note">SEU MÊS, SOB CONTROLE <span>✳</span></div>
+      <div class="auth-art-note">UMA VISÃO MAIS CLARA DO SEU DINHEIRO <span>✳</span></div>
       <div class="auth-art-card">
-        <div class="auth-art-card-top"><span>VISÃO GERAL</span><i>•••</i></div>
-        <p>Saldo projetado</p><strong>R$ 2.480<span>,00</span></strong>
+        <div class="auth-art-card-top"><span>PAINEL DE DEMONSTRAÇÃO</span><i>•••</i></div>
+        <p>Um mês visto por inteiro</p><strong>R$ 2.480<span>,00</span></strong>
         <div class="auth-art-chart"><i style="height:34%"></i><i style="height:49%"></i><i style="height:42%"></i><i style="height:66%"></i><i style="height:57%"></i><i style="height:82%"></i><i style="height:72%"></i><i style="height:94%"></i></div>
         <div class="auth-art-card-foot"><span><i></i> Entradas</span><span><i></i> Despesas</span></div>
       </div>
@@ -32,7 +32,7 @@ function mount(){if($('#auth-screen'))return;const root=document.createElement('
       <div class="auth-art-stamp">f.</div>
     </div>
   </section>
-  <section class="auth-about" id="sobre"><div class="auth-about-visual"><div class="auth-about-art"><span>f.</span><i></i><b></b></div><small>PLANEJAR É UM ATO DE CUIDADO.</small></div><div><p class="auth-kicker">SOBRE O FINANÇAS</p><h2>Uma relação mais leve com o seu <em>dinheiro começa aqui.</em></h2><p>O Finanças nasceu para tornar a organização financeira mais clara e acessível. Reúna sua rotina, compreenda seus hábitos e planeje os próximos passos com consciência.</p></div></section><section class="auth-features" id="recursos">
+  <section class="auth-about" id="sobre"><div class="auth-about-visual"><div class="auth-about-art"><span>f.</span><i></i><b></b></div><small>ORGANIZAÇÃO QUE ACOMPANHA A VIDA REAL.</small></div><div><p class="auth-kicker">SOBRE O FINANÇAS</p><h2>Uma relação mais leve com o seu <em>dinheiro começa aqui.</em></h2><p>O Finanças foi pensado para acompanhar a vida como ela é: com contas, planos, imprevistos, desejos e decisões. Um espaço para reunir as peças, enxergar o cenário completo e escolher os próximos passos com mais consciência.</p></div></section><section class="auth-features" id="recursos">
     <div class="auth-section-heading"><p class="auth-kicker">SEU DINHEIRO, COM DIREÇÃO</p><h2>Não é só controlar.<br><em>É fazer escolhas melhores.</em></h2></div>
     <div class="auth-feature-grid">
       <article><span class="auth-feature-icon">↗</span><small>01 / ORGANIZAÇÃO</small><h3>Entenda seu mês</h3><p>Reúna entradas, despesas, contas fixas e benefícios em uma visão simples e organizada.</p></article>
