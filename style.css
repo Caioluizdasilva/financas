@@ -1842,3 +1842,41 @@ body:has(#auth-screen){
 .auth-logout-note b{font-size:12px;color:#fff}
 .auth-logout-note small{font-size:10px;line-height:1.4;color:#aaa}
 @keyframes authLogoutIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+
+/* v44 — account modal scroll and visual hierarchy */
+.account-center-dialog{width:min(1040px,94vw)!important;height:min(790px,88vh)!important;max-height:88vh!important;padding:0!important;overflow:hidden!important}
+.account-center-dialog[open]{display:block}
+.account-center-layout{display:grid!important;grid-template-columns:258px minmax(0,1fr)!important;height:100%!important;min-height:0!important;max-height:none!important;overflow:hidden!important}
+.account-center-nav{min-height:0!important;height:100%!important;overflow-y:auto!important;overflow-x:hidden!important;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#555 #171717;align-content:start!important}
+.account-center-content{min-width:0!important;min-height:0!important;height:100%!important;overflow-y:auto!important;overflow-x:hidden!important;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#555 #191919;padding:28px 34px!important}
+.account-center-nav::-webkit-scrollbar,.account-center-content::-webkit-scrollbar{width:7px}
+.account-center-nav::-webkit-scrollbar-thumb,.account-center-content::-webkit-scrollbar-thumb{background:#505050;border-radius:10px}
+.account-center-body{display:flex!important;flex-direction:column!important;gap:16px!important;padding:25px 0 36px!important;min-height:0}
+.account-center-body>p{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:15px 17px;margin:0!important;background:#202020;border:1px solid #343434;border-radius:12px;color:#aaa!important;font-size:12px!important;line-height:1.55!important}
+.account-center-body>p b{color:#fff;font-size:14px;white-space:nowrap}
+.account-section-intro{padding:2px 0 8px!important;margin:0 0 2px!important}
+.account-section-intro h3{font-size:27px!important;line-height:1.16!important;font-weight:800!important;margin:9px 0!important;letter-spacing:-.8px}
+.account-section-intro p{font-size:12px!important;line-height:1.7!important;max-width:560px}
+.account-profile-card{margin:0!important;padding:19px!important}.account-info-grid{margin:0!important}
+.account-center-body>.button{align-self:flex-start;min-height:43px;padding-inline:18px!important}
+.account-center-body .account-setting{display:flex!important;align-items:center;justify-content:space-between;gap:20px;padding:15px 16px!important;margin:0!important;border:1px solid #343434!important;border-radius:11px;background:#202020;color:#e8e8e8!important;font-size:12px!important}
+.account-center-body .account-setting select,.account-center-body .account-setting input:not([type=color]){min-width:190px;max-width:48%;padding:9px 11px;border:1px solid #454545;border-radius:8px;background:#171717;color:#fff;font:inherit}
+.account-center-body .account-setting input[type=color]{width:48px;height:34px;border:1px solid #444;border-radius:8px;background:#171717;padding:3px}
+.account-center-body .form-section-title{margin:14px 0 0!important;padding:0 2px 8px!important;color:#ffe608!important;font-size:10px!important;letter-spacing:1.4px;font-weight:850}
+.account-center-body .data-management{margin:0!important;padding:20px!important}
+.account-center-body .data-management h3{font-size:16px!important;margin:0 0 8px!important}
+.account-center-body .data-management p{font-size:11px!important;line-height:1.7!important}
+.account-center-body .button-stack,.account-center-body .data-management-grid{display:flex;flex-wrap:wrap;gap:9px}
+.account-center-body .data-management-grid>*{flex:1 1 180px}
+.account-center-topbar{position:sticky;top:-28px;z-index:2;background:#171717;padding:0 0 18px!important}
+.account-center-nav button{min-height:40px;text-align:left;line-height:1.35}.account-center-nav-label{margin-top:5px}
+@media(max-width:700px){
+.account-center-dialog{width:96vw!important;height:92vh!important;max-height:92vh!important;overflow:hidden!important}
+.account-center-layout{display:flex!important;flex-direction:column!important;height:100%!important;max-height:none!important;overflow:hidden!important}
+.account-center-nav{flex:0 0 auto!important;width:100%!important;height:auto!important;max-height:39vh!important;overflow-y:auto!important;overflow-x:hidden!important;display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important}
+.account-center-content{flex:1 1 auto!important;height:auto!important;min-height:0!important;overflow-y:auto!important;padding:17px!important}
+.account-center-topbar{top:-17px}.account-center-body{padding-top:19px!important}
+.account-center-body .account-setting{align-items:flex-start;flex-direction:column;gap:9px}
+.account-center-body .account-setting select,.account-center-body .account-setting input:not([type=color]){max-width:none;width:100%}
+.account-center-body>p{align-items:flex-start;flex-direction:column;gap:5px}
+}
