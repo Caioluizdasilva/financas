@@ -1530,3 +1530,15 @@ body:has(#auth-screen){display:block!important;overscroll-behavior-y:auto}
 #tabs .nav-more-items .nav-icon{width:20px!important;height:20px!important;min-width:20px!important;flex-basis:20px!important}
 #tabs .nav-more-items .nav-icon svg{width:18px!important;height:18px!important;max-width:18px!important;max-height:18px!important}
 #tabs .nav-item:focus-visible{outline:2px solid var(--user-accent);outline-offset:2px}
+
+
+/* v35 — contraste explícito dos ícones selecionados e rolagem real da landing */
+#tabs .nav-item .nav-icon,#tabs .nav-item .nav-icon svg{visibility:visible!important;opacity:1!important}
+#tabs .nav-item .nav-icon svg,#tabs .nav-item .nav-icon svg *{fill:none!important;stroke:currentColor!important}
+#tabs .nav-item.active .nav-icon,#tabs .nav-item.active .nav-icon svg,#tabs .nav-item.active .nav-icon svg *{color:#171717!important;stroke:#171717!important;fill:none!important}
+#tabs .nav-item.active .nav-icon svg{display:block!important;overflow:visible!important}
+#auth-screen{position:fixed!important;inset:0!important;width:100%!important;height:100vh!important;height:100dvh!important;min-height:0!important;padding:0!important;overflow-x:hidden!important;overflow-y:auto!important;overscroll-behavior-y:contain!important;-webkit-overflow-scrolling:touch;touch-action:pan-y!important}
+#auth-screen .auth-site{width:100%!important;min-height:100%!important;height:auto!important;overflow:visible!important;contain:none!important}
+#auth-screen .auth-landing{display:block!important;height:auto!important;min-height:100%!important;overflow:visible!important}
+#auth-screen .auth-nav{position:sticky;top:0;z-index:20}
+#auth-screen .auth-access{min-height:100%;height:auto!important}
