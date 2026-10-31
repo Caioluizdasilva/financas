@@ -1519,3 +1519,14 @@ body:has(#auth-screen){display:block!important;overscroll-behavior-y:auto}
  #auth-screen .auth-window-body{padding:15px}
  #auth-screen .auth-balance-card{padding:14px}
 }
+
+
+/* Ícones SVG do menu lateral: menu principal e submenu Mais */
+#tabs .nav-item{display:flex;align-items:center;gap:11px;min-height:42px}
+#tabs .nav-icon{width:22px!important;height:22px!important;min-width:22px!important;flex:0 0 22px!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;padding:0!important;margin:0!important;font-size:0!important;line-height:0!important;color:inherit!important;vertical-align:middle}
+#tabs .nav-icon svg{display:block!important;width:19px!important;height:19px!important;max-width:19px!important;max-height:19px!important;overflow:visible!important;fill:none!important;stroke:currentColor!important;stroke-width:1.8!important;stroke-linecap:round!important;stroke-linejoin:round!important;flex:none!important}
+#tabs .nav-item.active .nav-icon svg{stroke-width:2!important}
+#tabs .nav-more-items .nav-item{min-height:38px}
+#tabs .nav-more-items .nav-icon{width:20px!important;height:20px!important;min-width:20px!important;flex-basis:20px!important}
+#tabs .nav-more-items .nav-icon svg{width:18px!important;height:18px!important;max-width:18px!important;max-height:18px!important}
+#tabs .nav-item:focus-visible{outline:2px solid var(--user-accent);outline-offset:2px}
