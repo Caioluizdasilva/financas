@@ -1664,3 +1664,77 @@ body #tabs .nav-more-items .nav-item.active .nav-icon svg *{
  stroke:#171717!important;
  fill:none!important;
 }
+
+
+/* v40 — fundo contínuo, centralizado e sem halos laterais na landing */
+html,body{
+  width:100%!important;
+  max-width:100%!important;
+  margin:0!important;
+  background:#1f1f1f!important;
+  background-color:#1f1f1f!important;
+}
+body:has(#auth-screen){
+  background:#1f1f1f!important;
+  overflow-x:hidden!important;
+}
+#auth-screen{
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+  background:#1f1f1f!important;
+  background-color:#1f1f1f!important;
+  isolation:isolate!important;
+}
+#auth-screen::before,#auth-screen::after{
+  content:none!important;
+  display:none!important;
+  background:none!important;
+}
+#auth-screen .auth-site{
+  width:100%!important;
+  max-width:1440px!important;
+  margin:0 auto!important;
+  background:#1f1f1f!important;
+  background-color:#1f1f1f!important;
+  overflow:clip!important;
+  isolation:isolate!important;
+}
+#auth-screen .auth-ambient{
+  inset:0!important;
+  width:100%!important;
+  max-width:100%!important;
+  background-color:transparent!important;
+  background-image:
+    linear-gradient(to right,transparent calc(50% - .5px),#ffffff05 50%,transparent calc(50% + .5px)),
+    linear-gradient(to bottom,#ffffff05 1px,transparent 1px)!important;
+  background-size:100% 100%,72px 72px!important;
+  background-position:center top,center top!important;
+  mask-image:linear-gradient(to bottom,#000 0%,#000 28%,transparent 68%)!important;
+  -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 28%,transparent 68%)!important;
+}
+#auth-screen .auth-ambient i,
+#auth-screen .auth-ambient b{
+  display:none!important;
+  animation:none!important;
+  filter:none!important;
+  box-shadow:none!important;
+}
+#auth-screen .auth-hero::before{
+  background:radial-gradient(ellipse at 58% 48%,#ffffff0a 0%,transparent 64%)!important;
+  opacity:1!important;
+}
+#auth-screen .auth-nav,
+#auth-screen .auth-landing,
+#auth-screen .auth-features,
+#auth-screen .auth-how,
+#auth-screen .auth-about,
+#auth-screen .auth-site-footer{
+  background-color:transparent!important;
+}
+#auth-screen .auth-bottom-cta{
+  background:#ffe608!important;
+}
+@media(min-width:1441px){
+  #auth-screen .auth-site{max-width:1440px!important}
+}
