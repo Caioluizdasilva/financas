@@ -2047,3 +2047,7 @@ body:has(#auth-screen){
 #finance-form-dialog .dialog-actions button{min-height:44px!important;padding:0 19px!important;border-radius:10px!important;font-size:12px!important;font-weight:800!important}
 #finance-form-dialog .dialog-fields input[type=month]{color-scheme:dark!important}
 @media(max-width:600px){#finance-form-dialog{width:calc(100vw - 20px)!important;max-height:90dvh!important;border-radius:17px!important}#finance-form-dialog>form{max-height:90dvh!important}#finance-form-dialog .dialog-head{padding:18px 17px 14px!important}#finance-form-dialog .dialog-head h2{font-size:19px!important}#finance-form-dialog .dialog-fields{grid-template-columns:1fr!important;gap:13px!important;padding:17px!important}#finance-form-dialog .dialog-fields>label{grid-column:1/-1!important}#finance-form-dialog .dialog-actions{padding:12px 17px calc(14px + env(safe-area-inset-bottom))!important}#finance-form-dialog .dialog-actions button{flex:1!important}}
+
+/* v50 — aviso de sessão encerrada com duração máxima de 10s */
+.auth-logout-note{opacity:0;transform:translateY(-8px);transition:opacity .28s ease,transform .28s ease}.auth-logout-note.is-visible{opacity:1;transform:translateY(0)}
+@media(prefers-reduced-motion:reduce){.auth-logout-note{transition:none}}
