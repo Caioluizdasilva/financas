@@ -66,7 +66,7 @@ Deno.serve(async (req) => {
       if (userId === authData.user.id && role !== "master") {
         return json({ error: "Você não pode remover seu próprio acesso master." }, 400);
       }
-      const attributes: Record<string, unknown> = { email, user_metadata: { display_name } };
+      const attributes: Record<string, unknown> = { email, email_confirm: true, user_metadata: { display_name } };
       if (password) attributes.password = password;
       const { error } = await admin.auth.admin.updateUserById(userId, attributes);
       if (error) return json({ error: error.message }, 400);
