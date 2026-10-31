@@ -1624,3 +1624,16 @@ body:has(#auth-screen){background:#1f1f1f!important;min-height:100vh!important}
  #auth-screen .auth-section-heading{display:block}
  #auth-screen .auth-section-heading>p{margin-top:18px}
 }
+
+
+/* v38 — neutraliza o fundo aplicado indevidamente ao span do ícone ativo */
+body #tabs .nav-item.active .nav-icon,
+body #tabs .nav-item.active .nav-icon:hover{
+ background:transparent!important;background-color:transparent!important;background-image:none!important;
+ box-shadow:none!important;border:0!important;outline:0!important;padding:0!important;
+}
+body #tabs .nav-item.active .nav-icon svg,
+body #tabs .nav-item.active .nav-icon svg *{
+ background:transparent!important;background-color:transparent!important;fill:none!important;stroke:#171717!important;
+}
+body #tabs .nav-item.active .nav-icon svg circle{fill:#171717!important;stroke:#171717!important}
