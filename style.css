@@ -1908,3 +1908,48 @@ body:has(#auth-screen){
 .account-financial-edit{align-self:flex-start;display:inline-flex;align-items:center;gap:22px;min-height:46px!important;padding:0 19px!important;font-size:12px!important;font-weight:800!important}
 .account-financial-edit span{font-size:17px}
 @media(max-width:700px){.account-financial-grid{grid-template-columns:1fr}.account-financial-main{grid-column:auto}.account-financial-card{min-height:120px}.account-financial-main>strong{font-size:30px}}
+
+
+/* v46 — experiência mobile e saída da conta em destaque */
+.account-center-nav{display:flex!important;flex-direction:column!important;align-items:stretch!important}
+.account-nav-logout-wrap{margin-top:auto;padding:18px 0 2px;border-top:1px solid #343434}
+.account-nav-logout{width:100%;display:flex!important;align-items:center;gap:12px;padding:12px!important;border:1px solid #573535!important;border-radius:12px!important;background:#321f1f!important;color:#ffaaa5!important;text-align:left!important;cursor:pointer}
+.account-nav-logout>span:first-child{width:34px;height:34px;display:grid;place-items:center;flex:0 0 34px;border-radius:10px;background:#522626;color:#ffaaa5;font-size:20px;font-weight:800}
+.account-nav-logout>span:last-child{display:flex;flex-direction:column;gap:3px}
+.account-nav-logout b{font-size:12px;color:#ffd1ce}
+.account-nav-logout small{font-size:10px;color:#c58f8c}
+.account-nav-logout:hover{background:#482626!important;border-color:#a24b46!important}
+.account-center-nav button.account-nav-logout{display:flex!important;grid-template-columns:none!important;min-height:58px!important}
+@media(max-width:700px){
+ .account-center-dialog{width:100vw!important;height:100dvh!important;max-height:100dvh!important;max-width:100vw!important;margin:0!important;border:0!important;border-radius:0!important}
+ .account-center-layout{height:100%!important;max-height:100%!important;min-height:0!important;display:flex!important;flex-direction:column!important}
+ .account-center-nav{flex:0 0 auto!important;width:100%!important;height:auto!important;max-height:none!important;min-height:0!important;padding:12px 12px 9px!important;display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;align-items:center!important;gap:7px!important;overflow-x:auto!important;overflow-y:hidden!important;white-space:nowrap;scrollbar-width:none;border-bottom:1px solid #383838!important}
+ .account-center-nav::-webkit-scrollbar{display:none}
+ .account-center-brand{flex:0 0 auto!important;width:auto!important;padding:0 12px 0 2px!important;margin:0 3px 0 0!important;border:0!important;border-right:1px solid #3b3b3b!important}
+ .account-center-brand span{font-size:12px!important}.account-center-brand small{font-size:7px!important;letter-spacing:1px!important}
+ .account-center-avatar,.account-center-nav h2,.account-center-nav p,.account-center-nav-label{display:none!important}
+ .account-center-nav button{flex:0 0 auto!important;width:auto!important;min-height:38px!important;padding:8px 11px!important;border:1px solid #3b3b3b!important;border-radius:10px!important;background:#222!important;color:#d8d8d8!important;font-size:10px!important;gap:7px!important}
+ .account-center-nav button.active{background:#ffe608!important;border-color:#ffe608!important;color:#171717!important}
+ .account-nav-symbol{width:17px!important;height:17px!important;flex:0 0 17px!important}
+ .account-nav-symbol svg{width:16px!important;height:16px!important;min-width:16px!important}
+ .account-nav-logout-wrap{flex:0 0 auto!important;margin:0 0 0 3px!important;padding:0 0 0 9px!important;border:0!important;border-left:1px solid #3b3b3b!important}
+ .account-nav-logout,.account-center-nav button.account-nav-logout{width:auto!important;min-height:38px!important;padding:7px 10px!important;gap:7px!important;border-radius:10px!important}
+ .account-nav-logout>span:first-child{width:22px!important;height:22px!important;flex-basis:22px!important;font-size:14px!important}
+ .account-nav-logout>span:last-child{display:block!important}.account-nav-logout b{font-size:10px!important}.account-nav-logout small{display:none!important}
+ .account-center-content{flex:1 1 auto!important;width:100%!important;height:auto!important;min-height:0!important;overflow-x:hidden!important;overflow-y:auto!important;padding:17px 16px calc(26px + env(safe-area-inset-bottom))!important}
+ .account-center-topbar{top:-17px!important;padding-bottom:14px!important}.account-center-topbar h2{font-size:19px!important}
+ .account-center-body{padding-top:16px!important}.account-section-intro h3{font-size:23px!important}
+ .account-financial-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important}
+ .account-financial-main{grid-column:1/-1!important}.account-financial-card{min-height:118px!important;padding:14px!important;border-radius:13px!important}
+ .account-financial-card>strong{font-size:21px!important}.account-financial-main>strong{font-size:29px!important}
+ .account-profile-card{padding:13px!important;gap:10px!important}.account-profile-avatar{width:44px!important;height:44px!important;flex-basis:44px!important}
+ .account-info-grid{grid-template-columns:1fr 1fr!important}.account-security-card{gap:10px!important;padding:12px!important}.account-security-card>button{margin-left:0!important}
+ .account-center-body .account-setting{padding:13px!important}
+}
+@media(max-width:390px){
+ .account-center-brand{padding-right:8px!important}.account-center-nav{gap:5px!important;padding-inline:9px!important}
+ .account-center-nav button{padding:7px 9px!important;font-size:9px!important}
+ .account-center-nav button .account-nav-symbol{display:none!important}
+ .account-financial-grid{grid-template-columns:1fr!important}.account-financial-main{grid-column:auto!important}
+ .account-info-grid{grid-template-columns:1fr!important}
+}
