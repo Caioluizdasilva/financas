@@ -1813,3 +1813,24 @@ body:has(#auth-screen){
  .account-security-card{flex-wrap:wrap}
  .account-security-card>button{margin-left:52px}
 }
+
+
+/* v43 — avisos e encerramento de sessão com identidade Finanças */
+.finance-toast-region{position:fixed;z-index:100000;right:22px;bottom:22px;display:flex;flex-direction:column;gap:10px;width:min(390px,calc(100vw - 28px));pointer-events:none}
+.finance-toast{display:flex;align-items:center;gap:12px;padding:14px 15px;border:1px solid #414141;border-radius:14px;background:#202020;color:#f5f5f5;box-shadow:0 16px 48px #0009;opacity:0;transform:translateY(12px);transition:opacity .2s,transform .2s;pointer-events:auto}
+.finance-toast.is-visible{opacity:1;transform:translateY(0)}
+.finance-toast-mark{width:27px;height:27px;flex:0 0 27px;display:grid;place-items:center;border-radius:9px;background:#ffe608;color:#171717;font-size:14px;font-weight:900}
+.finance-toast.is-error .finance-toast-mark{background:#ff6b65;color:#230b0b}
+.finance-toast.is-success .finance-toast-mark{background:#8bd7a5;color:#102217}
+.finance-toast-message{font-size:12px;line-height:1.5;overflow-wrap:anywhere;white-space:pre-line;flex:1}
+.finance-toast button{border:0;background:transparent;color:#aaa;font-size:20px;cursor:pointer;padding:0 2px}
+.finance-signout-dialog{width:min(430px,calc(100vw - 30px))!important;padding:30px!important;border:1px solid #3b3b3b!important;border-radius:22px!important;background:#191919!important;color:#f5f5f5!important;text-align:left!important;box-shadow:0 28px 90px #000b!important}
+.finance-signout-dialog::backdrop{background:#050505c7!important;backdrop-filter:blur(8px)}
+.signout-mark{width:48px;height:48px;display:grid;place-items:center;border-radius:15px;background:#ffe608;color:#171717;font-size:25px;font-weight:900;margin-bottom:22px}
+.finance-signout-dialog h2{font-size:29px;letter-spacing:-1px;margin:7px 0 10px;color:#fff}
+.finance-signout-dialog p{font-size:13px;line-height:1.7;color:#aaa;margin:0 0 23px}
+.signout-actions{display:flex;gap:10px;flex-wrap:wrap}
+.signout-actions button{flex:1;min-width:140px;min-height:44px;border-radius:11px!important}
+.signout-actions .button.primary{background:#ffe608!important;color:#171717!important;border-color:#ffe608!important}
+.signout-actions .button:disabled{opacity:.55;cursor:wait}
+@media(max-width:560px){.finance-toast-region{right:14px;bottom:14px;width:calc(100vw - 28px)}.finance-signout-dialog{padding:23px!important}.signout-actions{flex-direction:column-reverse}.signout-actions button{width:100%}}
