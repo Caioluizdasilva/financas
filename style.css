@@ -2103,3 +2103,5 @@ body:has(#auth-screen){
 .admin-logout-item{margin-top:12px!important;padding-top:13px!important;border-top:1px solid var(--line)!important;color:#d78a82!important}
 .admin-logout-item .nav-icon{color:inherit}
 @media(max-width:620px){.admin-module-grid{grid-template-columns:1fr}.admin-user-heading{align-items:flex-start}.admin-user-actions button{width:100%}.education-post>.eyebrow,.education-post>h2,.education-post>p,.education-post>.education-post-content,.education-post>.education-media,.education-post>.education-material-link,.education-post>button{margin-left:15px!important;margin-right:15px!important}.education-post>.education-media:first-child{margin:0!important}.education-post-content{font-size:12px}.admin-shortcut{min-height:135px}}
+
+.admin-module-option input{width:16px!important;height:16px!important;min-height:16px!important;padding:0!important;border:0!important;border-radius:3px!important;background:transparent!important;box-shadow:none!important}
