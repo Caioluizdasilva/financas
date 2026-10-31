@@ -96,3 +96,8 @@ as $$
 $$;
 revoke all on function public.touch_financas_last_seen() from public;
 grant execute on function public.touch_financas_last_seen() to authenticated;
+
+-- Permissões SQL para as políticas RLS acima.
+grant select, insert, update, delete on public.education_posts to authenticated;
+grant select on public.profiles to authenticated;
+grant update(display_name) on public.profiles to authenticated;
