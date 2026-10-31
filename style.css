@@ -2131,3 +2131,46 @@ body.theme-dark #tabs .nav-item.active{background:var(--user-accent)!important;c
 
 /* v61 — painel master e permissões */
 .admin-overview-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:16px 0}.admin-stat-list{display:grid;gap:0;margin-top:15px}.admin-stat-list>div{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);font-size:12px}.admin-stat-list>div:last-child{border-bottom:0}.admin-stat-list span{color:var(--muted)}.admin-stat-list b{color:var(--ink)}.admin-quick-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}.admin-permission-tools{display:flex;justify-content:flex-end;gap:8px;margin:0 0 10px}.admin-permission-tools .button{font-size:11px;padding:7px 10px}@media(max-width:700px){.admin-overview-grid{grid-template-columns:1fr}.admin-quick-actions{display:grid}.admin-quick-actions .button{width:100%}}
+
+
+/* v62 — ajustes de experiência mobile e central da conta */
+html{width:100%;min-width:0;overflow-x:hidden;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{width:100%;min-width:0;overflow-x:hidden}
+.app-shell,.main-column,#app,main{min-width:0;max-width:100%}
+main{width:100%;overflow-x:clip}
+img,svg,video,canvas{max-width:100%}
+button,input,select,textarea{max-width:100%}
+@supports(height:100dvh){.app-shell{min-height:100dvh}}
+@media(max-width:620px){
+  .app-shell{min-height:100svh}
+  .main-column{width:100%;min-width:0}
+  main{padding-left:clamp(12px,3.8vw,18px);padding-right:clamp(12px,3.8vw,18px)}
+  .page-head,.hero,.metrics,.grid2,.panel,.section-heading{min-width:0;max-width:100%}
+  .metrics{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .metric,.panel,.debt-card{min-width:0}
+  .table-wrap{max-width:100%;overscroll-behavior-x:contain}
+  .account-center-dialog{width:calc(100vw - 16px)!important;max-width:calc(100vw - 16px)!important;max-height:calc(100dvh - 16px)!important;margin:auto;padding:16px!important;overflow:auto!important;overscroll-behavior:contain;border-radius:16px!important}
+  .account-center-layout{display:flex!important;flex-direction:column;gap:14px;min-height:0}
+  .account-center-nav{display:block;min-width:0;padding:0 0 12px!important;border-right:0!important;border-bottom:1px solid var(--line)}
+  .account-center-brand{margin-bottom:10px}
+  .account-center-avatar{width:48px;height:48px;font-size:19px}
+  .account-center-nav h2{font-size:17px;margin-top:7px}
+  .account-center-nav p{margin:4px 0 12px;font-size:11px;overflow-wrap:anywhere}
+  .account-center-nav-label{margin:12px 0 5px;font-size:9px;font-weight:800;letter-spacing:1px;color:var(--muted)}
+  .account-center-nav button:not(.account-nav-logout){display:inline-flex!important;align-items:center;gap:7px;min-height:38px;margin:3px 4px 3px 0;padding:8px 10px!important;border:1px solid var(--line)!important;border-radius:10px!important;font-size:11px;white-space:normal}
+  .account-center-nav button.active{border-color:var(--user-accent)!important}
+  .account-nav-symbol{width:17px;height:17px;flex:0 0 17px}
+  .account-nav-symbol svg{width:17px;height:17px}
+  .account-nav-logout-wrap{margin-top:10px}
+  .account-nav-logout{display:flex!important;width:100%;align-items:center;gap:10px}
+  .account-center-content{width:100%;min-width:0}
+  .account-center-topbar{position:sticky;top:-16px;z-index:3;padding:10px 0;background:var(--surface)}
+  .account-center-topbar h2{font-size:19px}
+  .account-center-body{padding:8px 0 4px;min-width:0}
+  .account-section-intro h3{font-size:21px;line-height:1.2}
+  .account-info-grid,.account-financial-grid{grid-template-columns:1fr!important}
+  .account-profile-card,.account-security-card,.account-setting{flex-wrap:wrap;min-width:0}
+  .account-profile-card>div,.account-security-card>div{min-width:0;overflow-wrap:anywhere}
+  .account-center-close{position:sticky!important;top:0;float:right;z-index:5}
+}
+@media(max-width:380px){.account-center-nav button:not(.account-nav-logout){font-size:10px;padding:7px 8px!important}.page-head h1{font-size:29px}.metric strong{font-size:16px}}
