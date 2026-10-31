@@ -77,3 +77,14 @@ using (public.is_financas_master());
 -- Após criar a conta master no Auth, execute uma instrução separada:
 -- update public.profiles set role='master' where email='SEU_EMAIL_ASCII_CONFIRMADO';
 -- Use o endereço exato confirmado pelo provedor; nunca coloque senha neste arquivo.
+
+create or replace function public.set_financas_user_role(target_user uuid,new_role text)
+returns void language plpgsql security definer set search_path=public
+as $$
+begin
+  if not public.is_financas_master() then raise exception 'Acesso restrito ao administrador master'; end if;
+  if new_role not in ('common','master') then raise exception 'Perfil inválido'; end if;
+  update public.profiles set role=new_role where user_id=target_user;
+end; $$;
+revoke all on function public.set_financas_user_role(uuid,text) from public;
+grant execute on function public.set_financas_user_role(uuid,text) to authenticated;
