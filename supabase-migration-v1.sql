@@ -88,3 +88,11 @@ begin
 end; $$;
 revoke all on function public.set_financas_user_role(uuid,text) from public;
 grant execute on function public.set_financas_user_role(uuid,text) to authenticated;
+
+create or replace function public.touch_financas_last_seen()
+returns void language sql security definer set search_path=public
+as $$
+  update public.profiles set last_seen_at=now() where user_id=auth.uid();
+$$;
+revoke all on function public.touch_financas_last_seen() from public;
+grant execute on function public.touch_financas_last_seen() to authenticated;
