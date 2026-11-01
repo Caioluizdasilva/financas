@@ -2517,3 +2517,36 @@ button,input,select,textarea{max-width:100%}
  .planning-financial-grid .goal-contribution-row>b{grid-column:2;grid-row:1}
  .planning-financial-grid .goal-contribution-row .button{grid-column:1/-1;justify-self:start}
 }
+
+/* Bônus e extras: lista financeira limpa, sem cartões internos */
+.planning-financial-grid .bonus-panel{margin:18px 0 12px;padding:15px 0 0;border:0;border-top:1px solid var(--line);border-radius:0;background:transparent;box-shadow:none;overflow:visible}
+.planning-financial-grid .bonus-panel:before{display:none}
+.planning-financial-grid .bonus-panel-head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:0 0 8px;padding:0}
+.planning-financial-grid .bonus-panel-head strong{display:block;font-size:14px;font-weight:750;letter-spacing:-.02em}
+.planning-financial-grid .bonus-panel-head small{display:block;margin-top:3px;font-size:10px;line-height:1.45;color:var(--muted)}
+.planning-financial-grid .bonus-panel-head .icon-button{width:32px;height:32px;min-width:32px;border:1px solid var(--line);border-radius:9px;background:var(--surface-2);box-shadow:none;font-size:18px}
+.planning-financial-grid .bonus-list{display:grid;gap:0;margin:0}
+.planning-financial-grid .bonus-row.form-row{display:grid;grid-template-columns:minmax(0,1fr) auto 30px 30px;align-items:center;gap:8px;min-height:52px;margin:0;padding:10px 0;border:0;border-top:1px solid var(--line);background:transparent}
+.planning-financial-grid .bonus-row-info{display:grid;gap:3px;min-width:0}
+.planning-financial-grid .bonus-row-info>b{font-size:12px;line-height:1.35;font-weight:700;white-space:normal;overflow-wrap:anywhere}
+.planning-financial-grid .bonus-row-info>small{font-size:10px;line-height:1.3;color:var(--muted)}
+.planning-financial-grid .bonus-row>strong{font-size:12px;font-weight:800;white-space:nowrap;font-variant-numeric:tabular-nums}
+.planning-financial-grid .bonus-row .icon-action{width:28px;height:28px;min-width:28px;border:1px solid var(--line);border-radius:8px;background:var(--surface-2);font-size:12px}
+.shared-person-editor-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:18px 0 10px;padding-top:15px;border-top:1px solid var(--line)}
+.shared-person-editor-head b,.shared-person-editor-head small{display:block}
+.shared-person-editor-head b{font-size:13px}
+.shared-person-editor-head small{margin-top:3px;font-size:10px;color:var(--muted)}
+.shared-person-editor-row{margin:0 0 10px;padding:13px;border:1px solid var(--line);border-radius:12px;background:var(--surface-2)}
+.shared-person-editor-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.shared-person-editor-title>b{font-size:11px}
+.shared-person-editor-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.shared-person-editor-fields label,.shared-expense-form .dialog-fields>label{display:grid;gap:5px;min-width:0;font-size:10px;font-weight:650;color:var(--muted)}
+.shared-person-editor-fields input,.shared-person-editor-fields select,.shared-expense-form .dialog-fields input,.shared-expense-form .dialog-fields select{width:100%;min-width:0}
+.shared-person-paid{display:flex;align-items:center;gap:8px;margin-top:11px;font-size:11px;font-weight:650;color:var(--ink)}
+.shared-person-paid input{accent-color:var(--green);width:16px;height:16px}
+.shared-person-editor-row.is-received{border-color:color-mix(in srgb,var(--green) 35%,var(--line))}
+.shared-expense-total{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:12px 0;padding:12px 0;border-top:1px solid var(--line);font-size:11px;color:var(--muted)}
+.shared-expense-total strong{font-size:18px;color:var(--ink);font-variant-numeric:tabular-nums}
+@media(min-width:821px){.page:has(.planning-financial-grid) .planning-financial-grid{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;align-items:start!important;gap:18px!important}.page:has(.planning-financial-grid) .planning-financial-grid>.panel{width:100%;min-width:0}}
+@media(max-width:820px){.shared-person-editor-fields{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:520px){.planning-financial-grid .bonus-row.form-row{grid-template-columns:minmax(0,1fr) auto 26px 26px;gap:5px;padding:10px 0}.planning-financial-grid .bonus-row .icon-action{width:25px;height:25px;min-width:25px}.planning-financial-grid .bonus-row-info>b{font-size:11px}.planning-financial-grid .bonus-row>strong{font-size:11px}.shared-person-editor-head{align-items:flex-start;flex-wrap:wrap}.shared-person-editor-head .button{min-height:33px;padding:7px 10px;font-size:10px}}
