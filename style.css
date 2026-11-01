@@ -2431,3 +2431,37 @@ button,input,select,textarea{max-width:100%}
   .shared-expenses-panel>.panel-head{align-items:flex-start}
   .shared-expenses-panel>.panel-head>.button{min-height:34px;padding:7px 9px;font-size:10px}
 }
+
+/* Melhorias de pagamento, despesas da moto e histórico de aportes */
+.cell-input[type="checkbox"]{width:17px;height:17px;min-width:17px;accent-color:var(--green);cursor:pointer;vertical-align:middle}
+.calendar-event.is-paid{background:#f0f5ef;border-color:#d8e5d8}
+.calendar-event.is-paid>div small{color:var(--green)}
+.calendar-payment-toggle{border:1px solid var(--line);border-radius:8px;background:#f7f5ef;color:var(--green);padding:8px 11px;font-size:10px;font-weight:700;white-space:nowrap}
+.calendar-payment-toggle.is-paid{background:#e8f0e7;border-color:#cbdcc9;color:#2f6f5e}
+.goal-detail-balance-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:13px}
+.goal-contribution-history{display:grid;gap:8px;margin:12px 0 22px}
+.goal-contribution-history-row{display:grid;grid-template-columns:minmax(0,1fr) auto auto auto;align-items:center;gap:9px;padding:11px 12px;border:1px solid var(--line);border-radius:11px;background:#faf8f2;min-width:0}
+.goal-contribution-history-row>span{min-width:0}
+.goal-contribution-history-row b,.goal-contribution-history-row small{display:block;overflow-wrap:anywhere}
+.goal-contribution-history-row b{font-size:11px}
+.goal-contribution-history-row small{font-size:9px;color:var(--muted);margin-top:3px}
+.goal-contribution-history-row>strong{font-size:11px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.fuel-subheading{font:600 14px 'Playfair Display',Georgia,serif;margin:22px 0 9px;color:var(--ink)}
+.fuel-planned-record{padding:0}
+.fuel-planned-record .fuel-record-main{display:flex;align-items:center;gap:12px;padding:13px 14px;width:100%;min-width:0}
+.fuel-planned-record .fuel-record-copy{flex:1;min-width:0}
+.fuel-planned-record .fuel-record-copy b{display:block;overflow-wrap:anywhere}
+.fuel-planned-record .fuel-record-date{white-space:nowrap}
+.fuel-planned-record .icon-action{flex:none}
+.moto-expense-row{display:grid;grid-template-columns:minmax(0,1fr) auto auto auto;align-items:center;gap:9px;padding:12px 10px;border-bottom:1px solid #efebe2;min-width:0}
+.moto-expense-row>span:first-child{min-width:0}
+.moto-expense-row b,.moto-expense-row small{display:block;overflow-wrap:anywhere}
+.moto-expense-row b{font-size:11px}
+.moto-expense-row small{font-size:9px;color:var(--muted);margin-top:3px}
+.moto-expense-row>strong{font-size:11px;white-space:nowrap}
+.moto-detail-list-row{display:grid;grid-template-columns:minmax(0,1fr) auto auto auto;align-items:center;gap:9px;padding:12px 10px;border-bottom:1px solid #efebe2;min-width:0}
+.moto-detail-list-row>span{min-width:0}
+.moto-detail-list-row b,.moto-detail-list-row small{display:block;overflow-wrap:anywhere}
+.moto-detail-list-row small{font-size:9px;color:var(--muted);margin-top:3px}
+.moto-detail-list-row>strong{font-size:11px;white-space:nowrap}
+@media(max-width:620px){.goal-contribution-history-row{grid-template-columns:minmax(0,1fr) auto auto;gap:6px}.goal-contribution-history-row>strong{grid-column:2}.goal-contribution-history-row .icon-action{grid-row:1}.moto-expense-row,.moto-detail-list-row{grid-template-columns:minmax(0,1fr) auto auto;gap:7px}.moto-expense-row>strong,.moto-detail-list-row>strong{grid-column:2}.moto-expense-row .icon-action,.moto-detail-list-row .icon-action{grid-row:1}.fuel-planned-record .fuel-record-main{gap:7px;padding:10px}.fuel-planned-record .fuel-record-date{font-size:9px}}
