@@ -2735,3 +2735,15 @@ button,input,select,textarea{max-width:100%}
  #app:has(.planning-financial-grid) .bonus-panel-head{align-items:flex-start}
  #app:has(.planning-financial-grid) .bonus-add-button{min-height:31px;padding:6px 8px;font-size:10px}
 }
+
+
+/* Edição de participantes nos rateios */
+.shared-person-edit{display:flex;flex-direction:column;align-items:flex-start;gap:4px;min-width:0;padding:0;border:0;background:transparent;color:var(--ink);text-align:left;cursor:pointer}
+.shared-person-edit b{font-size:12px;line-height:1.35}
+.shared-person-edit small{font-size:10px;line-height:1.45;color:var(--muted)}
+.shared-person-edit:hover b{text-decoration:underline;text-decoration-color:var(--accent);text-underline-offset:3px}
+.shared-person-edit:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:5px}
+.fuel-detail-dialog .panel-head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:18px 0 10px}
+.fuel-detail-dialog .panel-head>div{min-width:0}
+.fuel-detail-dialog .panel-head .button{flex:0 0 auto}
+@media(max-width:620px){.fuel-detail-dialog .panel-head{align-items:flex-start;flex-direction:column}.fuel-detail-dialog .panel-head .button{width:100%}.shared-person-edit{width:100%}}
