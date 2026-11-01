@@ -3164,3 +3164,27 @@ button,input,select,textarea{max-width:100%}
 
 /* PR16 — Quem me deve: hierarquia e ações integradas */
 .receivables-shared-panel{margin-top:18px}.receivables-shared-panel .panel-head{align-items:flex-start}.receivable-row{min-width:0}.receivable-row .receivable-actions .button{min-height:34px}.receivable-row .receivable-actions .button:disabled{opacity:.45;cursor:not-allowed}@media(max-width:620px){.receivables-shared-panel .panel-head{gap:8px}.receivable-row .receivable-actions{justify-content:flex-start}.receivable-row .receivable-actions .button{flex:1 1 auto}}
+
+/* Privacidade — oculta também a identificação de pessoas em Quem me deve. */
+body.privacy-hidden .receivable-row > div:first-child b,
+body.privacy-hidden .shared-person-row .shared-person-edit b {
+  filter: blur(7px);
+  user-select: none;
+  transition: filter .18s ease;
+}
+
+
+/* Navegação reorganizada por áreas funcionais */
+#tabs{display:flex;flex-direction:column;gap:17px;min-height:0;overflow:auto}
+#tabs .nav-group{margin:0}
+#tabs .nav-label{padding:0 12px 8px;font-size:9px;letter-spacing:1.35px}
+#tabs .nav-item{min-height:40px}
+#tabs .nav-icon{display:grid;place-items:center;width:20px;height:20px;flex:none;background:transparent!important;border:0!important;padding:0!important;box-shadow:none!important}
+#tabs .nav-icon svg{display:block;width:18px;height:18px}
+#tabs .nav-item.active .nav-icon{color:inherit}
+@media(max-width:620px){
+ #tabs{display:flex;flex-direction:column;gap:5px;max-height:min(65vh,560px);overflow:auto;padding:0 0 8px}
+ #tabs .nav-group{display:flex;flex-direction:column;align-items:stretch;gap:2px;padding:8px 12px 0}
+ #tabs .nav-label{display:block;padding:0 8px 5px}
+ #tabs .nav-item{width:100%;justify-content:flex-start;min-height:38px;padding:8px 10px}
+}
