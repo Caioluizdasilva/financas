@@ -2916,3 +2916,8 @@ button,input,select,textarea{max-width:100%}
   .bonus-panel .bonus-row .bonus-row-value{grid-column:2;grid-row:1;align-self:center;font-size:13px}
   .bonus-panel .bonus-row .bonus-row-actions{grid-column:1/-1;grid-row:2;justify-content:flex-end;padding-top:8px;border-top:1px solid var(--line,#383838)}
 }
+
+/* Bônus e extras: mantém o símbolo de adicionar dentro do seu próprio quadrado */
+.bonus-panel-head .bonus-add-button{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:40px;padding:7px 15px 7px 10px}
+.bonus-panel-head .bonus-add-button>span{width:25px;height:25px;display:inline-grid;place-items:center;flex:none;border:1px solid currentColor;border-radius:7px;font-size:17px;line-height:1}
+@media(max-width:600px){.bonus-panel-head .bonus-add-button{width:100%;justify-content:center}}
