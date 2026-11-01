@@ -3108,3 +3108,25 @@ button,input,select,textarea{max-width:100%}
   .fuel-detail-dialog .fuel-trip{padding:11px;align-items:flex-start}
   .fuel-detail-dialog .fuel-trip-actions{gap:4px}
 }
+
+/* Minha Moto — identidade visual e responsividade */
+.moto-summary-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:22px 0}
+.moto-summary-card{min-width:0;display:grid;gap:9px;text-align:left;padding:19px;border:1px solid var(--line);border-radius:16px;background:var(--surface);color:var(--ink);cursor:pointer;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}
+.moto-summary-card:hover{transform:translateY(-2px);border-color:var(--user-accent);box-shadow:0 12px 28px rgba(0,0,0,.08)}
+.moto-card-icon{display:grid;place-items:center;width:38px;height:38px;border-radius:12px;background:color-mix(in srgb,var(--user-accent) 17%,var(--surface));font-size:19px}
+.moto-card-label{font-size:12px;color:var(--muted);font-weight:650}
+.moto-summary-card>strong{font-size:clamp(19px,2vw,25px);letter-spacing:-.04em}
+.moto-summary-card>small{font-size:10px;color:var(--muted);line-height:1.5}
+.fuel-panel,.moto-expenses-panel,.moto-lower-grid>.panel{border-radius:18px}
+.fuel-panel .panel-head,.moto-expenses-panel .panel-head{align-items:center}
+.fuel-record{padding:2px 0}.fuel-record-main{border-radius:12px;transition:background .18s ease}.fuel-record-main:hover{background:var(--surface-soft,rgba(128,128,128,.07))}
+.fuel-planned-record .fuel-record-main{grid-template-columns:100px minmax(0,1fr) auto auto auto}
+.moto-lower-grid{align-items:stretch}.moto-lower-grid>.panel{min-width:0}
+.moto-expense-list{display:grid}.moto-expense-row{display:grid;grid-template-columns:minmax(0,1fr) auto auto auto;align-items:center;gap:12px;padding:13px 2px;border-top:1px solid var(--line)}
+.moto-expense-row>span{display:grid;gap:4px;min-width:0}.moto-expense-row small{color:var(--muted);font-size:10px}
+.moto-profile-preview{display:flex;align-items:center;gap:14px;margin:18px 0;padding:17px;border:1px solid var(--line);border-radius:15px;background:var(--surface-soft,rgba(128,128,128,.06))}
+.moto-profile-mark{display:grid;place-items:center;width:48px;height:48px;border-radius:14px;background:var(--user-accent);color:#171717;font-size:28px}
+.moto-profile-preview>div{display:grid;gap:5px}.moto-profile-preview small{color:var(--muted);font-size:11px}.moto-profile-preview b{font-size:16px}
+@media(max-width:1050px){.moto-summary-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:620px){.moto-summary-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:16px 0}.moto-summary-card{padding:13px;border-radius:13px;gap:7px}.moto-summary-card>strong{font-size:19px}.moto-summary-card>small{font-size:9px}.fuel-panel .panel-head,.moto-expenses-panel .panel-head{align-items:flex-start;flex-direction:column}.fuel-panel .panel-head>.button,.moto-expenses-panel .panel-head>.button{width:100%}.fuel-record-main,.fuel-planned-record .fuel-record-main{grid-template-columns:minmax(0,1fr) auto;gap:7px;padding:13px 4px}.fuel-record-date{grid-column:1/-1}.fuel-record-copy{grid-column:1;grid-row:2}.fuel-record-meta{grid-column:1;grid-row:3;text-align:left}.fuel-record-main>strong{grid-column:2;grid-row:2}.fuel-record-main>.icon-action{grid-row:3}.fuel-record-chevron{display:none}.moto-lower-grid{grid-template-columns:1fr}.moto-expense-row{grid-template-columns:minmax(0,1fr) auto auto;gap:7px}.moto-expense-row>strong{grid-column:2}.moto-expense-row .icon-action{width:30px;height:30px}.fuel-detail-summary{grid-template-columns:repeat(2,minmax(0,1fr))}.moto-detail-dialog,.fuel-detail-dialog{width:calc(100vw - 18px);max-width:none;max-height:calc(100dvh - 18px);padding:18px}}
+@media(prefers-reduced-motion:reduce){.moto-summary-card,.fuel-record-main{transition:none}}
