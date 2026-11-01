@@ -2916,3 +2916,7 @@ button,input,select,textarea{max-width:100%}
   .bonus-panel .bonus-row .bonus-row-value{grid-column:2;grid-row:1;align-self:center;font-size:13px}
   .bonus-panel .bonus-row .bonus-row-actions{grid-column:1/-1;grid-row:2;justify-content:flex-end;padding-top:8px;border-top:1px solid var(--line,#383838)}
 }
+
+/* Ações das viagens no detalhe do abastecimento */
+.fuel-trip-actions{display:flex;align-items:center;gap:6px;flex:none}
+.fuel-trip-actions .icon-button{width:34px;height:34px;display:grid;place-items:center}
