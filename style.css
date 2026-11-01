@@ -3188,3 +3188,61 @@ body.privacy-hidden .shared-person-row .shared-person-edit b {
  #tabs .nav-label{display:block;padding:0 8px 5px}
  #tabs .nav-item{width:100%;justify-content:flex-start;min-height:38px;padding:8px 10px}
 }
+
+
+/* Visão geral — painel de recursos e identidade bancária simplificada */
+.bank-movement-brand{
+  display:grid;
+  place-items:center;
+  width:40px;
+  height:40px;
+  flex:0 0 40px;
+  border:1px solid color-mix(in srgb,var(--bank-color) 30%,var(--line));
+  border-radius:13px;
+  background:color-mix(in srgb,var(--bank-color) 13%,var(--surface));
+  color:var(--bank-color);
+  font-size:17px;
+  font-weight:850;
+  letter-spacing:-.04em;
+  line-height:1;
+  text-transform:uppercase;
+}
+.bank-movement-brand i{display:none!important}
+.dashboard-feature-section{margin:26px 0}
+.dashboard-feature-section .bank-section-intro{margin:0 0 13px}
+.dashboard-feature-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:13px;
+}
+.dashboard-feature-card{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  min-width:0;
+  min-height:190px;
+  padding:18px;
+  border:1px solid var(--line);
+  border-radius:17px;
+  background:var(--surface);
+  box-shadow:0 8px 24px rgba(0,0,0,.035);
+}
+.dashboard-feature-top{display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%;margin-bottom:18px}
+.dashboard-feature-icon{display:grid;place-items:center;width:35px;height:35px;border-radius:11px;background:color-mix(in srgb,var(--user-accent) 16%,var(--surface));color:var(--ink);font-size:19px;font-weight:800}
+.dashboard-feature-tag{color:var(--muted);font-size:8px;font-weight:850;letter-spacing:.11em}
+.dashboard-feature-card>b{font-size:clamp(19px,2vw,25px);font-weight:850;letter-spacing:-.045em;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.dashboard-feature-card>b small{font-size:10px;font-weight:650;color:var(--muted);letter-spacing:0}
+.dashboard-feature-card>p{margin:6px 0 17px;color:var(--muted);font-size:10px;line-height:1.5}
+.dashboard-feature-card>button{display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%;margin-top:auto;padding:10px 0 0;border:0;border-top:1px solid var(--line);background:transparent;color:var(--ink);font-size:10px;font-weight:750;text-align:left;cursor:pointer}
+.dashboard-feature-card>button span{color:var(--user-accent);font-size:15px}
+@media(max-width:1050px){.dashboard-feature-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:620px){
+ .dashboard-feature-section{margin:20px 0}
+ .dashboard-feature-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+ .dashboard-feature-card{min-height:174px;padding:13px;border-radius:14px}
+ .dashboard-feature-top{margin-bottom:13px}
+ .dashboard-feature-tag{font-size:7px;letter-spacing:.07em}
+ .dashboard-feature-card>b{font-size:18px}
+ .dashboard-feature-card>p{font-size:9px}
+ .dashboard-feature-card>button{font-size:9px}
+}
