@@ -3160,3 +3160,7 @@ button,input,select,textarea{max-width:100%}
  .receivable-actions{grid-column:1/-1}
  .shared-person-row{grid-template-columns:minmax(0,1fr) auto;gap:8px}
 }
+
+
+/* PR16 — Quem me deve: hierarquia e ações integradas */
+.receivables-shared-panel{margin-top:18px}.receivables-shared-panel .panel-head{align-items:flex-start}.receivable-row{min-width:0}.receivable-row .receivable-actions .button{min-height:34px}.receivable-row .receivable-actions .button:disabled{opacity:.45;cursor:not-allowed}@media(max-width:620px){.receivables-shared-panel .panel-head{gap:8px}.receivable-row .receivable-actions{justify-content:flex-start}.receivable-row .receivable-actions .button{flex:1 1 auto}}
