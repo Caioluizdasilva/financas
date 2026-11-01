@@ -2679,3 +2679,31 @@ button,input,select,textarea{max-width:100%}
 @media(max-width:1050px){#app:has(.planning-financial-grid)>.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}#app:has(.planning-financial-grid)>.page-head{align-items:flex-start;flex-direction:column}#app:has(.planning-financial-grid)>.page-head>div:last-child{justify-content:flex-start}}
 @media(max-width:760px){#app:has(.planning-financial-grid) .planning-financial-grid{grid-template-columns:minmax(0,1fr)}#app:has(.planning-financial-grid) .shared-expense-list{grid-template-columns:minmax(0,1fr)}#app:has(.planning-financial-grid) .planning-financial-grid>.panel,#app:has(.planning-financial-grid) .shared-expenses-panel{padding:16px}#app:has(.planning-financial-grid) .section-heading{align-items:flex-start;flex-direction:column;gap:5px}}
 @media(max-width:480px){#app:has(.planning-financial-grid)>.metrics{gap:8px}#app:has(.planning-financial-grid)>.metrics>.metric{min-height:112px;padding:13px;border-radius:15px}#app:has(.planning-financial-grid)>.metrics>.metric>strong{font-size:18px;margin:12px 0 6px}#app:has(.planning-financial-grid) .metric-tooltip{position:fixed;top:auto;left:12px;right:12px;bottom:14px;width:auto;max-width:none;max-height:55vh;z-index:1000}#app:has(.planning-financial-grid) .planning-financial-grid>.panel,#app:has(.planning-financial-grid) .shared-expenses-panel{padding:14px;border-radius:15px}#app:has(.planning-financial-grid) .panel-total-under-title b{font-size:20px}#app:has(.planning-financial-grid) .planning-financial-grid .inline-number{min-width:90px;width:42%;font-size:12px}#app:has(.planning-financial-grid) .shared-expense-main{grid-template-columns:minmax(0,1fr) auto 12px;gap:8px}}
+
+
+/* Modal de detalhes das despesas compartilhadas */
+.shared-expense-dialog{width:min(680px,calc(100vw - 28px));max-width:680px;max-height:min(88vh,820px);padding:0;overflow:auto;border:1px solid var(--line);border-radius:22px;background:var(--surface);color:var(--text);box-shadow:0 28px 90px rgba(0,0,0,.32)}
+.shared-expense-dialog::backdrop{background:rgba(8,12,9,.64);backdrop-filter:blur(5px)}
+.shared-expense-dialog .dialog-head{position:sticky;top:0;z-index:2;display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin:0;padding:22px 24px 18px;border-bottom:1px solid var(--line);background:var(--surface)}
+.shared-expense-dialog .dialog-head .eyebrow{margin:0 0 6px;font-size:9px;font-weight:800;letter-spacing:.15em;color:var(--muted)}
+.shared-expense-dialog .dialog-head h2{margin:0;font-size:clamp(20px,3vw,27px);font-weight:850;letter-spacing:-.055em;line-height:1.12}
+.shared-expense-dialog .dialog-head small{display:block;margin-top:7px;font-size:10px;color:var(--muted)}
+.shared-expense-dialog .dialog-head .button{width:34px;height:34px;min-width:34px;padding:0;border-radius:11px;font-size:20px}
+.shared-expense-dialog .fuel-detail-summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin:19px 22px;padding:0;background:transparent}
+.shared-expense-dialog .fuel-detail-summary>div{display:flex;flex-direction:column;justify-content:space-between;gap:10px;min-width:0;min-height:91px;padding:13px;border:1px solid var(--line);border-radius:14px;background:color-mix(in srgb,var(--surface) 90%,var(--user-accent) 10%)}
+.shared-expense-dialog .fuel-detail-summary small{font-size:9px;font-weight:750;letter-spacing:.055em;text-transform:uppercase;color:var(--muted)}
+.shared-expense-dialog .fuel-detail-summary b{overflow-wrap:anywhere;font-size:clamp(15px,2vw,20px);font-weight:850;letter-spacing:-.045em;font-variant-numeric:tabular-nums}
+.shared-expense-dialog .shared-people-list{display:grid;gap:8px;margin:0 22px}
+.shared-expense-dialog .shared-person-row{display:grid;grid-template-columns:minmax(0,1fr) auto auto;align-items:center;gap:13px;min-width:0;padding:14px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+.shared-expense-dialog .shared-person-row>div{display:grid;gap:5px;min-width:0}
+.shared-expense-dialog .shared-person-row>div b{overflow-wrap:anywhere;font-size:12px;font-weight:800}
+.shared-expense-dialog .shared-person-row>div small{font-size:10px;line-height:1.45;color:var(--muted)}
+.shared-expense-dialog .shared-person-row>span{padding:5px 8px;border-radius:30px;background:color-mix(in srgb,var(--user-accent) 12%,var(--surface));font-size:9px;font-weight:800;white-space:nowrap}
+.shared-expense-dialog .shared-person-row .button{min-height:31px;padding:6px 10px;border-radius:9px;font-size:10px;white-space:nowrap}
+.shared-expense-dialog>.micro{margin:14px 23px 18px;padding:11px 13px;border-left:2px solid var(--user-accent);border-radius:0 9px 9px 0;background:color-mix(in srgb,var(--user-accent) 6%,var(--surface));font-size:10px;line-height:1.6;color:var(--muted)}
+.shared-expense-dialog .dialog-actions{position:sticky;bottom:0;display:flex;justify-content:flex-end;flex-wrap:wrap;gap:8px;margin:0;padding:15px 22px;border-top:1px solid var(--line);background:var(--surface)}
+.shared-expense-dialog .dialog-actions .button{min-height:36px;padding:8px 13px;border-radius:10px;font-size:10px}
+.shared-expense-dialog .dialog-actions .danger{margin-right:auto}
+.moto-render-error{padding:22px;border-color:color-mix(in srgb,#c87936 35%,var(--line))}
+.moto-render-error p{font-size:12px;line-height:1.6;color:var(--muted)}
+@media(max-width:620px){.shared-expense-dialog{width:calc(100vw - 18px);max-height:92vh;border-radius:17px}.shared-expense-dialog .dialog-head{padding:17px 16px 14px}.shared-expense-dialog .fuel-detail-summary{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:14px 14px}.shared-expense-dialog .fuel-detail-summary>div{min-height:78px;padding:11px}.shared-expense-dialog .shared-people-list{margin:0 14px}.shared-expense-dialog .shared-person-row{grid-template-columns:minmax(0,1fr) auto;gap:9px;padding:11px}.shared-expense-dialog .shared-person-row>span{justify-self:start;grid-column:1}.shared-expense-dialog .shared-person-row .button{grid-column:2;grid-row:1/3}.shared-expense-dialog>.micro{margin:12px 14px}.shared-expense-dialog .dialog-actions{padding:12px 14px}.shared-expense-dialog .dialog-actions .button{flex:1}.shared-expense-dialog .dialog-actions .danger{margin-right:0}}
