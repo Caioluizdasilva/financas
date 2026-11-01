@@ -3108,3 +3108,24 @@ button,input,select,textarea{max-width:100%}
   .fuel-detail-dialog .fuel-trip{padding:11px;align-items:flex-start}
   .fuel-detail-dialog .fuel-trip-actions{gap:4px}
 }
+
+/* Despesas compartilhadas: estados de recebimento e acompanhamento individual */
+.shared-month-people{display:grid;gap:0;padding:0 16px 12px}
+.shared-month-person{display:grid;grid-template-columns:minmax(90px,1fr) auto auto auto;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--border-color,rgba(255,255,255,.08))}
+.shared-month-person-name{font-size:12px;font-weight:700;min-width:0;overflow-wrap:anywhere}
+.shared-month-person-values{font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.shared-status{display:inline-flex;align-items:center;gap:6px;width:max-content;padding:5px 9px;border-radius:999px;font-size:10px;font-weight:800;white-space:nowrap}
+.shared-status i{width:7px;height:7px;border-radius:50%;background:currentColor}
+.shared-status.status-pending{color:#ff7777;background:rgba(239,68,68,.13)}
+.shared-status.status-partial{color:#f2bd58;background:rgba(234,179,8,.14)}
+.shared-status.status-paid{color:#55cf91;background:rgba(34,197,94,.13)}
+.shared-month-receive{border:1px solid var(--border-color,rgba(255,255,255,.12));border-radius:9px;padding:6px 9px;background:transparent;color:var(--text);font:inherit;font-size:10px;font-weight:750;white-space:nowrap;cursor:pointer}
+.shared-month-receive:not(:disabled):hover{border-color:var(--user-accent);color:var(--user-accent)}
+.shared-month-receive:disabled{opacity:.55;cursor:default}
+.shared-detail-add-person{display:flex;justify-content:flex-end;padding:0 20px 14px}
+.shared-person-row>.shared-status{align-self:center}
+.bonus-add-button{gap:7px}
+.bonus-add-icon{display:inline-grid;place-items:center;width:23px;height:23px;border:1px solid currentColor;border-radius:7px;font-size:16px;line-height:1}
+.bonus-add-label{display:inline}
+@media(min-width:621px){.bonus-add-button .bonus-add-label{display:none}.bonus-add-button{width:38px;min-width:38px;height:38px;padding:0;justify-content:center}.bonus-add-icon{border:0;width:auto;height:auto;font-size:21px}}
+@media(max-width:620px){.shared-month-people{padding:0 12px 10px}.shared-month-person{grid-template-columns:minmax(0,1fr) auto;gap:7px 10px}.shared-month-person-name{grid-column:1}.shared-month-person .shared-status{grid-column:2;grid-row:1}.shared-month-person-values{grid-column:1;grid-row:2}.shared-month-receive{grid-column:2;grid-row:2}.shared-detail-add-person{padding:0 14px 12px}.shared-expense-actions{flex-wrap:wrap}.shared-expense-actions .button{font-size:11px}.bonus-add-button{width:auto;min-width:unset;padding:8px 12px}.bonus-add-button .bonus-add-label{display:inline}}
