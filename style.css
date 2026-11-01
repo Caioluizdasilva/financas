@@ -2550,3 +2550,66 @@ button,input,select,textarea{max-width:100%}
 @media(min-width:821px){.page:has(.planning-financial-grid) .planning-financial-grid{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;align-items:start!important;gap:18px!important}.page:has(.planning-financial-grid) .planning-financial-grid>.panel{width:100%;min-width:0}}
 @media(max-width:820px){.shared-person-editor-fields{grid-template-columns:minmax(0,1fr)}}
 @media(max-width:520px){.planning-financial-grid .bonus-row.form-row{grid-template-columns:minmax(0,1fr) auto 26px 26px;gap:5px;padding:10px 0}.planning-financial-grid .bonus-row .icon-action{width:25px;height:25px;min-width:25px}.planning-financial-grid .bonus-row-info>b{font-size:11px}.planning-financial-grid .bonus-row>strong{font-size:11px}.shared-person-editor-head{align-items:flex-start;flex-wrap:wrap}.shared-person-editor-head .button{min-height:33px;padding:7px 10px;font-size:10px}}
+
+
+/* Redesign da experiência de planejamento mensal */
+#app:has(.planning-financial-grid){--month-card-radius:18px}
+#app:has(.planning-financial-grid)>.page-head{align-items:flex-start;margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid var(--line)}
+#app:has(.planning-financial-grid)>.page-head>div{max-width:680px}
+#app:has(.planning-financial-grid)>.page-head h1{font-size:clamp(27px,3vw,38px);letter-spacing:-.045em;line-height:1.08}
+#app:has(.planning-financial-grid)>.page-head .lede{max-width:52ch;font-size:12px;line-height:1.65}
+#app:has(.planning-financial-grid)>.page-head>div:last-child{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:7px}
+#app:has(.planning-financial-grid)>.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:0 0 20px}
+#app:has(.planning-financial-grid)>.metrics>.metric{position:relative;min-width:0;min-height:122px;padding:17px 17px 15px;border:1px solid var(--line);border-radius:var(--month-card-radius);background:var(--surface);box-shadow:0 7px 24px rgba(25,30,20,.035);transition:border-color .18s,transform .18s,box-shadow .18s}
+#app:has(.planning-financial-grid)>.metrics>.metric:hover,#app:has(.planning-financial-grid)>.metrics>.metric.metric-detail-open{transform:translateY(-2px);border-color:color-mix(in srgb,var(--user-accent) 58%,var(--line));box-shadow:0 12px 30px rgba(25,30,20,.075)}
+#app:has(.planning-financial-grid)>.metrics>.metric>span{font-size:10px;font-weight:750;letter-spacing:.045em;text-transform:uppercase;color:var(--muted)}
+#app:has(.planning-financial-grid)>.metrics>.metric>strong{display:block;margin:12px 0 6px;font-size:clamp(19px,2vw,25px);font-weight:800;letter-spacing:-.045em;line-height:1.15;font-variant-numeric:tabular-nums}
+#app:has(.planning-financial-grid)>.metrics>.metric>small{display:block;font-size:10px;line-height:1.45;color:var(--muted)}
+#app:has(.planning-financial-grid) .metric.has-metric-tooltip{cursor:pointer}
+#app:has(.planning-financial-grid) .metric-tooltip{top:calc(100% + 9px);width:min(350px,calc(100vw - 32px));max-height:min(360px,55vh);overflow:auto;border-radius:14px;padding:15px 16px;box-shadow:0 18px 46px rgba(0,0,0,.18)}
+#app:has(.planning-financial-grid) .metric.has-metric-tooltip:hover .metric-tooltip,#app:has(.planning-financial-grid) .metric.has-metric-tooltip.metric-detail-open .metric-tooltip,#app:has(.planning-financial-grid) .metric.has-metric-tooltip:focus .metric-tooltip{display:block;opacity:1;visibility:visible;transform:translateY(0);pointer-events:auto}
+#app:has(.planning-financial-grid) .planning-financial-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start;gap:16px;margin:0 0 18px}
+#app:has(.planning-financial-grid) .planning-financial-grid>.panel{min-width:0;padding:clamp(17px,2vw,23px);border:1px solid var(--line);border-radius:var(--month-card-radius);background:var(--surface);box-shadow:0 7px 24px rgba(25,30,20,.035)}
+#app:has(.planning-financial-grid) .planning-financial-grid .panel-head{align-items:flex-start;margin-bottom:14px}
+#app:has(.planning-financial-grid) .planning-financial-grid .panel-head h2{font-size:17px;font-weight:800;letter-spacing:-.035em}
+#app:has(.planning-financial-grid) .planning-financial-grid .panel-head p{font-size:10px;line-height:1.55}
+#app:has(.planning-financial-grid) .planning-financial-grid .panel-total-under-title{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 14px;padding:13px 14px;border:1px solid color-mix(in srgb,var(--user-accent) 24%,var(--line));border-radius:12px;background:color-mix(in srgb,var(--user-accent) 7%,var(--surface))}
+#app:has(.planning-financial-grid) .planning-financial-grid .panel-total-under-title span{font-size:10px;font-weight:700;color:var(--muted)}
+#app:has(.planning-financial-grid) .planning-financial-grid .panel-total-under-title b{font-size:21px;letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+#app:has(.planning-financial-grid) .planning-financial-grid .form-row{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:49px;padding:9px 0;border-bottom:1px solid var(--line)}
+#app:has(.planning-financial-grid) .planning-financial-grid .form-row>label{font-size:11px;font-weight:650}
+#app:has(.planning-financial-grid) .planning-financial-grid .inline-number{width:145px;max-width:48%;min-width:95px;text-align:right;font-variant-numeric:tabular-nums}
+#app:has(.planning-financial-grid) .bonus-panel{margin-top:17px}
+#app:has(.planning-financial-grid) .shared-expenses-panel{margin:0 0 20px;padding:19px 21px;border:1px solid var(--line);border-radius:var(--month-card-radius);background:var(--surface);box-shadow:0 7px 24px rgba(25,30,20,.035)}
+#app:has(.planning-financial-grid) .section-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:27px 0 13px;padding:0 0 12px;border-bottom:1px solid var(--line)}
+#app:has(.planning-financial-grid) .section-heading h2{font-size:20px;font-weight:800;letter-spacing:-.04em}
+#app:has(.planning-financial-grid) .section-heading>span{font-size:10px;color:var(--muted)}
+#app:has(.planning-financial-grid)>.panel,#app:has(.planning-financial-grid)>.grid2>.panel{min-width:0;border-radius:var(--month-card-radius);border:1px solid var(--line);box-shadow:0 7px 24px rgba(25,30,20,.03)}
+#app:has(.planning-financial-grid) .date-filter-panel{margin-top:18px;padding:18px;border:1px solid var(--line);border-radius:var(--month-card-radius);background:var(--surface)}
+#app:has(.planning-financial-grid) .table-wrap{border-radius:12px}
+#app:has(.planning-financial-grid) .table-wrap table{min-width:700px}
+#app:has(.planning-financial-grid) .table-wrap th{font-size:9px;letter-spacing:.06em;text-transform:uppercase}
+#app:has(.planning-financial-grid) .table-wrap td{padding-top:11px;padding-bottom:11px}
+@media(max-width:1000px){
+ #app:has(.planning-financial-grid)>.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}
+ #app:has(.planning-financial-grid)>.page-head{flex-direction:column;gap:15px}
+ #app:has(.planning-financial-grid)>.page-head>div:last-child{justify-content:flex-start}
+}
+@media(max-width:760px){
+ #app:has(.planning-financial-grid) .planning-financial-grid{grid-template-columns:minmax(0,1fr)}
+ #app:has(.planning-financial-grid) .planning-financial-grid>.panel{padding:16px}
+ #app:has(.planning-financial-grid) .shared-expenses-panel{padding:15px}
+ #app:has(.planning-financial-grid) .section-heading{align-items:flex-start;flex-direction:column;gap:5px}
+}
+@media(max-width:480px){
+ #app:has(.planning-financial-grid)>.metrics{gap:8px}
+ #app:has(.planning-financial-grid)>.metrics>.metric{min-height:108px;padding:12px;border-radius:14px}
+ #app:has(.planning-financial-grid)>.metrics>.metric>strong{font-size:17px;margin:10px 0 5px}
+ #app:has(.planning-financial-grid)>.metrics>.metric>span{font-size:9px}
+ #app:has(.planning-financial-grid) .metric-tooltip{position:fixed;top:auto;left:12px;right:12px;bottom:16px;width:auto;max-width:none;max-height:55vh;z-index:1000}
+ #app:has(.planning-financial-grid) .planning-financial-grid>.panel{padding:14px;border-radius:14px}
+ #app:has(.planning-financial-grid) .planning-financial-grid .panel-total-under-title b{font-size:19px}
+ #app:has(.planning-financial-grid) .planning-financial-grid .inline-number{min-width:90px;width:42%;font-size:12px}
+ #app:has(.planning-financial-grid) .shared-expenses-panel>.panel-head{flex-wrap:wrap}
+}
+@media(prefers-reduced-motion:reduce){#app:has(.planning-financial-grid) *{transition:none!important}}
