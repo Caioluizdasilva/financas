@@ -2406,3 +2406,28 @@ button,input,select,textarea{max-width:100%}
  .planning-financial-grid .goal-contribution-row .button{padding:5px 4px}
  .shared-expenses-panel{padding:14px!important}
 }
+
+/* Correção estrutural do planejamento mensal */
+@media(min-width:821px){
+  .page:has(.planning-financial-grid) .planning-financial-grid{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+    align-items:start;
+    gap:16px;
+  }
+  .page:has(.planning-financial-grid) .planning-financial-grid>.panel{width:100%;min-width:0}
+  .page:has(.planning-financial-grid)>.metrics{grid-template-columns:repeat(4,minmax(0,1fr))}
+}
+.page:has(.planning-financial-grid) .metric.red strong{color:var(--red)}
+.page:has(.planning-financial-grid) .metric.green strong{color:var(--green)}
+.shared-expenses-panel>.panel-head{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.shared-expenses-panel>.panel-head>div{min-width:0}
+.shared-expenses-panel>.panel-head>.button{flex:0 0 auto;white-space:nowrap}
+@media(max-width:820px){
+  .page:has(.planning-financial-grid) .planning-financial-grid{display:grid;grid-template-columns:1fr!important}
+  .page:has(.planning-financial-grid)>.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:480px){
+  .shared-expenses-panel>.panel-head{align-items:flex-start}
+  .shared-expenses-panel>.panel-head>.button{min-height:34px;padding:7px 9px;font-size:10px}
+}
