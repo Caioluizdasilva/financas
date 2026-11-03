@@ -1,4 +1,4 @@
-const CACHE='financas-v65-network-fresh';
+const CACHE='financas-v66-installment-payment';
 const FILES=['./','index.html','style.css','app.js','auth.js','seed.js','manifest.webmanifest'];
 self.addEventListener('install',event=>event.waitUntil(
   caches.open(CACHE)
