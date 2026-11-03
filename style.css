@@ -3188,3 +3188,31 @@ body.privacy-hidden .shared-person-row .shared-person-edit b {
  #tabs .nav-label{display:block;padding:0 8px 5px}
  #tabs .nav-item{width:100%;justify-content:flex-start;min-height:38px;padding:8px 10px}
 }
+
+
+/* Recebíveis — alternância entre pendentes e quitados */
+.receivables-tabs{
+  display:flex;align-items:center;gap:8px;margin:22px 0 14px;
+  padding:5px;border:1px solid var(--line);border-radius:14px;
+  background:var(--surface-soft,rgba(128,128,128,.06));width:max-content;max-width:100%;
+}
+.receivables-tabs button{
+  display:inline-flex;align-items:center;gap:9px;min-height:40px;padding:9px 15px;
+  border:1px solid transparent;border-radius:10px;background:transparent;
+  color:var(--muted);font:inherit;font-size:12px;font-weight:750;cursor:pointer;
+}
+.receivables-tabs button.is-active{
+  border-color:var(--line);background:var(--surface);color:var(--ink);
+  box-shadow:0 3px 10px rgba(0,0,0,.06);
+}
+.receivables-tabs button span{
+  display:grid;place-items:center;min-width:21px;height:21px;padding:0 6px;
+  border-radius:99px;background:var(--surface-soft,rgba(128,128,128,.1));
+  font-size:10px;font-variant-numeric:tabular-nums;
+}
+.receivables-tabs button.is-active span{background:var(--user-accent);color:#171717}
+.receivables-shared-panel .receivable-list{display:grid;gap:9px}
+@media(max-width:620px){
+  .receivables-tabs{display:grid;grid-template-columns:1fr 1fr;width:100%}
+  .receivables-tabs button{justify-content:center;padding:9px 8px;font-size:11px}
+}
