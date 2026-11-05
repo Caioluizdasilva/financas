@@ -3492,3 +3492,6 @@ button[title*="Adicionar"] > svg{
     white-space:normal;
   }
 }
+
+/* Controle de uso e empréstimos da moto */
+.moto-usage-panel{margin-top:18px}.moto-usage-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:12px 0 16px}.moto-usage-summary>div{display:flex;flex-direction:column;gap:5px;padding:12px;border:1px solid var(--line);border-radius:11px;min-width:0}.moto-usage-summary small{font-size:10px;color:var(--muted)}.moto-usage-summary b{font-size:17px;font-variant-numeric:tabular-nums}.moto-use-list{display:flex;flex-direction:column}.moto-use-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 0;border-top:1px solid var(--line)}.moto-use-copy{display:flex;flex-direction:column;gap:4px;min-width:0}.moto-use-copy b{font-size:13px}.moto-use-copy small{font-size:10px;color:var(--muted);overflow-wrap:anywhere}.moto-use-actions{display:flex;align-items:center;gap:6px;flex:0 0 auto}@media(max-width:620px){.moto-usage-summary{grid-template-columns:1fr 1fr}.moto-usage-summary>div:last-child{grid-column:1/-1}.moto-use-row{align-items:flex-start}.moto-use-actions{gap:3px}}
