@@ -54,14 +54,14 @@ function clearAllMonths(){if(!confirm('Zerar os lançamentos de todos os meses? 
 
 function monthlyStatementRows(k){
  const m=M(k),c=calc(k),rows=[],bankName=id=>id==='__cash__'?'Dinheiro em espécie':(S.banks.find(b=>b.id===id)||{}).nome||'Não informado';
- const add=(date,direction,description,category,account,status,value,ledger='financeiro')=>rows.push({date:date||k+'-01',direction,description:description||'Movimentação',category:category||'',account:account||'',status,value:Math.abs(+value||0),ledger});
- if((+m.salary||0)>0)add(k+'-01','Entrada','Salário','Renda','', 'Previsto',m.salary);
+ const add=(date,direction,description,category,account,status,value,ledger='financeiro',includeInBalance=true)=>rows.push({date:date||k+'-01',direction,description:description||'Movimentação',category:category||'',account:account||'',status,value:Math.abs(+value||0),ledger,includeInBalance});
+ if((+m.salary||0)>0)add(k+'-01','Entrada','Salário (previsão)','Renda','', 'Previsto',m.salary,'financeiro',false);
  const va=+m.valeAlimentacao||0,vr=+m.valeRefeicao||0;
  if(va>0)add(k+'-01','Benefício','Crédito de vale-alimentação','Benefício alimentação','Flash','Disponibilizado',va,'alimentacao');
  if(vr>0)add(k+'-01','Benefício','Crédito de vale-refeição','Benefício refeição','VR','Disponibilizado',vr,'alimentacao');
  (c.movs||[]).forEach(x=>{
   const transfer=x.tipo==='Transferência'||/resgate\\s*[-–—]?\\s*vale alimenta[cç][aã]o/i.test(x.nome||'');
-  add(x.data,transfer?'Transferência':'Entrada',x.nome,x.tipo,bankName(x.bancoId),transfer?'Transferido':'Recebido',x.valor,transfer?'transferencia':'financeiro');
+  add(x.data,transfer?'Transferência':'Entrada',x.nome,x.tipo,bankName(x.bancoId),transfer?'Transferido':'Recebido',x.valor,transfer?'transferencia':'financeiro',x.includeInBalance!==false);
  });
  (c.legacy||[]).forEach(x=>add(x.data,'Entrada',x.descricao||'Bônus ou extra','Bônus e extras','', 'Recebido',x.valor));
  [['gastos','Despesa'],['fixos','Conta fixa'],['parcelas','Parcela']].forEach(([key,label])=>(m[key]||[]).forEach(x=>{
@@ -76,7 +76,7 @@ function monthlyStatementRows(k){
 function statementTotals(rows){
  let financialBalance=0,received=0,paid=0,pending=0,benefitCredit=0,benefitSpent=0;
  rows.forEach(r=>{
-  const actual=r.status==='Pago'||r.status==='Recebido'||r.status==='Disponibilizado';
+  const actual=(r.status==='Pago'||r.status==='Recebido'||r.status==='Disponibilizado')&&r.includeInBalance!==false;
   if(r.ledger==='alimentacao'){
    if(r.direction==='Benefício'&&actual)benefitCredit+=r.value;
    else if(r.direction==='Saída'&&r.status==='Pago')benefitSpent+=r.value;
@@ -97,7 +97,7 @@ function exportMonthlyStatementPDF(k){
  if(!w){appToast('Permita a abertura de janelas para gerar o PDF.','error');return}
  let financialBalance=0,benefitBalance=0;
  const body=rows.map(r=>{
-  const actual=r.status==='Pago'||r.status==='Recebido'||r.status==='Disponibilizado';
+  const actual=(r.status==='Pago'||r.status==='Recebido'||r.status==='Disponibilizado')&&r.includeInBalance!==false;
   if(r.ledger==='alimentacao'&&actual){
    if(r.direction==='Benefício')benefitBalance+=r.value;
    else if(r.direction==='Saída')benefitBalance-=r.value;
@@ -127,7 +127,7 @@ async function exportMonthlyStatementXlsx(k){
   let financialBalance=0,benefitBalance=0;
   const detail=[['Data','Tipo','Descrição','Categoria / origem','Conta / forma de pagamento','Situação','Valor (R$)','Saldo financeiro (R$)','Saldo alimentação (R$)']];
   rows.forEach(r=>{
-   const actual=r.status==='Pago'||r.status==='Recebido'||r.status==='Disponibilizado';
+   const actual=(r.status==='Pago'||r.status==='Recebido'||r.status==='Disponibilizado')&&r.includeInBalance!==false;
    const signed=r.direction==='Entrada'||r.direction==='Benefício'?r.value:r.direction==='Saída'?-r.value:r.value;
    if(actual&&r.ledger==='financeiro'){if(r.direction==='Entrada')financialBalance+=r.value;else if(r.direction==='Saída')financialBalance-=r.value}
    if(actual&&r.ledger==='alimentacao'){if(r.direction==='Benefício')benefitBalance+=r.value;else if(r.direction==='Saída')benefitBalance-=r.value}
