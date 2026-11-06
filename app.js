@@ -54,33 +54,63 @@ function clearAllMonths(){if(!confirm('Zerar os lançamentos de todos os meses? 
 
 function monthlyStatementRows(k){
  const m=M(k),c=calc(k),rows=[],bankName=id=>id==='__cash__'?'Dinheiro em espécie':(S.banks.find(b=>b.id===id)||{}).nome||'Não informado';
- const add=(date,direction,description,category,account,status,value)=>rows.push({date:date||k+'-01',direction,description:description||'Movimentação',category:category||'',account:account||'',status,value:Math.abs(+value||0)});
+ const add=(date,direction,description,category,account,status,value,ledger='financeiro')=>rows.push({date:date||k+'-01',direction,description:description||'Movimentação',category:category||'',account:account||'',status,value:Math.abs(+value||0),ledger});
  if((+m.salary||0)>0)add(k+'-01','Entrada','Salário','Renda','', 'Previsto',m.salary);
- (c.movs||[]).forEach(x=>add(x.data,'Entrada',x.nome,x.tipo,bankName(x.bancoId),x.tipo==='Reembolso de despesa compartilhada'?'Recebido':'Recebido',x.valor));
+ const va=+m.valeAlimentacao||0,vr=+m.valeRefeicao||0;
+ if(va>0)add(k+'-01','Benefício','Crédito de vale-alimentação','Benefício alimentação','Flash','Disponibilizado',va,'alimentacao');
+ if(vr>0)add(k+'-01','Benefício','Crédito de vale-refeição','Benefício refeição','VR','Disponibilizado',vr,'alimentacao');
+ (c.movs||[]).forEach(x=>{
+  const transfer=x.tipo==='Transferência'||/resgate\\s*[-–—]?\\s*vale alimenta[cç][aã]o/i.test(x.nome||'');
+  add(x.data,transfer?'Transferência':'Entrada',x.nome,x.tipo,bankName(x.bancoId),transfer?'Transferido':'Recebido',x.valor,transfer?'transferencia':'financeiro');
+ });
  (c.legacy||[]).forEach(x=>add(x.data,'Entrada',x.descricao||'Bônus ou extra','Bônus e extras','', 'Recebido',x.valor));
  [['gastos','Despesa'],['fixos','Conta fixa'],['parcelas','Parcela']].forEach(([key,label])=>(m[key]||[]).forEach(x=>{
   const day=String(Math.max(1,Math.min(31,+x.dia||1))).padStart(2,'0');
-  add(k+'-'+day,'Saída',x.nome,label+' · '+(x.cat||'Sem categoria'),(x.tipo||'')+(x.bancoId?' · '+bankName(x.bancoId):''),x.pago?'Pago':'Pendente',x.valor);
+  const ledger=x.tipo==='Alimentação / Refeição'?'alimentacao':'financeiro';
+  add(k+'-'+day,'Saída',x.nome,label+' · '+(x.cat||'Sem categoria'),(x.tipo||'')+(x.bancoId?' · '+bankName(x.bancoId):''),x.pago?'Pago':'Pendente',x.valor,ledger);
  }));
  (m.despesasCompartilhadas||[]).forEach(x=>add(x.data,'Saída',x.nome,'Despesa compartilhada',bankName(x.bancoId),'Pago',x.minhaParte));
- return rows.sort((a,b)=>a.date.localeCompare(b.date)||(a.direction==='Entrada'?-1:1));
+ const priority={Benefício:0,Entrada:1,Transferência:2,Saída:3};
+ return rows.sort((a,b)=>a.date.localeCompare(b.date)||(priority[a.direction]??4)-(priority[b.direction]??4));
+}
+function statementTotals(rows){
+ let financialBalance=0,received=0,paid=0,pending=0,benefitCredit=0,benefitSpent=0;
+ rows.forEach(r=>{
+  const actual=r.status==='Pago'||r.status==='Recebido'||r.status==='Disponibilizado';
+  if(r.ledger==='alimentacao'){
+   if(r.direction==='Benefício'&&actual)benefitCredit+=r.value;
+   else if(r.direction==='Saída'&&r.status==='Pago')benefitSpent+=r.value;
+  }else if(r.ledger==='financeiro'&&actual){
+   if(r.direction==='Entrada'){financialBalance+=r.value;received+=r.value}
+   else if(r.direction==='Saída'){financialBalance-=r.value;paid+=r.value}
+  }
+  if(r.direction==='Saída'&&r.status==='Pendente')pending+=r.value;
+ });
+ return{financialBalance,received,paid,pending,benefitCredit,benefitSpent,benefitBalance:benefitCredit-benefitSpent};
 }
 function statementDateLabel(value){
  const d=new Date(String(value||'')+'T12:00:00');
  return Number.isNaN(d.getTime())?String(value||''):d.toLocaleDateString('pt-BR');
 }
 function exportMonthlyStatementPDF(k){
- const rows=monthlyStatementRows(k),month=full(k),w=window.open('','_blank');
+ const rows=monthlyStatementRows(k),month=full(k),totals=statementTotals(rows),w=window.open('','_blank');
  if(!w){appToast('Permita a abertura de janelas para gerar o PDF.','error');return}
- let balance=0,received=0,paid=0,pending=0;
+ let financialBalance=0,benefitBalance=0;
  const body=rows.map(r=>{
-  const actual=r.status==='Pago'||r.status==='Recebido';
-  const amount=r.direction==='Entrada'?r.value:-r.value;
-  if(actual){balance+=amount;if(r.direction==='Entrada')received+=r.value;else paid+=r.value}
-  else if(r.direction==='Saída')pending+=r.value;
-  return '<tr><td>'+statementDateLabel(r.date)+'</td><td><span class="'+(r.direction==='Entrada'?'in':'out')+'">'+r.direction+'</span></td><td>'+esc(r.description)+'</td><td>'+esc(r.category)+'</td><td>'+esc(r.account||'—')+'</td><td>'+r.status+'</td><td class="money '+(r.direction==='Entrada'?'in':'out')+'">'+(r.direction==='Entrada'?'+ ':'− ')+brl(r.value)+'</td><td class="money">'+(actual?brl(balance):'—')+'</td></tr>';
+  const actual=r.status==='Pago'||r.status==='Recebido'||r.status==='Disponibilizado';
+  if(r.ledger==='alimentacao'&&actual){
+   if(r.direction==='Benefício')benefitBalance+=r.value;
+   else if(r.direction==='Saída')benefitBalance-=r.value;
+  }else if(r.ledger==='financeiro'&&actual){
+   if(r.direction==='Entrada')financialBalance+=r.value;
+   else if(r.direction==='Saída')financialBalance-=r.value;
+  }
+  const signed=r.direction==='Entrada'||r.direction==='Benefício'?'+':r.direction==='Transferência'?'↔':'−';
+  const rowBalance=r.ledger==='alimentacao'&&actual?brl(benefitBalance):r.ledger==='transferencia'?'—':actual?brl(financialBalance):'—';
+  const directionClass=r.direction==='Entrada'||r.direction==='Benefício'?'in':r.direction==='Saída'?'out':'neutral';
+  return '<tr><td>'+statementDateLabel(r.date)+'</td><td><span class="tag '+directionClass+'">'+r.direction+'</span></td><td>'+esc(r.description)+'</td><td>'+esc(r.category)+'</td><td>'+esc(r.account||'—')+'</td><td><span class="status">'+esc(r.status)+'</span></td><td class="money '+directionClass+'">'+signed+' '+brl(r.value)+'</td><td class="money">'+rowBalance+'</td></tr>';
  }).join('');
- const html='<!doctype html><html lang="pt-BR"><meta charset="utf-8"><title>Extrato mensal · '+esc(month)+'</title><style>*{box-sizing:border-box}body{font:12px Arial,sans-serif;color:#252a26;margin:0;padding:32px;background:#fff}.top{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:3px solid #2f6f5e;padding-bottom:18px}.brand{font-size:23px;font-weight:700;color:#2f6f5e}.eyebrow{font-size:9px;letter-spacing:2px;color:#777;margin:0 0 7px}.period{font-size:23px;margin:0}.muted{color:#73786f}.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:22px 0}.card{border:1px solid #e3e6e0;border-radius:9px;padding:13px}.card small{display:block;color:#73786f;margin-bottom:6px}.card strong{font-size:18px}.in{color:#267653}.out{color:#b34b3e}.note{font-size:10px;color:#777;margin:8px 0 18px}table{width:100%;border-collapse:collapse;font-size:10px}th{background:#edf2ed;text-align:left;color:#48534b;font-size:9px;letter-spacing:.4px}th,td{padding:9px 7px;border-bottom:1px solid #e8ebe6;vertical-align:top}.money{text-align:right;white-space:nowrap}.foot{margin-top:22px;border-top:1px solid #ddd;padding-top:10px;font-size:9px;color:#777}@media print{body{padding:14mm}.no-print{display:none}tr{break-inside:avoid}thead{display:table-header-group}}</style><div class="top"><div><p class="eyebrow">FINANÇAS · EXTRATO MENSAL</p><h1 class="period">'+esc(month)+'</h1><p class="muted">Movimentações registradas no planejamento</p></div><div class="brand">finanças.</div></div><div class="summary"><div class="card"><small>Entradas recebidas</small><strong class="in">'+brl(received)+'</strong></div><div class="card"><small>Saídas pagas</small><strong>'+brl(paid)+'</strong></div><div class="card"><small>Saldo das movimentações realizadas</small><strong>'+brl(balance)+'</strong></div></div><p class="note">Há '+rows.length+' movimentações neste extrato. Saídas pendentes: '+brl(pending)+'. Lançamentos previstos ou pendentes não alteram o saldo realizado.</p><table><thead><tr><th>DATA</th><th>TIPO</th><th>DESCRIÇÃO</th><th>CATEGORIA</th><th>CONTA / FORMA</th><th>SITUAÇÃO</th><th class="money">VALOR</th><th class="money">SALDO</th></tr></thead><tbody>'+(body||'<tr><td colspan="8">Nenhuma movimentação registrada neste mês.</td></tr>')+'</tbody></table><div class="foot">Documento gerado pelo Finanças. Este relatório consolida os registros do planejamento mensal e não substitui o extrato oficial emitido por bancos ou instituições financeiras.</div><script>window.onload=function(){window.print()}<\/script></html>';
+ const html='<!doctype html><html lang="pt-BR"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Extrato mensal · '+esc(month)+'</title><style>@import url(https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap);*{box-sizing:border-box}body{font:11px Poppins,Arial,sans-serif;color:#252821;margin:0;padding:28px;background:#fff}.top{display:flex;justify-content:space-between;align-items:center;padding:18px 20px;background:#1b1e19;color:#f8f8f2;border-radius:14px;border-bottom:4px solid #ffe608}.brand{display:flex;align-items:center;gap:10px;font-size:23px;font-weight:800;letter-spacing:-1.2px}.brand-mark{width:38px;height:38px;border-radius:11px;background:#ffe608;color:#171914;display:grid;place-items:center;font-weight:900;font-size:23px}.eyebrow{font-size:8px;letter-spacing:2px;color:#ffe608;margin:0 0 5px;font-weight:700}.period{font-size:22px;margin:0;color:#fff;font-weight:700}.muted{color:#c5c8bd;margin:5px 0 0;font-size:9px}.summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:17px 0 12px}.card{border:1px solid #e5e7df;border-radius:11px;padding:12px;background:#fafbf8;min-width:0}.card small{display:block;color:#73786f;margin-bottom:6px;font-size:9px}.card strong{font-size:16px;display:block;overflow-wrap:anywhere}.card.highlight{background:#fffbe0;border-color:#f0df67}.in{color:#267653}.out{color:#b34b3e}.neutral{color:#777e70}.note{font-size:9px;color:#73786f;margin:9px 0 14px;line-height:1.6}.note strong{color:#292d25}table{width:100%;border-collapse:collapse;font-size:8px}th{background:#252920;text-align:left;color:#fff;font-size:7px;letter-spacing:.45px}th,td{padding:8px 6px;border-bottom:1px solid #e8ebe4;vertical-align:top}tbody tr:nth-child(even){background:#f8f9f5}.money{text-align:right;white-space:nowrap}.tag{font-weight:700}.status{display:inline-block;padding:3px 6px;border-radius:20px;background:#eff1eb;color:#53594e;font-size:7px;white-space:nowrap}.foot{margin-top:18px;border-top:1px solid #e2e5dc;padding-top:10px;font-size:8px;color:#777;line-height:1.6}.foot b{color:#30352c}@page{size:A4 landscape;margin:10mm}@media print{body{padding:0}.top{print-color-adjust:exact;-webkit-print-color-adjust:exact}.card.highlight{print-color-adjust:exact;-webkit-print-color-adjust:exact}tr{break-inside:avoid}thead{display:table-header-group}}</style><div class="top"><div><p class="eyebrow">CONTROLE FINANCEIRO · EXTRATO MENSAL</p><h1 class="period">'+esc(month)+'</h1><p class="muted">Movimentações registradas no seu planejamento</p></div><div class="brand"><span class="brand-mark">F</span><span>finanças.</span></div></div><div class="summary"><div class="card"><small>Entradas financeiras recebidas</small><strong class="in">'+brl(totals.received)+'</strong></div><div class="card"><small>Saídas financeiras pagas</small><strong class="out">'+brl(totals.paid)+'</strong></div><div class="card"><small>Saldo financeiro realizado</small><strong>'+brl(totals.financialBalance)+'</strong></div><div class="card highlight"><small>Saldo do benefício alimentação</small><strong>'+brl(totals.benefitBalance)+'</strong></div></div><p class="note"><strong>Leitura do extrato:</strong> o saldo financeiro considera entradas e saídas de dinheiro/banco. O vale-alimentação é controlado separadamente: crédito de '+brl(totals.benefitCredit)+' menos gastos pagos de '+brl(totals.benefitSpent)+'. Transferências e resgates entre carteiras aparecem no histórico, mas não são tratados como nova renda. Saídas pendentes: '+brl(totals.pending)+'.</p><table><thead><tr><th>DATA</th><th>TIPO</th><th>DESCRIÇÃO</th><th>CATEGORIA</th><th>CONTA / FORMA</th><th>SITUAÇÃO</th><th class="money">VALOR</th><th class="money">SALDO DA CARTEIRA</th></tr></thead><tbody>'+(body||'<tr><td colspan="8">Nenhuma movimentação registrada neste mês.</td></tr>')+'</tbody></table><div class="foot"><b>Documento gerado pelo Finanças.</b> Este relatório consolida os registros do planejamento mensal e separa o saldo financeiro do benefício alimentação. Não substitui o extrato oficial emitido por bancos ou instituições financeiras.</div><script>window.onload=function(){window.print()}<\/script></html>';
  w.document.open();w.document.write(html);w.document.close();
 }
 function loadStatementXlsx(){
@@ -93,28 +123,30 @@ function loadStatementXlsx(){
 }
 async function exportMonthlyStatementXlsx(k){
  try{
-  const XLSX=await loadStatementXlsx(),rows=monthlyStatementRows(k),month=full(k),wb=XLSX.utils.book_new();
-  let balance=0,received=0,paid=0,pending=0;
-  const detail=[['Data','Tipo','Descrição','Categoria / origem','Conta / forma de pagamento','Situação','Valor (R$)','Saldo realizado (R$)']];
+  const XLSX=await loadStatementXlsx(),rows=monthlyStatementRows(k),month=full(k),wb=XLSX.utils.book_new(),totals=statementTotals(rows);
+  let financialBalance=0,benefitBalance=0;
+  const detail=[['Data','Tipo','Descrição','Categoria / origem','Conta / forma de pagamento','Situação','Valor (R$)','Saldo financeiro (R$)','Saldo alimentação (R$)']];
   rows.forEach(r=>{
-   const actual=r.status==='Pago'||r.status==='Recebido',signed=r.direction==='Entrada'?r.value:-r.value;
-   if(actual){balance+=signed;if(r.direction==='Entrada')received+=r.value;else paid+=r.value}else if(r.direction==='Saída')pending+=r.value;
-   detail.push([statementDateLabel(r.date),r.direction,r.description,r.category,r.account,r.status,signed,actual?balance:null]);
+   const actual=r.status==='Pago'||r.status==='Recebido'||r.status==='Disponibilizado';
+   const signed=r.direction==='Entrada'||r.direction==='Benefício'?r.value:r.direction==='Saída'?-r.value:r.value;
+   if(actual&&r.ledger==='financeiro'){if(r.direction==='Entrada')financialBalance+=r.value;else if(r.direction==='Saída')financialBalance-=r.value}
+   if(actual&&r.ledger==='alimentacao'){if(r.direction==='Benefício')benefitBalance+=r.value;else if(r.direction==='Saída')benefitBalance-=r.value}
+   detail.push([statementDateLabel(r.date),r.direction,r.description,r.category,r.account,r.status,signed,r.ledger==='financeiro'?financialBalance:null,r.ledger==='alimentacao'?benefitBalance:null]);
   });
   const ws=XLSX.utils.aoa_to_sheet(detail);
-  ws['!cols']=[{wch:14},{wch:13},{wch:34},{wch:27},{wch:28},{wch:14},{wch:18},{wch:22}];
-  ws['!autofilter']={ref:'A1:H'+Math.max(1,detail.length)};
+  ws['!cols']=[{wch:14},{wch:14},{wch:34},{wch:27},{wch:28},{wch:16},{wch:18},{wch:22},{wch:23}];
+  ws['!autofilter']={ref:'A1:I'+Math.max(1,detail.length)};
   ws['!freeze']={xSplit:0,ySplit:1};
-  for(let C=0;C<8;C++){const cell=ws[XLSX.utils.encode_cell({r:0,c:C})];if(cell)cell.s={font:{bold:true,color:{rgb:'FFFFFF'}},fill:{fgColor:{rgb:'285C4D'}},alignment:{vertical:'center',wrapText:true},border:{bottom:{style:'medium',color:{rgb:'D6E4DA'}}}}}
+  for(let C=0;C<9;C++){const cell=ws[XLSX.utils.encode_cell({r:0,c:C})];if(cell)cell.s={font:{bold:true,color:{rgb:'171914'}},fill:{fgColor:{rgb:'FFE608'}},alignment:{vertical:'center',wrapText:true},border:{bottom:{style:'medium',color:{rgb:'D7C300'}}}}}
   for(let R=1;R<detail.length;R++){
-   for(let C=0;C<8;C++){const cell=ws[XLSX.utils.encode_cell({r:R,c:C})];if(cell)cell.s={font:{color:{rgb:C===6&&cell.v>0?'267653':C===6&&cell.v<0?'B34B3E':'27312B'}},fill:{fgColor:{rgb:R%2?'FFFFFF':'F4F7F3'}},alignment:{vertical:'center',horizontal:C>=6?'right':'left'}}}
-   ['G','H'].forEach(col=>{const cell=ws[col+(R+1)];if(cell)cell.z='"R$" #,##0.00;[Red]-"R$" #,##0.00'});
+   for(let C=0;C<9;C++){const cell=ws[XLSX.utils.encode_cell({r:R,c:C})];if(cell)cell.s={font:{color:{rgb:C===6&&cell.v>0?'267653':C===6&&cell.v<0?'B34B3E':'27312B'}},fill:{fgColor:{rgb:R%2?'FFFFFF':'F7F8F3'}},alignment:{vertical:'center',horizontal:C>=6?'right':'left'}}}
+   ['G','H','I'].forEach(col=>{const cell=ws[col+(R+1)];if(cell)cell.z='"R$" #,##0.00;[Red]-"R$" #,##0.00'});
   }
-  ws['!rows']=[{hpt:28}];XLSX.utils.book_append_sheet(wb,ws,'Extrato');
-  const summary=[['EXTRATO FINANCEIRO',''],['Período',month],['Entradas recebidas',received],['Saídas pagas',paid],['Saldo realizado',received-paid],['Saídas pendentes',pending],['Quantidade de movimentações',rows.length],[''],['Observação','Este relatório consolida os registros do planejamento mensal. Não substitui o extrato oficial de uma instituição financeira.']];
-  const sm=XLSX.utils.aoa_to_sheet(summary);sm['!cols']=[{wch:32},{wch:90}];
-  ['A1','B1'].forEach(ref=>{if(sm[ref])sm[ref].s={font:{bold:true,color:{rgb:'FFFFFF'},sz:14},fill:{fgColor:{rgb:'285C4D'}},alignment:{vertical:'center'}}});
-  for(let R=2;R<=6;R++){if(sm['A'+R])sm['A'+R].s={font:{bold:true,color:{rgb:'39463E'}},fill:{fgColor:{rgb:'F0F4EF'}}};if(sm['B'+R])sm['B'+R].s={font:{bold:true,color:{rgb:'285C4D'}},numFmt:'"R$" #,##0.00'}}
+  ws['!rows']=[{hpt:30}];XLSX.utils.book_append_sheet(wb,ws,'Extrato');
+  const summary=[['FINANÇAS · EXTRATO FINANCEIRO',''],['Período',month],['Entradas financeiras recebidas',totals.received],['Saídas financeiras pagas',totals.paid],['Saldo financeiro realizado',totals.financialBalance],['Crédito do benefício alimentação',totals.benefitCredit],['Gastos pagos no benefício alimentação',totals.benefitSpent],['Saldo do benefício alimentação',totals.benefitBalance],['Saídas pendentes',totals.pending],['Quantidade de movimentações',rows.length],[''],['Observação','Transferências e resgates entre carteiras são exibidos, mas não contam como nova renda. O benefício alimentação é controlado separadamente do saldo financeiro. Este relatório não substitui o extrato oficial de uma instituição financeira.']];
+  const sm=XLSX.utils.aoa_to_sheet(summary);sm['!cols']=[{wch:42},{wch:100}];
+  ['A1','B1'].forEach(ref=>{if(sm[ref])sm[ref].s={font:{bold:true,color:{rgb:'171914'},sz:14},fill:{fgColor:{rgb:'FFE608'}},alignment:{vertical:'center'}}});
+  for(let R=3;R<=9;R++){if(sm['A'+R])sm['A'+R].s={font:{bold:true,color:{rgb:'39463E'}},fill:{fgColor:{rgb:'F0F4EF'}}};if(sm['B'+R])sm['B'+R].s={font:{bold:true,color:{rgb:'285C4D'}},numFmt:'"R$" #,##0.00'}}
   sm['!rows']=[{hpt:30}];XLSX.utils.book_append_sheet(wb,sm,'Resumo');
   const filename='extrato-'+k+'.xlsx';XLSX.writeFile(wb,filename);appToast('Extrato Excel gerado com sucesso.','success');
  }catch(error){console.error('Falha ao exportar extrato Excel:',error);appToast(error.message||'Não foi possível gerar o Excel.','error')}
