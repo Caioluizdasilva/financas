@@ -64,7 +64,31 @@ The app does not yet aggregate real-time, individually available CDB, LCI, or LC
 - Supabase integration for cloud authentication/synchronization when configured
 - Browser storage for local app data and cached reference indicators
 
-There is no frontend build step or package installation required for the static app.
+There is no frontend build step or package installation required for the static app. Third-party files the app needs to start (the Supabase client and the Poppins font) are kept in the repository so the installed PWA also opens without internet.
+
+## Cloud sync
+
+Each device remembers which version of your data it loaded. A save only replaces the cloud copy if it is still that same version, so a device with outdated data can never overwrite changes made on another one. If that happens, the app asks which version to keep. When you return to a tab that has no unsaved changes, it picks up changes made elsewhere automatically. Changes made while offline are sent as soon as the connection returns, and the browser warns before closing a tab with unsaved changes.
+
+## Tests
+
+```bash
+node scripts/check-app.mjs           # syntax + every file needed offline is cached by sw.js
+node --test tests/unit/*.test.mjs    # financial calculations (no browser needed)
+python3 tests/sync/sync_test.py      # cloud sync and offline startup in a real browser
+```
+
+The browser tests need `pip install playwright` and Chrome (or `python -m playwright install chromium`). They use a simulated Supabase (`tests/mock-supabase.js`) with sample data (`tests/fixtures/state.json`), never your real account. The first two commands and the sync tests run on GitHub for every push and pull request.
+
+To check that a CSS change does not alter the look of the app, capture every screen before and after and compare them pixel by pixel:
+
+```bash
+python3 tests/visual/shoot.py <folder-before> /tmp/before
+python3 tests/visual/shoot.py . /tmp/after
+python3 tests/visual/compare.py /tmp/before /tmp/after /tmp/diff
+```
+
+The captures cover all screens, dialogs, the sign-in page and the admin area, in light and dark themes, at desktop, laptop, tablet and phone sizes.
 
 ## Run locally
 
@@ -94,8 +118,11 @@ You can also use any static web server that serves the project files from the re
 - `style.css` — responsive interface styles and themes.
 - `seed.js` — initial data and default configuration.
 - `auth.js` — optional Supabase authentication and cloud integration.
-- `manifest.webmanifest` and `sw.js` — PWA metadata and service worker.
-- `assets/` — local visual assets, including bank icon font files.
+- `manifest.webmanifest` and `sw.js` — PWA metadata and service worker (list new files the app needs to start in its `FILES`).
+- `assets/` — local visual assets, including bank icon font files and the Poppins font.
+- `vendor/` — pinned copy of the Supabase browser client.
+- `tests/` — calculation, sync and visual tests (see above).
+- `scripts/` — repository checks and the CSS consolidation tool.
 
 ## Privacy and backups
 

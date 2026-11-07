@@ -7,7 +7,8 @@ on:
     branches: [main]
 
 jobs:
-  javascript-syntax:
+  checks:
+    name: Sintaxe, cache offline e cálculos
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -16,8 +17,22 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Check JavaScript syntax
-        run: |
-          node --check app.js
-          node --check auth.js
-          node --check seed.js
+      - name: Check syntax and offline cache
+        run: node scripts/check-app.mjs
+      - name: Test financial calculations
+        run: node --test tests/unit/*.test.mjs
+
+  sync:
+    name: Sincronização e modo offline (navegador)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install Playwright
+        run: pip install playwright==1.63.0 && python -m playwright install chromium
+      - name: Test cloud sync and offline startup
+        run: python tests/sync/sync_test.py

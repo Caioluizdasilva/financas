@@ -1,0 +1,76 @@
+{
+  "keys": ["2026-09", "2026-10", "2026-11"],
+  "months": {
+    "2026-09": {
+      "salary": 5200, "valeRefeicao": 650, "valeAlimentacao": 400, "homeOffice": 150, "reserva": 300, "rendaFixa": 200,
+      "gastos": [
+        {"nome": "Mercado", "pago": true, "dia": 6, "tipo": "Débito", "cat": "Alimentação", "bancoId": "b1", "valor": 612.4},
+        {"nome": "Farmácia", "pago": true, "dia": 14, "tipo": "Pix", "cat": "Saúde", "bancoId": "b2", "valor": 89.9}
+      ],
+      "fixos": [
+        {"nome": "Aluguel", "pago": true, "dia": 5, "tipo": "Pix", "cat": "Moradia", "bancoId": "b1", "valor": 1500},
+        {"nome": "Internet", "pago": true, "dia": 10, "tipo": "Débito", "cat": "Moradia", "bancoId": "b1", "valor": 119.9}
+      ],
+      "parcelas": [
+        {"nome": "Notebook", "parc": "3/10", "pago": true, "dia": 15, "tipo": "Crédito", "cat": "Educação", "bancoId": "b2", "valor": 349}
+      ],
+      "aportesMetas": [{"goalId": "g1", "valor": 250}]
+    },
+    "2026-10": {
+      "salary": 5200, "valeRefeicao": 650, "valeAlimentacao": 400, "homeOffice": 150, "reserva": 300, "rendaFixa": 200,
+      "gastos": [
+        {"nome": "Mercado", "pago": true, "dia": 4, "tipo": "Débito", "cat": "Alimentação", "bancoId": "b1", "valor": 580.15},
+        {"nome": "Cinema", "pago": true, "dia": 18, "tipo": "Crédito", "cat": "Lazer", "bancoId": "b2", "valor": 64}
+      ],
+      "fixos": [
+        {"nome": "Aluguel", "pago": true, "dia": 5, "tipo": "Pix", "cat": "Moradia", "bancoId": "b1", "valor": 1500},
+        {"nome": "Internet", "pago": true, "dia": 10, "tipo": "Débito", "cat": "Moradia", "bancoId": "b1", "valor": 119.9}
+      ],
+      "parcelas": [
+        {"nome": "Notebook", "parc": "4/10", "pago": true, "dia": 15, "tipo": "Crédito", "cat": "Educação", "bancoId": "b2", "valor": 349}
+      ],
+      "aportesMetas": [{"goalId": "g1", "valor": 250}, {"goalId": "g2", "valor": 120}]
+    },
+    "2026-11": {
+      "salary": 5200, "valeRefeicao": 650, "valeAlimentacao": 400, "homeOffice": 150, "reserva": 300, "rendaFixa": 0,
+      "gastos": [
+        {"nome": "Mercado", "pago": true, "dia": 3, "tipo": "Débito", "cat": "Alimentação", "bancoId": "b1", "valor": 498.7},
+        {"nome": "Uber", "pago": false, "dia": 12, "tipo": "Crédito", "cat": "Transporte", "bancoId": "b2", "valor": 73.5}
+      ],
+      "fixos": [
+        {"nome": "Aluguel", "pago": true, "dia": 5, "tipo": "Pix", "cat": "Moradia", "bancoId": "b1", "valor": 1500},
+        {"nome": "Internet", "pago": false, "dia": 10, "tipo": "Débito", "cat": "Moradia", "bancoId": "b1", "valor": 119.9}
+      ],
+      "parcelas": [
+        {"nome": "Notebook", "parc": "5/10", "pago": false, "dia": 15, "tipo": "Crédito", "cat": "Educação", "bancoId": "b2", "valor": 349}
+      ],
+      "aportesMetas": [{"goalId": "g1", "valor": 250}]
+    }
+  },
+  "debts": [
+    {"id": "d1", "nome": "Cartão Banco Azul", "tipoDivida": "Cartão de crédito", "valor": 2400, "inicial": 4000, "vencimento": "2026-11-20", "cat": "Outros", "bancoId": "b2", "historico": [{"valor": 800, "data": "2026-09-20"}, {"valor": 800, "data": "2026-10-20"}]},
+    {"id": "d2", "nome": "Empréstimo pessoal", "tipoDivida": "Empréstimo", "valor": 6500, "inicial": 9000, "vencimento": "2026-11-28", "cat": "Outros", "historico": [{"valor": 500, "data": "2026-10-28"}]}
+  ],
+  "goals": [
+    {"id": "g1", "nome": "Reserva de emergência", "tipo": "Meta", "alvo": 15000, "descricao": "Seis meses de custo de vida", "prazo": "2027-12"},
+    {"id": "g2", "nome": "Viagem de férias", "tipo": "Meta", "alvo": 4000, "descricao": "Praia em julho", "prazo": "2027-07"}
+  ],
+  "subscriptions": [
+    {"id": "s1", "nome": "Streaming", "valor": 39.9, "dia": 8, "regraVencimento": "dia-fixo", "tipo": "Crédito", "cat": "Assinaturas", "inicio": "2026-09"},
+    {"id": "s2", "nome": "Academia", "valor": 99, "dia": 5, "regraVencimento": "dia-fixo", "tipo": "Débito", "cat": "Saúde", "inicio": "2026-09"}
+  ],
+  "movements": [
+    {"id": "mv1", "nome": "Freela de design", "valor": 800, "data": "2026-10-22", "bancoId": "b1", "tipo": "Bônus", "includeInBalance": true}
+  ],
+  "banks": [
+    {"id": "b1", "nome": "Nubank", "tipo": "Banco", "cor": "#8a05be", "cartaoDebito": true, "cartaoCredito": false},
+    {"id": "b2", "nome": "Itaú", "tipo": "Banco", "cor": "#ec7000", "cartaoDebito": true, "cartaoCredito": true, "limiteCartao": 5000}
+  ],
+  "receivables": [
+    {"id": "r1", "nome": "Marina", "descricao": "Show de outubro", "valor": 300, "recebido": 100, "data": "2026-10-15"}
+  ],
+  "cats": ["Moradia", "Alimentação", "Transporte", "Saúde", "Educação", "Lazer", "Assinaturas", "Outros"],
+  "tipos": ["Débito", "Crédito", "Pix", "Alimentação / Refeição", "Auxílio"],
+  "profile": {"nome": "Ana Souza", "chamado": "Ana", "salarioBase": 5200, "vrDia": 30, "vaMensal": 400, "homeOffice": 150},
+  "preferences": {"theme": "dark", "categoryBudgets": {"Alimentação": 900, "Lazer": 300}, "manualAssets": [{"id": "a1", "nome": "Moto", "valor": 9000, "tipo": "Bem"}]}
+}
