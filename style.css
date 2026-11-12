@@ -21107,3 +21107,416 @@ button[title*="Adicionar"] > svg {
   .cashbox-credit-panel > .cashbox-subhead { align-items: flex-start; }
   .cashbox-credit-panel > .cashbox-subhead > strong { font-size: 15px; }
 }
+
+
+/* v49 — Central da conta: hierarquia e navegação consistentes */
+.account-center-dialog {
+  width: min(1040px,calc(100vw - 40px)) !important;
+  height: min(780px,calc(100dvh - 48px)) !important;
+  max-width: 1040px !important;
+  max-height: calc(100dvh - 48px) !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  border: 1px solid #353535 !important;
+  border-radius: 20px !important;
+  background: #151515 !important;
+}
+
+.account-center-layout {
+  display: grid !important;
+  grid-template-columns: 250px minmax(0,1fr) !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+}
+
+.account-center-nav {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 5px !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  height: 100% !important;
+  padding: 22px 15px !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  border: 0 !important;
+  border-right: 1px solid #303030 !important;
+  border-radius: 0 !important;
+  background: #191919 !important;
+}
+
+.account-center-brand {
+  margin: 0 0 12px !important;
+  padding: 0 8px 16px !important;
+}
+
+.account-center-nav-label {
+  margin: 8px 0 2px !important;
+  padding: 7px 9px 2px !important;
+  font-size: 9px !important;
+  line-height: 1.3 !important;
+  letter-spacing: 1.25px !important;
+}
+
+.account-center-nav button:not(.account-nav-logout) {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 10px !important;
+  width: 100% !important;
+  min-height: 40px !important;
+  margin: 0 !important;
+  padding: 9px 10px !important;
+  border: 1px solid transparent !important;
+  border-radius: 9px !important;
+  background: transparent !important;
+  color: #c7c7c7 !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  line-height: 1.35 !important;
+  text-align: left !important;
+  white-space: normal !important;
+}
+
+.account-center-nav button:not(.account-nav-logout):hover {
+  background: #262626 !important;
+  border-color: #363636 !important;
+  color: #fff !important;
+}
+
+.account-center-nav button:not(.account-nav-logout).active {
+  background: var(--fin-yellow) !important;
+  border-color: var(--fin-yellow) !important;
+  color: #171717 !important;
+}
+
+.account-center-nav button .account-nav-symbol {
+  display: grid !important;
+  place-items: center !important;
+  width: 18px !important;
+  height: 18px !important;
+  flex: 0 0 18px !important;
+}
+
+.account-center-nav button .account-nav-symbol svg {
+  display: block !important;
+  width: 17px !important;
+  height: 17px !important;
+}
+
+.account-nav-logout-wrap {
+  margin-top: auto !important;
+  padding-top: 12px !important;
+  border-top: 1px solid #303030 !important;
+}
+
+.account-center-content {
+  display: flex !important;
+  flex-direction: column !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  height: 100% !important;
+  padding: 25px 32px !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+}
+
+.account-center-topbar {
+  position: sticky !important;
+  top: -25px !important;
+  z-index: 4 !important;
+  min-height: 54px !important;
+  margin: -25px -32px 0 !important;
+  padding: 17px 32px 14px !important;
+  border-bottom: 1px solid #303030 !important;
+  background: #151515 !important;
+}
+
+.account-center-topbar h2 {
+  margin: 4px 0 0 !important;
+  font-size: 19px !important;
+  line-height: 1.25 !important;
+  letter-spacing: -.35px !important;
+}
+
+.account-center-body {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 15px !important;
+  min-width: 0 !important;
+  padding: 24px 0 32px !important;
+}
+
+.account-section-intro {
+  margin: 0 !important;
+  padding: 0 0 4px !important;
+}
+
+.account-section-intro h3 {
+  margin: 7px 0 6px !important;
+  color: #f5f5f5 !important;
+  font-size: 24px !important;
+  line-height: 1.2 !important;
+  font-weight: 750 !important;
+  letter-spacing: -.65px !important;
+}
+
+.account-section-intro p {
+  max-width: 520px !important;
+  margin: 0 !important;
+  color: #a5a5a5 !important;
+  font-size: 12px !important;
+  line-height: 1.6 !important;
+}
+
+.account-profile-card {
+  display: flex !important;
+  align-items: center !important;
+  gap: 14px !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  padding: 17px !important;
+  border: 1px solid #353535 !important;
+  border-radius: 13px !important;
+  background: #1d1d1d !important;
+}
+
+.account-profile-card>div:nth-child(2) {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+}
+
+.account-profile-card b {
+  color: #f4f4f4 !important;
+  font-size: 13px !important;
+  line-height: 1.4 !important;
+}
+
+.account-profile-card span,
+.account-profile-card small {
+  color: #a6a6a6 !important;
+  font-size: 10px !important;
+  line-height: 1.45 !important;
+  overflow-wrap: anywhere !important;
+}
+
+.account-profile-status {
+  flex: 0 0 auto !important;
+  padding: 6px 9px !important;
+  border: 1px solid #315b3d !important;
+  border-radius: 999px !important;
+  background: #1d3324 !important;
+  color: #a8e0b6 !important;
+  font-size: 9px !important;
+  font-weight: 750 !important;
+  letter-spacing: .35px !important;
+}
+
+.account-info-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2,minmax(0,1fr)) !important;
+  gap: 10px !important;
+  margin: 0 !important;
+}
+
+.account-info-grid>div {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 7px !important;
+  min-width: 0 !important;
+  padding: 14px !important;
+  border: 1px solid #343434 !important;
+  border-radius: 11px !important;
+  background: #1b1b1b !important;
+}
+
+.account-info-grid small {
+  color: #929292 !important;
+  font-size: 9px !important;
+  font-weight: 700 !important;
+  letter-spacing: .65px !important;
+  line-height: 1.4 !important;
+}
+
+.account-info-grid b {
+  color: #f1f1f1 !important;
+  font-size: 12px !important;
+  font-weight: 650 !important;
+  line-height: 1.45 !important;
+  overflow-wrap: anywhere !important;
+}
+
+.account-center-body>.button {
+  align-self: flex-start !important;
+  min-height: 42px !important;
+  margin: 0 !important;
+  padding: 0 17px !important;
+  border-radius: 10px !important;
+  font-size: 11px !important;
+}
+
+.account-center-close-inline {
+  flex: 0 0 34px !important;
+  width: 34px !important;
+  height: 34px !important;
+}
+
+@media (max-width:700px) {
+  .account-center-dialog {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100vw !important;
+    height: 100dvh !important;
+    max-width: 100vw !important;
+    max-height: 100dvh !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .account-center-layout {
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    height: 100% !important;
+    overflow: hidden !important;
+  }
+
+  .account-center-nav {
+    display: grid !important;
+    grid-template-columns: repeat(2,minmax(0,1fr)) !important;
+    align-items: stretch !important;
+    gap: 6px !important;
+    width: 100% !important;
+    height: auto !important;
+    max-height: 44dvh !important;
+    min-height: 0 !important;
+    padding: 12px 13px !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    border: 0 !important;
+    border-bottom: 1px solid #343434 !important;
+    background: #191919 !important;
+  }
+
+  .account-center-brand,
+  .account-center-nav-label,
+  .account-nav-logout-wrap {
+    grid-column: 1/-1 !important;
+  }
+
+  .account-center-brand {
+    margin: 0 0 3px !important;
+    padding: 0 0 9px !important;
+  }
+
+  .account-center-avatar,
+  .account-center-nav>h2,
+  .account-center-nav>p {
+    display: none !important;
+  }
+
+  .account-center-nav-label {
+    display: block !important;
+    margin: 4px 0 0 !important;
+    padding: 2px 2px 0 !important;
+  }
+
+  .account-center-nav button:not(.account-nav-logout) {
+    display: flex !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 39px !important;
+    margin: 0 !important;
+    padding: 8px 9px !important;
+    font-size: 10px !important;
+    line-height: 1.25 !important;
+  }
+
+  .account-nav-logout-wrap {
+    margin: 2px 0 0 !important;
+    padding-top: 7px !important;
+  }
+
+  .account-center-content {
+    display: flex !important;
+    flex: 1 1 auto !important;
+    width: 100% !important;
+    min-height: 0 !important;
+    height: auto !important;
+    padding: 0 15px calc(20px + env(safe-area-inset-bottom)) !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+  }
+
+  .account-center-topbar {
+    top: 0 !important;
+    min-height: 56px !important;
+    margin: 0 -15px 13px !important;
+    padding: 10px 15px !important;
+  }
+
+  .account-center-body {
+    gap: 12px !important;
+    padding: 0 0 20px !important;
+  }
+
+  .account-section-intro h3 {
+    font-size: 21px !important;
+  }
+
+  .account-section-intro p {
+    font-size: 11px !important;
+  }
+
+  .account-profile-card {
+    flex-wrap: nowrap !important;
+    padding: 12px !important;
+  }
+
+  .account-profile-status {
+    font-size: 8px !important;
+    padding: 5px 7px !important;
+  }
+
+  .account-info-grid {
+    grid-template-columns: repeat(2,minmax(0,1fr)) !important;
+    gap: 7px !important;
+  }
+
+  .account-info-grid>div {
+    padding: 11px !important;
+  }
+
+  .account-center-body>.button {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+}
+
+@media (max-width:380px) {
+  .account-center-nav {
+    padding-inline: 10px !important;
+  }
+
+  .account-center-nav button:not(.account-nav-logout) {
+    gap: 6px !important;
+    padding-inline: 7px !important;
+    font-size: 9px !important;
+  }
+
+  .account-center-content {
+    padding-inline: 12px !important;
+  }
+
+  .account-center-topbar {
+    margin-inline: -12px !important;
+    padding-inline: 12px !important;
+  }
+}
