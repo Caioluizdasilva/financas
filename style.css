@@ -20761,3 +20761,349 @@ button[title*="Adicionar"] > svg {
     justify-content: center;
   }
 }
+
+
+/* Caixa mensal — saldos reais, compromissos e crédito separado */
+.cashbox-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin: 0 0 22px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--surface);
+}
+
+.cashbox-header,
+.cashbox-subhead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.cashbox-header h2 {
+  margin: 3px 0 5px;
+  font-size: 20px;
+  letter-spacing: -.035em;
+}
+
+.cashbox-header p:not(.eyebrow),
+.cashbox-subhead p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.cashbox-header .eyebrow {
+  margin: 0 0 5px;
+  color: var(--muted);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .12em;
+}
+
+.cashbox-add-button {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.cashbox-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4,minmax(0,1fr));
+  gap: 10px;
+}
+
+.cashbox-summary-card {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  min-width: 0;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  background: color-mix(in srgb,var(--surface) 84%,var(--ink) 4%);
+}
+
+.cashbox-summary-card > span,
+.cashbox-after-card > span {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.cashbox-summary-card strong {
+  color: var(--ink);
+  font-size: clamp(17px,2vw,23px);
+  font-weight: 700;
+  letter-spacing: -.04em;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+
+.cashbox-summary-card small,
+.cashbox-after-card small {
+  color: var(--muted);
+  font-size: 9px;
+  line-height: 1.5;
+}
+
+.cashbox-summary-card.cashbox-main-balance {
+  border-color: color-mix(in srgb,var(--user-accent) 48%,var(--line));
+  background: color-mix(in srgb,var(--user-accent) 10%,var(--surface));
+}
+
+.cashbox-summary-card.cashbox-main-balance strong {
+  color: var(--ink);
+}
+
+.cashbox-summary-card.is-positive strong { color: var(--green); }
+.cashbox-summary-card.is-negative strong { color: var(--red); }
+
+.cashbox-columns {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 12px;
+  align-items: stretch;
+}
+
+.cashbox-subpanel {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 15px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: color-mix(in srgb,var(--surface) 88%,var(--ink) 3%);
+}
+
+.cashbox-subhead {
+  margin-bottom: 10px;
+}
+
+.cashbox-subhead h3 {
+  margin: 0 0 4px;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.cashbox-count {
+  display: grid;
+  place-items: center;
+  min-width: 27px;
+  height: 27px;
+  padding: 0 7px;
+  border-radius: 9px;
+  background: color-mix(in srgb,var(--user-accent) 13%,var(--surface));
+  color: var(--ink);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.cashbox-balance-row,
+.cashbox-credit-row,
+.cashbox-pending-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  padding: 11px 0;
+  border-top: 1px solid var(--line);
+}
+
+.cashbox-balance-icon,
+.cashbox-credit-icon {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  border-radius: 10px;
+  background: color-mix(in srgb,var(--user-accent) 12%,var(--surface));
+  color: var(--ink);
+  font-size: 16px;
+}
+
+.cashbox-balance-info,
+.cashbox-credit-info,
+.cashbox-pending-copy {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.cashbox-balance-info b,
+.cashbox-credit-info b,
+.cashbox-pending-copy b {
+  color: var(--ink);
+  font-size: 11px;
+  font-weight: 650;
+  overflow-wrap: anywhere;
+}
+
+.cashbox-balance-info small,
+.cashbox-credit-info small,
+.cashbox-pending-copy small {
+  color: var(--muted);
+  font-size: 9px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.cashbox-balance-row > strong,
+.cashbox-credit-row > strong,
+.cashbox-pending-row > strong {
+  flex: 0 0 auto;
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.cashbox-row-actions {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 3px;
+}
+
+.cashbox-row-actions .icon-action {
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+}
+
+.cashbox-pending-row {
+  align-items: flex-start;
+}
+
+.cashbox-pending-row > strong {
+  padding-top: 1px;
+}
+
+.cashbox-subtotal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: auto;
+  padding: 10px 0 0;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.cashbox-subtotal + .cashbox-subtotal {
+  margin-top: 8px;
+  padding-top: 8px;
+}
+
+.cashbox-subtotal b {
+  color: var(--ink);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.cashbox-empty {
+  margin: 0;
+  padding: 20px 8px;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.cashbox-credit-panel {
+  padding: 15px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: color-mix(in srgb,var(--surface) 88%,var(--ink) 3%);
+}
+
+.cashbox-credit-panel > .cashbox-subhead > strong {
+  flex: 0 0 auto;
+  color: var(--ink);
+  font-size: 18px;
+  font-variant-numeric: tabular-nums;
+}
+
+.cashbox-footer-grid {
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  gap: 10px;
+}
+
+.cashbox-after-card {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  min-width: 0;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+}
+
+.cashbox-after-card > strong {
+  font-size: 19px;
+  font-weight: 750;
+  letter-spacing: -.035em;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+
+.cashbox-salary-card {
+  border-style: dashed;
+  background: transparent;
+}
+
+.cashbox-disclaimer {
+  margin: -2px 0 0;
+  padding: 11px 13px;
+  border-radius: 10px;
+  background: color-mix(in srgb,var(--user-accent) 7%,var(--surface));
+  color: var(--muted);
+  font-size: 9px;
+  line-height: 1.6;
+}
+
+@media (max-width:900px) {
+  .cashbox-summary-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+}
+
+@media (max-width:620px) {
+  .cashbox-panel {
+    gap: 13px;
+    padding: 13px;
+    border-radius: 14px;
+  }
+
+  .cashbox-header {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .cashbox-header h2 { font-size: 18px; }
+  .cashbox-add-button { width: 100%; justify-content: center; }
+  .cashbox-summary-grid { gap: 7px; }
+  .cashbox-summary-card { gap: 5px; padding: 10px; }
+  .cashbox-summary-card > span { font-size: 9px; }
+  .cashbox-summary-card strong { font-size: 17px; }
+  .cashbox-summary-card small { font-size: 8px; }
+  .cashbox-columns { grid-template-columns: 1fr; gap: 9px; }
+  .cashbox-subpanel,.cashbox-credit-panel { padding: 12px; }
+  .cashbox-footer-grid { grid-template-columns: 1fr 1fr; gap: 7px; }
+  .cashbox-after-card { padding: 11px; }
+  .cashbox-after-card:last-child { grid-column: 1/-1; }
+  .cashbox-after-card > strong { font-size: 17px; }
+  .cashbox-row-actions { gap: 1px; }
+  .cashbox-row-actions .icon-action { width: 26px; height: 26px; min-width: 26px; }
+  .cashbox-credit-panel > .cashbox-subhead { align-items: flex-start; }
+  .cashbox-credit-panel > .cashbox-subhead > strong { font-size: 15px; }
+}
