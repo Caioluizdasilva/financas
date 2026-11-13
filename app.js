@@ -276,9 +276,9 @@ function cashboxAddMovement(){
   if(!S.keys.includes(month)){S.keys.push(month);S.keys.sort()}
   const m=M(month),id='cashbox-move-'+Date.now(),isIn=v.direcao==='entrada';
   if(isIn){
-   const movementId='mv'+Date.now(),movement={id:movementId,nome:v.nome,valor:amount,data:v.data,bancoId:v.bankId||'__cash__',tipo:v.origem||'Outra entrada',planningExclude:v.origem==='Salário',includeInBalance:true,formaRecebimento:v.bankId==='__cash__'?'dinheiro':'transferencia',observacao:v.observacao||'',cashboxId:id};
+   const movementId='mv'+Date.now(),movement={id:movementId,nome:v.nome,valor:amount,data:v.data,bancoId:v.bankId||'__cash__',tipo:v.origem||'Outra entrada',planningExclude:['Salário','Vale-refeição','Vale-alimentação','Auxílio home office','Reembolso'].includes(v.origem),includeInBalance:true,formaRecebimento:v.bankId==='__cash__'?'dinheiro':'transferencia',observacao:v.observacao||'',cashboxId:id};
    S.movements.push(movement);m.bonusItems=Array.isArray(m.bonusItems)?m.bonusItems:[];m.bonusItems.push({id:'cashbox-bonus-'+id,descricao:v.nome,valor:amount,data:v.data,observacao:v.observacao||'',includeInBalance:true,movementId});
-   cashboxAdjustBalance({bankId:v.bankId||'__cash__',amount});
+   cashboxAdjustBalance({bankId:['Vale-refeição','Vale-alimentação','Auxílio home office'].includes(v.origem)?'':v.bankId||'__cash__',amount,benefit:['Vale-refeição','Vale-alimentação','Auxílio home office'].includes(v.origem)});
   }else{
    if(v.tipo==='Crédito'&&v.pago==='1'&&!v.cardId){appToast('Selecione o cartão utilizado.','error');return false}
    const paid=v.pago==='1',row={id,nome:v.nome,dia:+v.data.slice(8,10),tipo:v.tipo||'Débito',cat:v.cat||'Outros',bancoId:v.bankId||'',valor:amount,observacao:v.observacao||'',pago:paid,cashboxId:id};
