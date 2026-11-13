@@ -216,16 +216,16 @@ function cashboxAdjustBalance({bankId='',amount=0,benefit=false}){
  return null;
 }
 function cashboxRecordCardPurchase(name,amount,date,cardId){
- if(!cardId)return;
- const card=(S.cards||[]).find(x=>x.id===cardId);if(!card)return;
+ if(!cardId)return '';
+ const card=(S.cards||[]).find(x=>x.id===cardId);if(!card)return '';
  card.compras=Array.isArray(card.compras)?card.compras:[];
- card.compras.push({id:'cashbox-card-'+Date.now(),nome:name,descricao:name,valor:+amount||0,data:date,pago:false,origem:'caixa'});
+ const id='cashbox-card-'+Date.now();card.compras.push({id,nome:name,descricao:name,valor:+amount||0,data:date,pago:false,origem:'caixa'});return id;
 }
 function cashboxPaymentFields(){
  return [
   {type:'section',label:'CONFIRMAÇÃO DO PAGAMENTO'},
   {name:'tipo',label:'Como você pagou?',type:'select',required:true,options:['Débito','Pix','Dinheiro','Crédito','Alimentação / Refeição','Auxílio'].map(x=>({value:x,label:x}))},
-  {name:'bankId',label:'Conta utilizada',type:'select',options:[{value:'',label:'Não atualizar uma conta específica'},{value:'__cash__',label:'Dinheiro em espécie'},...(S.banks||[]).map(b=>({value:b.id,label:b.nome}))],showIf:{field:'tipo',value:'Débito'}},
+  {name:'bankId',label:'Conta utilizada',type:'select',options:[{value:'',label:'Não atualizar uma conta específica'},{value:'__cash__',label:'Dinheiro em espécie'},...(S.banks||[]).map(b=>({value:b.id,label:b.nome})) ]},
   {name:'cardId',label:'Cartão utilizado',type:'select',required:true,options:[{value:'',label:'Selecione o cartão'},...(S.cards||[]).map(x=>({value:x.id,label:x.nome||'Cartão'}))],showIf:{field:'tipo',value:'Crédito'}},
   {name:'confirmado',label:'Confirmo que este pagamento foi realizado.',type:'checkbox',required:true}
  ];
@@ -239,10 +239,10 @@ function cashboxConfirmPending(item){
   if(row.debtId)syncDebtPlanningPayment(row,item.month,item.key,true);
   const method=v.tipo||row.tipo||'Débito',amount=+row.valor||0;
   let balanceId=null;
-  if(method==='Crédito')cashboxRecordCardPurchase(row.nome,amount,item.date,v.cardId);
+  let cardPurchaseId='';if(method==='Crédito')cardPurchaseId=cashboxRecordCardPurchase(row.nome,amount,item.date,v.cardId);
   else if(method==='Alimentação / Refeição'||method==='Auxílio')balanceId=cashboxAdjustBalance({bankId:v.bankId,amount:-amount,benefit:true});
   else balanceId=cashboxAdjustBalance({bankId:v.bankId||row.bancoId||'',amount:-amount});
-  row.cashboxPayment={method,bankId:v.bankId||'',cardId:v.cardId||'',balanceId,amount};
+  row.cashboxPayment={method,bankId:v.bankId||'',cardId:v.cardId||'',cardPurchaseId,balanceId,amount};
   save();render();
  });
 }
@@ -251,7 +251,7 @@ function cashboxUndoPlanningPayment(item){
  if(!confirm('Desfazer a confirmação deste pagamento? O compromisso voltará a ficar em aberto.'))return;
  const payment=row.cashboxPayment;
  if(payment?.balanceId){const balance=(S.caixaSaldos||[]).find(x=>x.id===payment.balanceId);if(balance)balance.valor=Math.round(((+balance.valor||0)+(+payment.amount||0))*100)/100}
- if(payment?.method==='Crédito'&&payment.cardId){const card=(S.cards||[]).find(x=>x.id===payment.cardId);if(card)card.compras=(card.compras||[]).filter(p=>p.id!=='cashbox-card-'+payment.id)}
+ if(payment?.method==='Crédito'&&payment.cardId){const card=(S.cards||[]).find(x=>x.id===payment.cardId);if(card)card.compras=(card.compras||[]).filter(p=>p.id!==payment.cardPurchaseId)}
  row.pago=false;delete row.cashboxPayment;
  if(row.debtId)syncDebtPlanningPayment(row,item.month,item.key,false);
  save();render();
@@ -264,7 +264,7 @@ function cashboxAddMovement(){
   {name:'valor',label:'Valor (R$)',type:'number',min:.01,step:'.01',required:true},
   {name:'data',label:'Data',type:'date',required:true},
   {name:'cat',label:'Categoria',type:'select',options:[...new Set([...(S.cats||[]),'Moto · Gasolina','Moto · Manutenção','Moto · Peças','Moto · Documentos','Moto · Outros'])].map(x=>({value:x,label:x}))},
-  {name:'tipo',label:'Forma de pagamento / recebimento',type:'select',options:['Débito','Pix','Dinheiro','Crédito','Transferência','Outra entrada','Alimentação / Refeição','Auxílio'].map(x=>({value:x,label:x}))},
+  {name:'tipo',label:'Forma de pagamento / recebimento',type:'select',options:['Débito','Pix','Dinheiro','Crédito','Transferência','Outra entrada','Bônus','Rendimento de investimento','Reembolso','Alimentação / Refeição','Auxílio'].map(x=>({value:x,label:x}))},
   {name:'bankId',label:'Conta ou carteira',type:'select',options:[{value:'__cash__',label:'Dinheiro em espécie'},...(S.banks||[]).map(b=>({value:b.id,label:b.nome}))]},
   {name:'cardId',label:'Cartão de crédito',type:'select',required:true,options:[{value:'',label:'Selecione o cartão'},...(S.cards||[]).map(x=>({value:x.id,label:x.nome||'Cartão'}))],showIf:{field:'tipo',value:'Crédito'}},
   {name:'pago',label:'Esta saída já foi paga?',type:'checkbox',showIf:{field:'direcao',value:'saida'}},
