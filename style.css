@@ -21349,3 +21349,23 @@ button[title*="Adicionar"] > svg {
 .cashbox-pending-actions{grid-column:1/-1;display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap}
 .cashbox-pending-actions .button{min-height:34px;padding:7px 12px}
 @media(max-width:620px){.cashbox-forecast-panel,.cashbox-pending-panel{padding:16px}.cashbox-forecast-head{align-items:flex-start;flex-direction:column}.cashbox-forecast-head>strong{font-size:1.8rem}.cashbox-forecast-metrics{grid-template-columns:1fr 1fr}.cashbox-pending-row{grid-template-columns:minmax(0,1fr) auto}.cashbox-pending-actions{justify-content:stretch}.cashbox-pending-actions .button{flex:1}}
+
+/* R47 — filtros de situação e alertas do módulo Dívidas */
+.debt-status-summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:18px 0 16px}
+.debt-status-summary>div{display:flex;flex-direction:column;gap:5px;padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+.debt-status-summary b{font-size:21px;font-variant-numeric:tabular-nums}
+.debt-status-summary span,.debt-filter-area>span{font-size:10px;color:var(--muted)}
+.debt-filter-area{display:flex;flex-direction:column;gap:9px;margin-top:16px}
+.debt-filters{display:flex;flex-wrap:wrap;gap:7px}
+.debt-filters button{display:inline-flex;align-items:center;gap:6px}
+.debt-filters button small{font-size:9px;opacity:.7}
+.debt-progress-status,.debt-alert-status{display:inline-flex;align-items:center;padding:5px 8px;border-radius:7px;font-size:9px;font-weight:700;background:var(--surface);border:1px solid var(--line);color:var(--muted)}
+.debt-progress-status.is-paid{color:var(--green);border-color:color-mix(in srgb,var(--green) 35%,var(--line))}
+.debt-progress-status.is-started{color:var(--user-accent);border-color:color-mix(in srgb,var(--user-accent) 35%,var(--line))}
+.debt-progress-status.is-pending{color:var(--red);border-color:color-mix(in srgb,var(--red) 35%,var(--line))}
+.debt-alert-status{color:var(--red);border-color:color-mix(in srgb,var(--red) 35%,var(--line))}
+.debt-needs-planning{border-color:color-mix(in srgb,var(--red) 32%,var(--line))}
+.debt-planning-warning{margin:12px 0 0;padding:10px 12px;border-radius:9px;background:color-mix(in srgb,var(--red) 7%,var(--surface));color:var(--muted);font-size:10px;line-height:1.6}
+.debt-empty-filter{padding:18px;color:var(--muted);text-align:center}
+.debt-empty-filter p{margin:0}
+@media(max-width:620px){.debt-status-summary{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.debt-status-summary>div{padding:10px}.debt-status-summary b{font-size:18px}.debt-filters{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.debt-filters button{justify-content:space-between;min-width:0;padding:9px}}
