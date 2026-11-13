@@ -284,9 +284,10 @@ function cashboxAddMovement(){
    const paid=v.pago==='1',row={id,nome:v.nome,dia:+v.data.slice(8,10),tipo:v.tipo||'Débito',cat:v.cat||'Outros',bancoId:v.bankId||'',valor:amount,observacao:v.observacao||'',pago:paid,cashboxId:id};
    m.gastos.push(row);
    if(paid){
-    if(v.tipo==='Crédito')cashboxRecordCardPurchase(v.nome,amount,v.data,v.cardId);
-    else cashboxAdjustBalance({bankId:v.bankId||'__cash__',amount:-amount,benefit:v.tipo==='Alimentação / Refeição'||v.tipo==='Auxílio'});
-    row.cashboxPayment={method:v.tipo,bankId:v.bankId||'',cardId:v.cardId||'',cardPurchaseId,amount};
+    let cardPurchaseId='',balanceId=null;
+    if(v.tipo==='Crédito'&&v.cardId)cardPurchaseId=cashboxRecordCardPurchase(v.nome,amount,v.data,v.cardId);
+    else balanceId=cashboxAdjustBalance({bankId:v.bankId||'__cash__',amount:-amount,benefit:v.tipo==='Alimentação / Refeição'||v.tipo==='Auxílio'});
+    row.cashboxPayment={method:v.tipo,bankId:v.bankId||'',cardId:v.cardId||'',cardPurchaseId,balanceId,amount};
    }
    if(/^Moto\\s*·\\s*Gasolina$/i.test(row.cat)){
     const fuel={id:'fuel-'+id,data:v.data,valor:amount,tipo:row.tipo,bancoId:row.bancoId,litros:0,precoLitro:0,odometro:0,tanqueCheio:false,detalhesPendentes:true,observacao:row.observacao,viagens:[]};S.fuelRecords.push(fuel);row.fuelId=fuel.id;
