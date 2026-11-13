@@ -21330,3 +21330,22 @@ button[title*="Adicionar"] > svg {
     grid-template-columns: minmax(0,1fr);
   }
 }
+
+/* Caixa integrado: marco zero, projeção de compromissos e movimentações */
+.cashbox-forecast-panel,.cashbox-pending-panel{padding:22px;margin-bottom:18px}
+.cashbox-forecast-head{display:flex;align-items:center;justify-content:space-between;gap:18px}
+.cashbox-forecast-head h2{margin:4px 0 6px}
+.cashbox-forecast-head p{margin:0;color:var(--muted);font-size:.88rem}
+.cashbox-forecast-head>strong{font-size:clamp(1.6rem,4vw,2.35rem);letter-spacing:-.04em}
+.cashbox-forecast-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:20px;padding-top:16px;border-top:1px solid var(--border)}
+.cashbox-forecast-metrics>div{display:flex;flex-direction:column;gap:5px}
+.cashbox-forecast-metrics small,.cashbox-pending-copy small{color:var(--muted);font-size:.78rem}
+.cashbox-forecast-metrics b{font-size:1.05rem}
+.cashbox-pending-row{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:10px;padding:14px 0;border-bottom:1px solid var(--border)}
+.cashbox-pending-row:last-child{border-bottom:0}
+.cashbox-pending-copy{display:flex;flex-direction:column;gap:4px;min-width:0}
+.cashbox-pending-copy b{overflow-wrap:anywhere}
+.cashbox-pending-row>strong{white-space:nowrap}
+.cashbox-pending-actions{grid-column:1/-1;display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap}
+.cashbox-pending-actions .button{min-height:34px;padding:7px 12px}
+@media(max-width:620px){.cashbox-forecast-panel,.cashbox-pending-panel{padding:16px}.cashbox-forecast-head{align-items:flex-start;flex-direction:column}.cashbox-forecast-head>strong{font-size:1.8rem}.cashbox-forecast-metrics{grid-template-columns:1fr 1fr}.cashbox-pending-row{grid-template-columns:minmax(0,1fr) auto}.cashbox-pending-actions{justify-content:stretch}.cashbox-pending-actions .button{flex:1}}
