@@ -197,14 +197,14 @@ function cashboxForm(index=-1){
  });
 }
 function cashboxPendingItems(){
- const todayKey=new Date().toISOString().slice(0,10),items=[];
- (S.keys||[]).slice().sort().forEach(k=>{
-  const m=S.months[k];if(!m)return;
-  ['gastos','fixos','parcelas'].forEach(key=>(m[key]||[]).forEach((row,index)=>{
-   const date=k+'-'+String(Math.max(1,+row.dia||1)).padStart(2,'0');
-   if(row.pago!==true&&date>=todayKey)items.push({month:k,key,index,row,date,amount:+row.valor||0});
-  }));
- });
+ const now=new Date(),currentMonth=now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0'),items=[];
+ const m=S.months?.[currentMonth];if(!m)return items;
+ ['gastos','fixos','parcelas'].forEach(key=>(m[key]||[]).forEach((row,index)=>{
+  const date=currentMonth+'-'+String(Math.max(1,+row.dia||1)).padStart(2,'0');
+  // O Caixa mostra apenas compromissos ainda não pagos do mês corrente.
+  // Inclui vencidos deste mês, pois continuam pendentes; exclui meses futuros.
+  if(row.pago!==true)items.push({month:currentMonth,key,index,row,date,amount:+row.valor||0});
+ }));
  return items.sort((a,b)=>a.date.localeCompare(b.date));
 }
 function cashboxAdjustBalance({bankId='',amount=0,benefit=false}){
