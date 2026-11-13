@@ -21293,3 +21293,40 @@ button[title*="Adicionar"] > svg {
     font-size: 10px !important;
   }
 }
+
+
+/* Caixa independente: foco em saldos reais, sem misturar projeções do planejamento */
+.cashbox-page-metrics {
+  margin-bottom: 18px;
+}
+.cashbox-panel .cashbox-header {
+  align-items: center;
+}
+.cashbox-panel .cashbox-columns {
+  grid-template-columns: minmax(0,1.15fr) minmax(0,.85fr);
+}
+.cashbox-panel .cashbox-subpanel {
+  min-width: 0;
+}
+.cashbox-panel .cashbox-credit-panel {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+.cashbox-panel .cashbox-disclaimer {
+  margin-top: 18px;
+  line-height: 1.65;
+}
+@media (max-width:760px) {
+  .cashbox-panel .cashbox-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .cashbox-panel .cashbox-add-button {
+    width: 100%;
+  }
+  .cashbox-panel .cashbox-columns {
+    grid-template-columns: minmax(0,1fr);
+  }
+}
