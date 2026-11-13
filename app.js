@@ -271,7 +271,7 @@ function cashboxAddMovement(){
   {name:'pago',label:'Esta saída já foi paga?',type:'checkbox',showIf:{field:'direcao',value:'saida'}},
   {name:'observacao',label:'Observações',type:'textarea'}
  ];
- openForm('Nova movimentação no Caixa',fields,{direcao:'saida',valor:0,data:new Date().toISOString().slice(0,10),cat:S.cats?.[0]||'Outros',tipo:'Débito',bankId:'__cash__',pago:'1'},v=>{
+ openForm('Nova movimentação no Caixa',fields,{direcao:'saida',valor:0,data:new Date().toISOString().slice(0,10),cat:S.cats?.[0]||'Outros',tipo:'Débito',origem:'Outra entrada',bankId:'__cash__',pago:'1'},v=>{
   const amount=Math.max(0,+v.valor||0),month=String(v.data||'').slice(0,7);if(!amount||!/^\\d{4}-\\d{2}-\\d{2}$/.test(v.data||''))return false;
   if(!S.keys.includes(month)){S.keys.push(month);S.keys.sort()}
   const m=M(month),id='cashbox-move-'+Date.now(),isIn=v.direcao==='entrada';
