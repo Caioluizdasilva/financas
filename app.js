@@ -298,7 +298,8 @@ function cashboxAddMovement(){
   }else{
    const isBenefit=v.tipo==='Alimentação / Refeição'||v.tipo==='Auxílio';
    if(v.tipo==='Crédito'&&!v.cardId){appToast('Selecione o cartão utilizado.','error');return false}
-   if(isBenefit&&!(S.caixaSaldos||[]).some(x=>x.id===v.benefitId&&x.tipo==='beneficio')){appToast('Selecione o saldo de benefício utilizado em Minha Conta.','error');return false}
+   const sourceBalance=(S.caixaSaldos||[]).find(x=>isBenefit?x.id===v.benefitId&&x.tipo==='beneficio':v.bankId==='__cash__'?x.tipo==='especie':(x.tipo==='conta'||x.tipo==='outro')&&x.bankId===v.bankId);
+   if(v.tipo!=='Crédito'&&(!sourceBalance||(+sourceBalance.valor||0)<amount)){appToast(isBenefit?'Selecione um benefício com saldo suficiente.':'A origem selecionada não tem saldo suficiente. Confira os saldos em Minha Conta.','error');return false}
    const row={id,nome:v.nome,dia:+v.data.slice(8,10),tipo:v.tipo||'Débito',cat:v.cat||'Outros',bancoId:v.bankId||'',valor:amount,observacao:v.observacao||'',pago:true,cashboxId:id};
    m.gastos.push(row);
    let cardPurchaseId='',balanceId=null;
