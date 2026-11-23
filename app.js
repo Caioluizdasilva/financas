@@ -195,7 +195,7 @@ function cashboxForm(index=-1){
   if(!/^\d{4}-\d{2}-\d{2}$/.test(v.data||'')){appToast('Informe a data do saldo.','error');return false}
   const item={id:current?.id||'cashbox-'+Date.now()+'-'+Math.random().toString(36).slice(2,7),tipo:v.tipo,nome:v.nome,bankId:v.tipo==='conta'?v.bankId:'',valor:Math.max(0,+v.valor||0),data:v.data};
   if(v.tipo==='conta'&&!v.bankId){appToast('Selecione a conta bancária correspondente.','error');return false}
-  if(current){Object.assign(current,item);S.caixaHistoricoInicio=(S.caixaSaldos||[]).map(x=>x.data).filter(Boolean).sort()[0]||v.data}
+  if(current){Object.assign(current,item);S.caixaHistoricoInicio=v.data}
   else{S.caixaSaldos.push(item);S.caixaHistoricoInicio=v.data}
   S.caixaMarcoZero={data:S.caixaHistoricoInicio};
   save();return true;
@@ -332,9 +332,11 @@ function cashboxMovementHistory(){
   const source=x.fuelId?'Minha Moto':x.cashboxId?'Minha Conta':x.debtId?'Dívidas':'Planejamento';
   rows.push({id:x.id||x.cashboxId||'',month,key,index,kind:x.pago===true?'Despesa paga':'Despesa pendente',date,label:x.nome||'Despesa sem descrição',amount:+x.valor||0,income:false,source,paid:x.pago===true});
  }))});
- const fallbackStart=(S.caixaSaldos||[]).map(x=>x?.data).filter(Boolean).sort()[0]||S.caixaMarcoZero?.data||'0000-01-01';
- const startDate=S.caixaHistoricoInicio||fallbackStart;
- const visibleRows=rows.filter(x=>String(x.date||'')>=String(startDate));
+ const balances=S.caixaSaldos||[];
+ const startDate=S.caixaHistoricoInicio||'';
+ // O histórico da Minha Conta só existe após informar um saldo e fica restrito
+ // ao mês de referência, começando exatamente no dia informado.
+ const visibleRows=startDate&&balances.length?rows.filter(x=>String(x.date||'').slice(0,7)===startDate.slice(0,7)&&String(x.date||'')>=String(startDate)):[];
  rows.length=0;rows.push(...visibleRows);
  rows.sort((a,b)=>String(b.date).localeCompare(String(a.date))||String(a.label).localeCompare(String(b.label)));
  const totalExpenses=rows.filter(x=>!x.income&&x.paid).reduce((n,x)=>n+x.amount,0);
