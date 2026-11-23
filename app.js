@@ -192,7 +192,7 @@ function cashboxForm(index=-1){
   {name:'data',label:'Data de referência deste saldo',type:'date',required:true}
  ];
  openForm(current?'Editar saldo do Caixa':'Adicionar saldo ao Caixa',fields,current?{...current,data:current.data||localToday()}:{tipo:'conta',nome:'',bankId:S.banks[0]?.id||'',valor:0,data:localToday()},v=>{
-  if(!/^\\d{4}-\\d{2}-\\d{2}$/.test(v.data||'')){appToast('Informe a data do saldo.','error');return false}
+  if(!/^\d{4}-\d{2}-\d{2}$/.test(v.data||'')){appToast('Informe a data do saldo.','error');return false}
   const item={id:current?.id||'cashbox-'+Date.now()+'-'+Math.random().toString(36).slice(2,7),tipo:v.tipo,nome:v.nome,bankId:v.tipo==='conta'?v.bankId:'',valor:Math.max(0,+v.valor||0),data:v.data};
   if(v.tipo==='conta'&&!v.bankId){appToast('Selecione a conta bancária correspondente.','error');return false}
   if(current){Object.assign(current,item);S.caixaHistoricoInicio=(S.caixaSaldos||[]).map(x=>x.data).filter(Boolean).sort()[0]||v.data}
