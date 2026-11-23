@@ -358,15 +358,15 @@ function cashboxAddMovement(){
    if(v.direcao==='cdb'&&!card){appToast('Selecione o cartão que receberá o limite.','error');return false}
    source.valor=Math.round(((+source.valor||0)-amount)*100)/100;
    if(target)target.valor=Math.round(((+target.valor||0)+amount)*100)/100;
-   if(card){S.caixaCdb=Array.isArray(S.caixaCdb)?S.caixaCdb:[];S.caixaCdb.push({id:'cdb-'+Date.now(),cardId:card.id,valor:amount,data,nome:v.nome||'CDB vira limite',sourceBalanceId:source.id,observacao:v.observacao||''})}
+   if(card){S.caixaCdb=Array.isArray(S.caixaCdb)?S.caixaCdb:[];S.caixaCdb.push({id:'cdb-'+Date.now(),cardId:card.id,valor:amount,data:date,nome:v.nome||'CDB vira limite',sourceBalanceId:source.id,observacao:v.observacao||''})}
    S.caixaOperacoes=Array.isArray(S.caixaOperacoes)?S.caixaOperacoes:[];
-   S.caixaOperacoes.push({id,direcao:v.direcao,nome:v.nome||(card?'CDB vira limite':'Transferência entre contas'),valor:amount,data,fromBalanceId:source.id,toBalanceId:target?.id||'',cardId:card?.id||'',observacao:v.observacao||''});
+   S.caixaOperacoes.push({id,direcao:v.direcao,nome:v.nome||(card?'CDB vira limite':'Transferência entre contas'),valor:amount,data:date,fromBalanceId:source.id,toBalanceId:target?.id||'',cardId:card?.id||'',observacao:v.observacao||''});
    save();render();return true;
   }
   if(!S.keys.includes(month)){S.keys.push(month);S.keys.sort()}
   const m=M(month),isIn=v.direcao==='entrada';
   if(isIn){
-   const movementId='mv'+Date.now(),movement={id:movementId,nome:v.nome,valor:amount,data,bancoId:v.bankId||'__cash__',tipo:v.origem||'Outra entrada',planningExclude:['Salário','Vale-refeição','Vale-alimentação','Auxílio home office','Reembolso'].includes(v.origem),includeInBalance:true,formaRecebimento:v.bankId==='__cash__'?'dinheiro':'transferencia',observacao:v.observacao||'',cashboxId:id};
+   const movementId='mv'+Date.now(),movement={id:movementId,nome:v.nome,valor:amount,data:date,bancoId:v.bankId||'__cash__',tipo:v.origem||'Outra entrada',planningExclude:['Salário','Vale-refeição','Vale-alimentação','Auxílio home office','Reembolso'].includes(v.origem),includeInBalance:true,formaRecebimento:v.bankId==='__cash__'?'dinheiro':'transferencia',observacao:v.observacao||'',cashboxId:id};
    S.movements.push(movement);cashboxApplyEntryBalance(movement);
   }else{
    const isBenefit=v.tipo==='Alimentação / Refeição'||v.tipo==='Auxílio',isCash=v.tipo==='Dinheiro',effectiveBankId=isCash?'__cash__':v.bankId||'';
@@ -374,14 +374,14 @@ function cashboxAddMovement(){
    if(!isBenefit&&!isCash&&v.tipo!=='Crédito'&&!effectiveBankId){appToast('Selecione a conta bancária de onde sairá o dinheiro.','error');return false}
    const sourceBalance=(S.caixaSaldos||[]).find(x=>isBenefit?x.id===v.benefitId&&x.tipo==='beneficio':effectiveBankId==='__cash__'?x.tipo==='especie':(x.tipo==='conta'||x.tipo==='outro')&&x.bankId===effectiveBankId);
    if(v.tipo!=='Crédito'&&(!sourceBalance||(+sourceBalance.valor||0)<amount)){appToast(isBenefit?'Selecione um benefício com saldo suficiente.':isCash?'O saldo de dinheiro em espécie é insuficiente.':'A conta selecionada não possui saldo cadastrado ou suficiente no Caixa. Confira seus saldos ou escolha outra origem.','error');return false}
-   const row={id,nome:v.nome,dia:+date.slice(8,10),tipo:v.tipo||'Débito',cat:v.cat||'Outros',bancoId:effectiveBankId,valor:amount,observacao:v.observacao||'',pago:true,cashboxId:id,data};
+   const row={id,nome:v.nome,dia:+date.slice(8,10),tipo:v.tipo||'Débito',cat:v.cat||'Outros',bancoId:effectiveBankId,valor:amount,observacao:v.observacao||'',pago:true,cashboxId:id,data:date};
    m.gastos.push(row);
    let cardPurchaseId='',balanceId=null;
    if(v.tipo==='Crédito')cardPurchaseId=cashboxRecordCardPurchase(v.nome,amount,date,v.cardId);
    else balanceId=cashboxAdjustBalance({bankId:effectiveBankId||'__cash__',balanceId:isBenefit?v.benefitId:'',amount:-amount,benefit:isBenefit});
    if(v.tipo!=='Crédito'&&!balanceId){m.gastos.pop();appToast('Não foi possível localizar o saldo de origem. Confira os saldos em Minha Conta.','error');return false}
    row.cashboxPayment={method:v.tipo,bankId:effectiveBankId,benefitId:isBenefit?v.benefitId:'',cardId:v.cardId||'',cardPurchaseId,balanceId,amount};
-   if(/^Moto\s*·\s*Gasolina$/i.test(row.cat)){const fuel={id:'fuel-'+id,data,valor:amount,tipo:row.tipo,bancoId:row.bancoId,litros:0,precoLitro:0,odometro:0,tanqueCheio:false,detalhesPendentes:true,observacao:row.observacao,viagens:[]};S.fuelRecords.push(fuel);row.fuelId=fuel.id}
+   if(/^Moto\s*·\s*Gasolina$/i.test(row.cat)){const fuel={id:'fuel-'+id,data:date,valor:amount,tipo:row.tipo,bancoId:row.bancoId,litros:0,precoLitro:0,odometro:0,tanqueCheio:false,detalhesPendentes:true,observacao:row.observacao,viagens:[]};S.fuelRecords.push(fuel);row.fuelId=fuel.id}
   }
   save();render();return true;
  });
