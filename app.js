@@ -374,7 +374,7 @@ function cashboxAddMovement(){
    if(!isBenefit&&!isCash&&v.tipo!=='Crédito'&&!effectiveBankId){appToast('Selecione a conta bancária de onde sairá o dinheiro.','error');return false}
    const sourceBalance=(S.caixaSaldos||[]).find(x=>isBenefit?x.id===v.benefitId&&x.tipo==='beneficio':effectiveBankId==='__cash__'?x.tipo==='especie':(x.tipo==='conta'||x.tipo==='outro')&&x.bankId===effectiveBankId);
    if(v.tipo!=='Crédito'&&(!sourceBalance||(+sourceBalance.valor||0)<amount)){appToast(isBenefit?'Selecione um benefício com saldo suficiente.':isCash?'O saldo de dinheiro em espécie é insuficiente.':'A conta selecionada não possui saldo cadastrado ou suficiente no Caixa. Confira seus saldos ou escolha outra origem.','error');return false}
-   const row={id,nome:v.nome,dia:+date.slice(8,10),tipo:v.tipo||'Débito',cat:v.cat||'Outros',bancoId:effectiveBankId,valor:amount,observacao:v.observacao||'',pago:true,cashboxId:id,data};
+   const row={id,nome:v.nome,dia:+date.slice(8,10),tipo:v.tipo||'Débito',cat:v.cat||'Outros',bancoId:effectiveBankId,valor:amount,observacao:v.observacao||'',pago:true,cashboxId:id,data:date};
    m.gastos.push(row);
    let cardPurchaseId='',balanceId=null;
    if(v.tipo==='Crédito')cardPurchaseId=cashboxRecordCardPurchase(v.nome,amount,date,v.cardId);
