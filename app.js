@@ -302,6 +302,10 @@ function cashboxUndoPlanningPayment(item){
 }
 function cashboxAddMovement(){
  const bankOptions=[{value:'',label:'Selecione a conta'},...(S.banks||[]).map(b=>({value:b.id,label:b.nome})),{value:'__cash__',label:'Dinheiro em espécie'}];
+ const defaultBankBalance=(S.caixaSaldos||[]).find(x=>x&&['conta','outro'].includes(x.tipo)&&x.bankId&&Number.isFinite(+x.valor)&&(+x.valor)>0);
+ const defaultCashBalance=(S.caixaSaldos||[]).find(x=>x&&x.tipo==='especie'&&Number.isFinite(+x.valor)&&(+x.valor)>0);
+ const defaultPaymentType=defaultBankBalance?'Débito':defaultCashBalance?'Dinheiro':'Débito';
+ const defaultPaymentBank=defaultBankBalance?.bankId|| (defaultCashBalance?'__cash__':'');
  const balanceOptions=[
   ...(S.caixaSaldos||[]).filter(x=>x&&x.tipo!=='beneficio').map(x=>({value:x.id,label:(x.nome||((S.banks||[]).find(b=>b.id===x.bankId)?.nome)||'Saldo')+(x.tipo==='conta'?' · conta':'')})),
   ...(S.banks||[]).filter(b=>!(S.caixaSaldos||[]).some(x=>x&&x.bankId===b.id&&(x.tipo==='conta'||x.tipo==='outro'))).map(b=>({value:'bank:'+b.id,label:(b.nome||'Conta bancária')+' · sem saldo no Caixa'}))
@@ -324,9 +328,10 @@ function cashboxAddMovement(){
   {name:'cdbCardId',label:'Cartão que receberá o limite',type:'select',options:[{value:'',label:'Selecione o cartão'},...(S.cards||[]).map(x=>({value:x.id,label:x.nome||'Cartão'}))],showIf:{field:'direcao',value:'cdb'}},
   {name:'observacao',label:'Observações',type:'textarea'}
  ];
- openForm('Nova movimentação no Caixa',fields,{direcao:'saida',valor:0,data:new Date().toISOString().slice(0,10),cat:S.cats?.[0]||'Outros',tipo:'Débito',origem:'Outra entrada',bankId:'__cash__',benefitId:(S.caixaSaldos||[]).find(x=>x.tipo==='beneficio')?.id||''},v=>{
+ openForm('Nova movimentação no Caixa',fields,{direcao:'saida',valor:'',data:new Date().toISOString().slice(0,10),cat:S.cats?.[0]||'Outros',tipo:defaultPaymentType,origem:'Outra entrada',bankId:defaultPaymentBank,benefitId:(S.caixaSaldos||[]).find(x=>x.tipo==='beneficio')?.id||''},v=>{
   const amount=Math.round((+v.valor||0)*100)/100,date=String(v.data||''),month=date.slice(0,7),id='cashbox-move-'+Date.now();
-  if(!amount||!/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(date))return false;
+  if(!amount||amount<=0){appToast('Informe um valor maior que zero para a movimentação.','error');return false}
+  if(!/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(date)){appToast('Informe uma data válida para a movimentação.','error');return false}
   if(v.direcao==='transferencia'||v.direcao==='cdb'){
    const resolveCashboxAccount=(selection,create=false)=>{
     let found=(S.caixaSaldos||[]).find(x=>x&&x.id===selection);
@@ -366,8 +371,9 @@ function cashboxAddMovement(){
   }else{
    const isBenefit=v.tipo==='Alimentação / Refeição'||v.tipo==='Auxílio',isCash=v.tipo==='Dinheiro',effectiveBankId=isCash?'__cash__':v.bankId||'';
    if(v.tipo==='Crédito'&&!v.cardId){appToast('Selecione o cartão utilizado.','error');return false}
+   if(!isBenefit&&!isCash&&v.tipo!=='Crédito'&&!effectiveBankId){appToast('Selecione a conta bancária de onde sairá o dinheiro.','error');return false}
    const sourceBalance=(S.caixaSaldos||[]).find(x=>isBenefit?x.id===v.benefitId&&x.tipo==='beneficio':effectiveBankId==='__cash__'?x.tipo==='especie':(x.tipo==='conta'||x.tipo==='outro')&&x.bankId===effectiveBankId);
-   if(v.tipo!=='Crédito'&&(!sourceBalance||(+sourceBalance.valor||0)<amount)){appToast(isBenefit?'Selecione um benefício com saldo suficiente.':isCash?'O saldo de dinheiro em espécie é insuficiente.':'A origem selecionada não tem saldo suficiente. Confira os saldos em Minha Conta.','error');return false}
+   if(v.tipo!=='Crédito'&&(!sourceBalance||(+sourceBalance.valor||0)<amount)){appToast(isBenefit?'Selecione um benefício com saldo suficiente.':isCash?'O saldo de dinheiro em espécie é insuficiente.':'A conta selecionada não possui saldo cadastrado ou suficiente no Caixa. Confira seus saldos ou escolha outra origem.','error');return false}
    const row={id,nome:v.nome,dia:+date.slice(8,10),tipo:v.tipo||'Débito',cat:v.cat||'Outros',bancoId:effectiveBankId,valor:amount,observacao:v.observacao||'',pago:true,cashboxId:id,data};
    m.gastos.push(row);
    let cardPurchaseId='',balanceId=null;
