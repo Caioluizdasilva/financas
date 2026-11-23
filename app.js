@@ -297,7 +297,10 @@ function cashboxUndoPlanningPayment(item){
 }
 function cashboxAddMovement(){
  const bankOptions=[{value:'',label:'Selecione a conta'},...(S.banks||[]).map(b=>({value:b.id,label:b.nome})),{value:'__cash__',label:'Dinheiro em espécie'}];
- const balanceOptions=(S.caixaSaldos||[]).filter(x=>x.tipo!=='beneficio').map(x=>({value:x.id,label:x.nome||((S.banks||[]).find(b=>b.id===x.bankId)?.nome)||'Saldo'}));
+ const balanceOptions=[
+  ...(S.caixaSaldos||[]).filter(x=>x&&x.tipo!=='beneficio').map(x=>({value:x.id,label:(x.nome||((S.banks||[]).find(b=>b.id===x.bankId)?.nome)||'Saldo')+(x.tipo==='conta'?' · conta':'')})),
+  ...(S.banks||[]).filter(b=>!(S.caixaSaldos||[]).some(x=>x&&x.bankId===b.id&&(x.tipo==='conta'||x.tipo==='outro'))).map(b=>({value:'bank:'+b.id,label:(b.nome||'Conta bancária')+' · sem saldo no Caixa'}))
+ ];
  const fields=[
   {type:'section',label:'NOVA MOVIMENTAÇÃO'},
   {name:'direcao',label:'Tipo de movimentação',type:'select',required:true,options:[{value:'entrada',label:'Entrada de dinheiro'},{value:'saida',label:'Saída / despesa'},{value:'transferencia',label:'Transferência entre contas'},{value:'cdb',label:'Aplicação em CDB vira limite'}]},
@@ -320,8 +323,27 @@ function cashboxAddMovement(){
   const amount=Math.round((+v.valor||0)*100)/100,date=String(v.data||''),month=date.slice(0,7),id='cashbox-move-'+Date.now();
   if(!amount||!/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(date))return false;
   if(v.direcao==='transferencia'||v.direcao==='cdb'){
-   const fromId=v.direcao==='transferencia'?v.fromBalanceId:v.cdbBalanceId,source=(S.caixaSaldos||[]).find(x=>x.id===fromId),target=v.direcao==='transferencia'?(S.caixaSaldos||[]).find(x=>x.id===v.toBalanceId):null,card=v.direcao==='cdb'?(S.cards||[]).find(x=>x.id===v.cdbCardId):null;
-   if(!source||(+source.valor||0)<amount){appToast('A conta de origem não tem saldo suficiente.','error');return false}
+   const resolveCashboxAccount=(selection,create=false)=>{
+    let found=(S.caixaSaldos||[]).find(x=>x&&x.id===selection);
+    if(found)return found;
+    const raw=String(selection||'');
+    if(!raw.startsWith('bank:'))return null;
+    const bankId=raw.slice(5),bank=(S.banks||[]).find(x=>x.id===bankId);
+    if(!bank)return null;
+    found=(S.caixaSaldos||[]).find(x=>x&&x.bankId===bankId&&(x.tipo==='conta'||x.tipo==='outro'));
+    if(found)return found;
+    if(!create)return null;
+    S.caixaSaldos=Array.isArray(S.caixaSaldos)?S.caixaSaldos:[];
+    found={id:'cashbox-auto-'+Date.now()+'-'+Math.random().toString(36).slice(2,6),tipo:'conta',nome:bank.nome||'Conta bancária',bankId,valor:0};
+    S.caixaSaldos.push(found);
+    return found;
+   };
+   const fromId=v.direcao==='transferencia'?v.fromBalanceId:v.cdbBalanceId;
+   const source=resolveCashboxAccount(fromId,false);
+   const target=v.direcao==='transferencia'?resolveCashboxAccount(v.toBalanceId,true):null;
+   const card=v.direcao==='cdb'?(S.cards||[]).find(x=>x.id===v.cdbCardId):null;
+   if(!source){appToast('A conta de origem ainda não tem saldo cadastrado no Caixa. Cadastre o saldo inicial antes de transferir ou aplicar no CDB.','error');return false}
+   if((+source.valor||0)<amount){appToast('A conta de origem não tem saldo suficiente.','error');return false}
    if(v.direcao==='transferencia'&&(!target||target.id===source.id)){appToast('Selecione uma conta de destino diferente da origem.','error');return false}
    if(v.direcao==='cdb'&&!card){appToast('Selecione o cartão que receberá o limite.','error');return false}
    source.valor=Math.round(((+source.valor||0)-amount)*100)/100;
